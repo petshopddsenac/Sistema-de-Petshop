@@ -1,2 +1,2 @@
 # Sistema-de-Petshop
-Desenvolvido por Elza Ximenes, Gustavo Borges Ivano Valêncio para a disciplina de Desenvolvimento Desktop do Senac.
+Desenvolvido por Elza Ximenes, Gustavo Borges e Ivano Valêncio, para a disciplina de Desenvolvimento Desktop do Senac.
