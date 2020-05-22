@@ -1,0 +1,30 @@
+INSERT INTO ANIMAL(IDANIMAL, nome, especie, raca, DATANASCIMENTO, peso, IDCLIENTE) VALUES (2,'Alvim', 'cachorro', 'maltês', 4, 5, '');
+INSERT INTO ANIMAL(IDANIMAL, nome, especie, raca, DATANASCIMENTO, peso, IDCLIENTE) VALUES (	3,'Mingau', 'gato', 'persa', 3, 3, '');
+INSERT INTO ANIMAL(IDANIMAL, nome, especie, raca, DATANASCIMENTO, peso, IDCLIENTE) VALUES (4,'Obama', 'cachorro', 'yorkshire', 5, 8, '');
+INSERT INTO ANIMAL(IDANIMAL, nome, especie, raca, DATANASCIMENTO, peso, IDCLIENTE) VALUES (5,'Lola', 'gato', 'angorá', 7, 7, '');
+INSERT INTO ANIMAL(IDANIMAL, nome, especie, raca, DATANASCIMENTO, peso, IDCLIENTE) VALUES (6,'Nolo', 'cachorro', 'shitzu', 10, 12, '');
+ 
+INSERT INTO SERVICO(IDSERVICO, nome, preco, necessitaconsulta) VALUES (2, 'banho', 22-02-2020, 70, 'não');
+INSERT INTO SERVICO(IDSERVICO, nome, preco, necessitaconsulta) VALUES (3, 'tosa', 10-03-2020, 85, 'não');
+INSERT INTO SERVICO(IDSERVICO, nome, preco, necessitaconsulta) VALUES (4,'vacina', 04-04-2020,150,'sim');
+INSERT INTO SERVICO(IDSERVICO, nome, preco, necessitaconsulta) VALUES (5, 'escovacaoo de dentes',75,  05-05-2020, 'não');
+
+
+INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep,  email, telefone) VALUES (2,'Luciano', 012345678927, 'Rua das Gaivotas', 55, 'Ingleses', 10001200, 'luciano@gmail.com', 99991111);
+INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep, email, telefone) VALUES (3,'Magali', 19854763019, 'Rua das Baleias', 44, 'Canasvieiras', 31111400, 'magali@gmail.com', 99223333);
+INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro,  cep, email, telefone) VALUES (4,'Maria Luiza', 26045684375, 'Rua dos Girassois',66, 'Trindade', 42222600,'marialuiza@gmail.com', 99334444);
+INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep,  email, telefone) VALUES (5,'Andreia', 34567098160, 'Rua das  Sequoias',80, 'Itacorubi', 68888100,'andreia@gmail.com', 99445555);
+INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep, email, telefone) VALUES (6,'Rafael', 4012397853, 'Rua dos Guarupuvus',100,  'Centro', 94444300,'rafael@gmail.com', 99556666);
+
+INSERT INTO CLIENTE (IDCLIENTE, IDLISTAANIMAIS, IDPESSOA) VALUES (1, 1, 1);
+INSERT INTO CLIENTE (IDCLIENTE, IDLISTAANIMAIS, IDPESSOA) VALUES (2, 2, 2);
+INSERT INTO CLIENTE (IDCLIENTE, IDLISTAANIMAIS, IDPESSOA) VALUES (3, 3, 3);
+
+INSERT INTO FUNCIONARIO (IDFUNCIONARIO, CARGO, SALARIO, IDLISTASERVICOS, IDPESSOA) VALUES (1, 'SECRETARIA', 1500.00, 1, 4);
+INSERT INTO FUNCIONARIO (IDFUNCIONARIO, CARGO, SALARIO, IDLISTASERVICOS, IDPESSOA) VALUES (2, 'VETERINARIA', 3500.00, 2, 5);
+
+INSERT INTO LISTASERVICOS (IDLISTASERVICOS, IDSERVICO, IDFUNCIONARIO) VALUES (1, 5, 1);
+INSERT INTO LISTASERVICOS (IDLISTASERVICOS, IDSERVICO, IDFUNCIONARIO) VALUES (2, 5, 2);
+INSERT INTO LISTASERVICOS (IDLISTASERVICOS, IDSERVICO, IDFUNCIONARIO) VALUES (3, 4, 2);
+INSERT INTO LISTASERVICOS (IDLISTASERVICOS, IDSERVICO, IDFUNCIONARIO) VALUES (4, 3, 2);
+INSERT INTO LISTASERVICOS (IDLISTASERVICOS, IDSERVICO, IDFUNCIONARIO) VALUES (5, 2, 2);
