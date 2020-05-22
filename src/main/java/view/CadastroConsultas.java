@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CadastroConsultas extends JInternalFrame {
-	private JTextField textCliente;
 	private JTextField textAnimal;
 
 	/**
@@ -46,12 +45,6 @@ public class CadastroConsultas extends JInternalFrame {
 		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCliente.setBounds(10, 20, 50, 25);
 		getContentPane().add(lblCliente);
-		
-		textCliente = new JTextField();
-		textCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textCliente.setBounds(100, 20, 210, 25);
-		getContentPane().add(textCliente);
-		textCliente.setColumns(10);
 		
 		JLabel lblAnimal = new JLabel("Animal: ");
 		lblAnimal.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -127,6 +120,10 @@ public class CadastroConsultas extends JInternalFrame {
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnSalvar.setBounds(265, 325, 85, 30);
 		getContentPane().add(btnSalvar);
+		
+		JComboBox cbClientes = new JComboBox();
+		cbClientes.setBounds(100, 20, 210, 25);
+		getContentPane().add(cbClientes);
 
 	}
 }
