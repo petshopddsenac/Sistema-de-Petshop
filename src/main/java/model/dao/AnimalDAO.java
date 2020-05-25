@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.vo.Animal;
-import model.vo.exercicio1.Telefone;
 
 public class AnimalDAO {
 
