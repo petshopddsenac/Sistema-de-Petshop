@@ -6,9 +6,11 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class CadastroClientes extends JInternalFrame {
@@ -51,7 +53,7 @@ public class CadastroClientes extends JInternalFrame {
 		
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNome.setBounds(70, 10, 445, 25);
+		textNome.setBounds(70, 10, 200, 25);
 		getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
@@ -60,9 +62,22 @@ public class CadastroClientes extends JInternalFrame {
 		lblCPF.setBounds(10, 45, 45, 25);
 		getContentPane().add(lblCPF);
 		
+		
+		try {
+			MaskFormatter mascaraCpf = new MaskFormatter ("###.###.###-##");
+			
+			JFormattedTextField TextCPF = new JFormattedTextField(mascaraCpf);
+			TextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			TextCPF.setBounds(70, 50, 200, 25);
+			getContentPane().add(TextCPF);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		JFormattedTextField formattedTextCPF = new JFormattedTextField();
 		formattedTextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		formattedTextCPF.setBounds(70, 50, 200, 25);
+		formattedTextCPF.setBounds(70, 50, 80, 25);
 		getContentPane().add(formattedTextCPF);
 		
 		JLabel lblRua = new JLabel("Rua: ");
@@ -71,7 +86,7 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(lblRua);
 		
 		textRua = new JTextField();
-		textRua.setBounds(70, 85, 445, 25);
+		textRua.setBounds(70, 85, 200, 25);
 		getContentPane().add(textRua);
 		textRua.setColumns(10);
 		
@@ -103,7 +118,7 @@ public class CadastroClientes extends JInternalFrame {
 		
 		textEmail = new JTextField();
 		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textEmail.setBounds(70, 225, 250, 25);
+		textEmail.setBounds(70, 225, 200, 25);
 		getContentPane().add(textEmail);
 		textEmail.setColumns(10);
 		
