@@ -139,6 +139,16 @@ public class CadastroFuncionarios extends JInternalFrame {
 		btnSalvar.setBounds(320, 310, 85, 30);
 		getContentPane().add(btnSalvar);
 		
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblCep.setBounds(300, 115, 30, 25);
+		getContentPane().add(lblCep);
+		
+		JFormattedTextField formattedTextCEP = new JFormattedTextField();
+		formattedTextCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		formattedTextCEP.setBounds(335, 115, 160, 25);
+		getContentPane().add(formattedTextCEP);
+		
 		
 
 	}

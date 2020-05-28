@@ -16,8 +16,8 @@ import java.awt.event.ActionEvent;
 public class CadastroClientes extends JInternalFrame {
 	private JTextField textNome;
 	private JTextField textRua;
-	private JTextField textFieldNumero;
-	private JTextField textField;
+	private JTextField textNumero;
+	private JTextField textBairro;
 	private JTextField textEmail;
 	private JTextField textTelefone;
 
@@ -53,7 +53,7 @@ public class CadastroClientes extends JInternalFrame {
 		
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNome.setBounds(70, 10, 200, 25);
+		textNome.setBounds(70, 10, 415, 25);
 		getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
@@ -86,7 +86,7 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(lblRua);
 		
 		textRua = new JTextField();
-		textRua.setBounds(70, 85, 200, 25);
+		textRua.setBounds(70, 85, 415, 25);
 		getContentPane().add(textRua);
 		textRua.setColumns(10);
 		
@@ -95,21 +95,21 @@ public class CadastroClientes extends JInternalFrame {
 		lblNumero.setBounds(10, 115, 50, 25);
 		getContentPane().add(lblNumero);
 		
-		textFieldNumero = new JTextField();
-		textFieldNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textFieldNumero.setBounds(70, 120, 200, 25);
-		getContentPane().add(textFieldNumero);
-		textFieldNumero.setColumns(10);
+		textNumero = new JTextField();
+		textNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textNumero.setBounds(70, 120, 200, 25);
+		getContentPane().add(textNumero);
+		textNumero.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro:");
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblBairro.setBounds(10, 150, 45, 25);
 		getContentPane().add(lblBairro);
 		
-		textField = new JTextField();
-		textField.setBounds(70, 155, 200, 25);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textBairro = new JTextField();
+		textBairro.setBounds(70, 155, 200, 25);
+		getContentPane().add(textBairro);
+		textBairro.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("e-mail:");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -150,6 +150,15 @@ public class CadastroClientes extends JInternalFrame {
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnSalvar.setBounds(335, 320, 85, 30);
 		getContentPane().add(btnSalvar);
+		
+		JLabel lblCEP = new JLabel("CEP: ");
+		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblCEP.setBounds(296, 120, 30, 25);
+		getContentPane().add(lblCEP);
+		
+		JFormattedTextField formattedTextCEP = new JFormattedTextField();
+		formattedTextCEP.setBounds(335, 120, 150, 25);
+		getContentPane().add(formattedTextCEP);
 
 	}
 }

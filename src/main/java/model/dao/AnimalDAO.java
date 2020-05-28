@@ -22,7 +22,7 @@ public class AnimalDAO {
 			stmt.setString(2, novoAnimal.getEspecie());
 			stmt.setString(3, novoAnimal.getRaca());
 			stmt.setDate(4, novoAnimal.getDataNascimento());
-			stmt.setString(5, novoAnimal.getPeso());
+			stmt.setDouble(5, novoAnimal.getPeso());
 
 			if (novoAnimal.getDono() != null) {
 				stmt.setInt(6, novoAnimal.getDono().getId());
@@ -39,7 +39,7 @@ public class AnimalDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Erro ao inserir o novo telefone.");
+			System.out.println("Erro ao inserir o novo animal.");
 			System.out.println("Erro: " + e.getMessage());
 		}
 
@@ -74,7 +74,7 @@ public class AnimalDAO {
 			stmt.setString(2, animal.getEspecie());
 			stmt.setString(3, animal.getRaca());
 			stmt.setDate(4, animal.getDataNascimento());
-			stmt.setString(5, animal.getPeso());
+			stmt.setDouble(5, animal.getPeso());
 
 			if (animal.getDono() != null) {
 				stmt.setInt(6, animal.getDono().getId());
