@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.seletor.AnimalSeletor;
+import model.seletor.ClienteSeletor;
 import model.vo.Cliente;
 
 public class ClienteDAO {
 
-	public Cliente salvar(Cliente novoCliente) {
+	public Cliente cadastrar(Cliente novoCliente) {
 		Connection conn = Banco.getConnection();
 
 		String sql = "INSERT INTO CLIENTE (NOME, CPF, RUA, NUMERO, BAIRRO, CEP, EMAIL, TELEFONE)"
@@ -47,6 +49,23 @@ public class ClienteDAO {
 		}
 
 		return novoCliente;
+	}
+	
+	public Cliente construirCliente(ResultSet rs) {
+		Cliente c = new Cliente();
+		try {
+			c.setId(rs.getInt("Id"));
+			c.setNome(rs.getNString("Nome"));
+			c.setCpf(rs.getNString("CPF"));
+			c.setRua(rs.getNString("Rua"));
+			c.setNumero(rs.getNString("Número"));
+			c.setCep(rs.getNString("CEP"));
+			c.setTelefone(rs.getString("Telefone"));
+			c.setEmail(rs.getNString("email"));
+		} catch(SQLException e ) {
+			System.out.println("Erro ao construir cliente a partir do ResultSet. Causa: " + e.getMessage());
+		}
+		return c;
 	}
 
 	public boolean alterar(Cliente cliente) {
@@ -104,6 +123,54 @@ public class ClienteDAO {
 		}
 		return listar();
 	}
+	
+	public ArrayList<Cliente> listarComSeletor(ClienteSeletor seletor) {
+		String sql = "SELECT * FROM CLIENTE  c";
+		if (seletor.temFiltro()) {
+			sql = criarFiltros(seletor, sql);
+		}
+			Connection conn = Banco.getConnection();
+			PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		
+			ArrayList<Cliente> clientes = new ArrayList();
+			try {
+				ResultSet result = stmt.executeQuery();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return clientes;	
+		
+	}
+	
+		
+		
+	
+	private String criarFiltros(ClienteSeletor seletor, String sql) {
+		sql += "WHERE";
+		boolean primeiro = true;
+
+		if (seletor.getIdCliente() > 0) {
+			if (!primeiro) {
+				sql += "AND";
+			}
+			sql += "cliente.id" + seletor.getIdCliente();
+			primeiro = false;
+		}
+		
+		if((seletor.getNome() != null) && (seletor.getNome().trim().length()>0)){
+			if (!primeiro) {
+				sql += "AND";
+			}
+			
+			if((seletor.getCpf() != null) && (seletor.getCpf().trim().length()>0)) {
+				if (!primeiro) {
+					sql += "AND";
+				}
+			}
+		}
+		return sql;
+	}
 
 	public Cliente buscarCliente(int id) {
 		Connection conn = Banco.getConnection();
@@ -156,4 +223,6 @@ public class ClienteDAO {
 
 		return excluiu;
 	}
+	
+	
 }

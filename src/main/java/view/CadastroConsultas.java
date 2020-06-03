@@ -6,11 +6,13 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class CadastroConsultas extends JInternalFrame {
@@ -72,9 +74,18 @@ public class CadastroConsultas extends JInternalFrame {
 		lblData.setBounds(10, 160, 45, 25);
 		getContentPane().add(lblData);
 		
+		try {
+			MaskFormatter mascaraData = new MaskFormatter("##/##/####");
+			JFormattedTextField  formattedTextData = new JFormattedTextField (mascaraData);
+			formattedTextData.setBounds(100, 160, 125, 25);
+			getContentPane().add(formattedTextData);
+		}catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
 		JFormattedTextField formattedTextData = new JFormattedTextField();
 		formattedTextData.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		formattedTextData.setBounds(100, 160, 125, 25);
+		formattedTextData.setBounds(100, 195, 125, 25);
 		getContentPane().add(formattedTextData);
 		
 		JLabel lblServico = new JLabel("Serviço:");
@@ -102,11 +113,6 @@ public class CadastroConsultas extends JInternalFrame {
 		textAreaDiagnostico.setBounds(100, 230, 340, 85);
 		getContentPane().add(textAreaDiagnostico);
 		
-		JFormattedTextField formattedTextHora = new JFormattedTextField();
-		formattedTextHora.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		formattedTextHora.setBounds(100, 195, 125, 25);
-		getContentPane().add(formattedTextHora);
-		
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnLimpar.addActionListener(new ActionListener() {
@@ -117,6 +123,10 @@ public class CadastroConsultas extends JInternalFrame {
 		getContentPane().add(btnLimpar);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnSalvar.setBounds(265, 325, 85, 30);
 		getContentPane().add(btnSalvar);

@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 
 public class CadastroServicos extends JInternalFrame {
 	private JTextField textNome;
-	private JTextField textField;
+	private JTextField textPreco;
 
 	/**
 	 * Launch the application.
@@ -57,10 +57,10 @@ public class CadastroServicos extends JInternalFrame {
 		lblPreco.setBounds(10, 65, 45, 25);
 		getContentPane().add(lblPreco);
 		
-		textField = new JTextField();
-		textField.setBounds(70, 65, 95, 25);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textPreco = new JTextField();
+		textPreco.setBounds(70, 65, 95, 25);
+		getContentPane().add(textPreco);
+		textPreco.setColumns(10);
 		
 		JLabel lblNecessitaConsulta = new JLabel("Necessita Consulta: ");
 		lblNecessitaConsulta.setFont(new Font("Tahoma", Font.PLAIN, 12));

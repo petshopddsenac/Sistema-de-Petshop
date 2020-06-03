@@ -5,12 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import model.seletor.AnimalSeletor;
 import model.vo.Animal;
 
 public class AnimalDAO {
 
-	public Animal salvar(Animal novoAnimal) {
+	public Animal cadastrar(Animal novoAnimal) {
 
 		Connection conn = Banco.getConnection();
 		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, DATANASCIMENTO PESO, IDCLIENTE) VALUES "
@@ -89,5 +91,87 @@ public class AnimalDAO {
 
 		return quantidadeLinhasAfetadas > 0;
 	}
+	
+	public Animal construirAnimal(ResultSet result) {
+		Animal animal = new Animal();
+		try {
+			animal.setId(result.getInt("ID"));
+			animal.setNome(result.getNString("Nome"));
+			animal.setEspecie(result.getNString("Espécie"));
+			animal.setRaca(result.getNString("Raça"));
+			animal.setDataNascimento(result.getDate("Data de Nascimento"));
+			animal.setPeso(result.getDouble("Peso"));
+			
+		} catch(SQLException e ) {
+			System.out.println("Erro ao construir animal a partir do ResultSet. Causa: " + e.getMessage());
+		}
+		return animal;
+	}
+
+	public ArrayList<Animal> listarComSeletor(AnimalSeletor seletor) {
+		String sql = "SELECT * FROM ANIMAL  animal";
+		if (seletor.temFiltro()) {
+			sql = criarFiltros(seletor, sql);
+
+		}
+		Connection conn = Banco.getConnection();
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		ArrayList<Animal> pets = new ArrayList<Animal>();
+		try {
+			ResultSet result = stmt.executeQuery();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return pets;
+	}
+
+	private String criarFiltros(AnimalSeletor seletor, String sql) {
+
+		sql += "WHERE";
+		boolean primeiro = true;
+
+		if (seletor.getIdAnimal() > 0) {
+			if (!primeiro) {
+				sql += "AND";
+			}
+			sql += "animal.id" + seletor.getIdAnimal();
+			primeiro = false;
+		}
+		if (seletor.getDono() != null) {
+			if (!primeiro) {
+				sql += "AND";
+			}
+			sql += "animal.dono"+ seletor.getDono();
+			primeiro = false;
+		}
+		if ((seletor.getRaca() != null) && (seletor.getRaca().trim().length() > 0)) {
+			if (!primeiro) {
+				sql += "AND";
+			}
+			sql += "animal.raca LIKE '%" + seletor.getRaca() + "%'";
+			primeiro = false;
+
+		}
+		
+		if ((seletor.getEspecie() != null) && (seletor.getEspecie().trim().length() >0)) {
+			if(!primeiro) {
+				sql += "AND";	
+			}
+			sql += "animal.especie = '"+ seletor.getEspecie()+ "'";
+			primeiro = false;
+		}
+		
+		if(seletor.getDataNascimento() != null){
+			if (!primeiro) {
+				sql += "AND";
+			}
+			sql += "animal.dataNascimento'" + seletor.getDataNascimento();
+			primeiro = false;
+		}
+		
+		return sql;
+	}
+	
 
 }

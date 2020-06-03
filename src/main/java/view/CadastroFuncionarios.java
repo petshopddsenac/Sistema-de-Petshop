@@ -6,9 +6,11 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class CadastroFuncionarios extends JInternalFrame {
@@ -60,11 +62,17 @@ public class CadastroFuncionarios extends JInternalFrame {
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCpf.setBounds(10, 45, 45, 25);
 		getContentPane().add(lblCpf);
-		
-		JFormattedTextField formattedTextCPF = new JFormattedTextField();
-		formattedTextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		formattedTextCPF.setBounds(65, 45, 200, 25);
-		getContentPane().add(formattedTextCPF);
+		try {
+			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
+
+			JFormattedTextField TextCPF = new JFormattedTextField(mascaraCpf);
+			TextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			TextCPF.setBounds(65, 45, 200, 25);
+			getContentPane().add(TextCPF);
+		} catch (ParseException e1) {
+
+			e1.printStackTrace();
+		}
 		
 		JLabel lblRua = new JLabel("Rua: ");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -144,10 +152,15 @@ public class CadastroFuncionarios extends JInternalFrame {
 		lblCep.setBounds(300, 115, 30, 25);
 		getContentPane().add(lblCep);
 		
-		JFormattedTextField formattedTextCEP = new JFormattedTextField();
-		formattedTextCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		formattedTextCEP.setBounds(335, 115, 160, 25);
-		getContentPane().add(formattedTextCEP);
+		try {
+			MaskFormatter mascaraCep = new MaskFormatter("###-####");
+
+			JFormattedTextField TextCEP = new JFormattedTextField(mascaraCep);
+			TextCEP.setBounds(335, 115, 150, 25);
+			getContentPane().add(TextCEP);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		
 		
 
