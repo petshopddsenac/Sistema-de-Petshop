@@ -50,7 +50,7 @@ public class ClienteDAO {
 
 		return novoCliente;
 	}
-	
+
 	public Cliente construirCliente(ResultSet rs) {
 		Cliente c = new Cliente();
 		try {
@@ -62,7 +62,7 @@ public class ClienteDAO {
 			c.setCep(rs.getNString("CEP"));
 			c.setTelefone(rs.getString("Telefone"));
 			c.setEmail(rs.getNString("email"));
-		} catch(SQLException e ) {
+		} catch (SQLException e) {
 			System.out.println("Erro ao construir cliente a partir do ResultSet. Causa: " + e.getMessage());
 		}
 		return c;
@@ -70,8 +70,8 @@ public class ClienteDAO {
 
 	public boolean alterar(Cliente cliente) {
 		Connection conn = Banco.getConnection();
-		String sql = " UPDADE CLIENTE" + "SET NOME =?, CPF = ?, RUA = ?, NUMERO =?, BAIRRO =?, CEP =?,EMAIL =? "
-				+ "WHERE ID =?";
+		String sql = " UPDADE CLIENTE"
+				+ "SET NOME =?, CPF = ?, RUA = ?, NUMERO =?, BAIRRO =?, CEP =?,EMAIL =?, TELEFONE =? " + "WHERE ID =?";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 		int registrosAlterados = 0;
 		try {
@@ -82,6 +82,7 @@ public class ClienteDAO {
 			stmt.setString(5, cliente.getBairro());
 			stmt.setString(6, cliente.getCep());
 			stmt.setString(7, cliente.getEmail());
+			stmt.setString(8, cliente.getTelefone());
 			registrosAlterados = stmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Erro ao atualizar o cliente.");
@@ -95,57 +96,25 @@ public class ClienteDAO {
 
 	}
 
-	public ArrayList<Cliente> listar() {
-		Connection conn = Banco.getConnection();
-		String sql = " SELECT * FROM CLIENTE ";
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
-		ResultSet rs = null;
-		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-		try {
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				Cliente cliente = new Cliente();
-				cliente.setNome(rs.getString("nome"));
-				cliente.setCpf(rs.getNString("cpf"));
-				cliente.setRua(rs.getNString("Rua"));
-				cliente.setBairro(rs.getNString("Bairro"));
-				cliente.setCep(rs.getNString("CEP"));
-				cliente.setTelefone(rs.getNString("Telefone"));
-				cliente.setEmail(rs.getNString("email"));
-
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			Banco.closePreparedStatement(stmt);
-			Banco.closeConnection(conn);
-
-		}
-		return listar();
-	}
-	
 	public ArrayList<Cliente> listarComSeletor(ClienteSeletor seletor) {
 		String sql = "SELECT * FROM CLIENTE  c";
 		if (seletor.temFiltro()) {
 			sql = criarFiltros(seletor, sql);
 		}
-			Connection conn = Banco.getConnection();
-			PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
-		
-			ArrayList<Cliente> clientes = new ArrayList();
-			try {
-				ResultSet result = stmt.executeQuery();
+		Connection conn = Banco.getConnection();
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return clientes;	
-		
+		ArrayList<Cliente> clientes = new ArrayList();
+		try {
+			ResultSet result = stmt.executeQuery();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return clientes;
+
 	}
-	
-		
-		
-	
+
 	private String criarFiltros(ClienteSeletor seletor, String sql) {
 		sql += "WHERE";
 		boolean primeiro = true;
@@ -157,13 +126,13 @@ public class ClienteDAO {
 			sql += "cliente.id" + seletor.getIdCliente();
 			primeiro = false;
 		}
-		
-		if((seletor.getNome() != null) && (seletor.getNome().trim().length()>0)){
+
+		if ((seletor.getNome() != null) && (seletor.getNome().trim().length() > 0)) {
 			if (!primeiro) {
 				sql += "AND";
 			}
-			
-			if((seletor.getCpf() != null) && (seletor.getCpf().trim().length()>0)) {
+
+			if ((seletor.getCpf() != null) && (seletor.getCpf().trim().length() > 0)) {
 				if (!primeiro) {
 					sql += "AND";
 				}
@@ -223,6 +192,5 @@ public class ClienteDAO {
 
 		return excluiu;
 	}
-	
-	
+
 }
