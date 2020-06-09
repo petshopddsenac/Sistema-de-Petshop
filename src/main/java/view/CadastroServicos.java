@@ -41,9 +41,9 @@ public class CadastroServicos extends JInternalFrame {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
-		JLabel lblNome = new JLabel("Nome:");
+		JLabel lblNome = new JLabel("Nome: *");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNome.setBounds(10, 20, 45, 25);
+		lblNome.setBounds(10, 20, 50, 25);
 		getContentPane().add(lblNome);
 		
 		textNome = new JTextField();
@@ -52,9 +52,9 @@ public class CadastroServicos extends JInternalFrame {
 		getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
-		JLabel lblPreco = new JLabel("Preço:");
+		JLabel lblPreco = new JLabel("Preço: *");
 		lblPreco.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblPreco.setBounds(10, 65, 45, 25);
+		lblPreco.setBounds(10, 65, 50, 25);
 		getContentPane().add(lblPreco);
 		
 		textPreco = new JTextField();
@@ -62,7 +62,7 @@ public class CadastroServicos extends JInternalFrame {
 		getContentPane().add(textPreco);
 		textPreco.setColumns(10);
 		
-		JLabel lblNecessitaConsulta = new JLabel("Necessita Consulta: ");
+		JLabel lblNecessitaConsulta = new JLabel("Necessita Consulta: *");
 		lblNecessitaConsulta.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNecessitaConsulta.setBounds(10, 100, 120, 25);
 		getContentPane().add(lblNecessitaConsulta);
@@ -90,6 +90,10 @@ public class CadastroServicos extends JInternalFrame {
 		});
 		btnSalvar.setBounds(265, 215, 85, 30);
 		getContentPane().add(btnSalvar);
+		
+		JLabel lblCamposObrigatorios = new JLabel("* Campos Obrigatorios");
+		lblCamposObrigatorios.setBounds(15, 170, 115, 15);
+		getContentPane().add(lblCamposObrigatorios);
 
 	}
 }

@@ -47,34 +47,34 @@ public class CadastroAnimal extends JInternalFrame {
 		
 		JLabel lblNome = new JLabel("Nome: ");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNome.setBounds(10, 15, 45, 25);
+		lblNome.setBounds(10, 15, 40, 25);
 		getContentPane().add(lblNome);
 		
 		textNomePet = new JTextField();
 		textNomePet.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNomePet.setBounds(65, 15, 175, 25);
+		textNomePet.setBounds(70, 15, 175, 25);
 		getContentPane().add(textNomePet);
 		textNomePet.setColumns(10);
 		
 		JLabel lblEspecie = new JLabel("Espécie: ");
 		lblEspecie.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEspecie.setBounds(10, 55, 55, 25);
+		lblEspecie.setBounds(10, 55, 50, 25);
 		getContentPane().add(lblEspecie);
 		
 		textEspecie = new JTextField();
 		textEspecie.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textEspecie.setBounds(65, 55, 175, 25);
+		textEspecie.setBounds(70, 55, 175, 25);
 		getContentPane().add(textEspecie);
 		textEspecie.setColumns(10);
 		
 		JLabel lblRaca = new JLabel("Raça: ");
 		lblRaca.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblRaca.setBounds(10, 90, 45, 25);
+		lblRaca.setBounds(10, 90, 40, 25);
 		getContentPane().add(lblRaca);
 		
 		textRaca = new JTextField();
 		textRaca.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textRaca.setBounds(65, 90, 175, 25);
+		textRaca.setBounds(70, 90, 175, 25);
 		getContentPane().add(textRaca);
 		textRaca.setColumns(10);
 		
@@ -86,36 +86,32 @@ public class CadastroAnimal extends JInternalFrame {
 		try {
 			MaskFormatter mascaraData = new MaskFormatter("##/##/####");
 			JFormattedTextField  formattedTextDataNascimento = new JFormattedTextField (mascaraData);
-			formattedTextDataNascimento.setBounds(125, 200, 115, 25);
+			formattedTextDataNascimento.setBounds(130, 200, 115, 25);
 			getContentPane().add(formattedTextDataNascimento);
 		}catch (ParseException e1) {
 			e1.printStackTrace();
 		}
 		
-		JFormattedTextField formattedTextDataNascimento = new JFormattedTextField();
-		formattedTextDataNascimento.setBounds(125, 200, 115, 25);
-		getContentPane().add(formattedTextDataNascimento);
-		
 		JLabel lblPeso = new JLabel("Peso: ");
 		lblPeso.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblPeso.setBounds(10, 130, 45, 25);
+		lblPeso.setBounds(10, 130, 40, 25);
 		getContentPane().add(lblPeso);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setBounds(65, 130, 85, 25);
+		textField.setBounds(70, 130, 85, 25);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
 				
 		JLabel lblDono = new JLabel("Dono: ");
 		lblDono.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDono.setBounds(10, 165, 45, 25);
+		lblDono.setBounds(10, 165, 40, 25);
 		getContentPane().add(lblDono);
 		
 		textDono = new JTextField();
 		textDono.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textDono.setBounds(65, 165, 175, 25);
+		textDono.setBounds(70, 165, 175, 25);
 		getContentPane().add(textDono);
 		textDono.setColumns(10);
 		
@@ -136,7 +132,41 @@ public class CadastroAnimal extends JInternalFrame {
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnSalvar.setBounds(240, 260, 85, 30);
 		getContentPane().add(btnSalvar);
+		
+		JLabel lblNewLabel = new JLabel("*");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(50, 15, 10, 20);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel label = new JLabel("*");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		label.setBounds(50, 90, 10, 20);
+		getContentPane().add(label);
+		
+		JLabel label_1 = new JLabel("*");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		label_1.setBounds(50, 122, 10, 20);
+		getContentPane().add(label_1);
+		
+		JLabel label_2 = new JLabel("*");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		label_2.setBounds(50, 158, 10, 20);
+		getContentPane().add(label_2);
+		
+		JLabel label_3 = new JLabel("*");
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		label_3.setBounds(120, 200, 10, 20);
+		getContentPane().add(label_3);
+		
+		JLabel label_4 = new JLabel("*");
+		label_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		label_4.setBounds(50, 49, 10, 20);
+		getContentPane().add(label_4);
+		
+		JLabel lblObrigatorio = new JLabel("* Campos Obrigatorios");
+		lblObrigatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblObrigatorio.setBounds(35, 235, 135, 20);
+		getContentPane().add(lblObrigatorio);
 
 	}
-
 }

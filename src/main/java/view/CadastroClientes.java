@@ -46,9 +46,9 @@ public class CadastroClientes extends JInternalFrame {
 		setBounds(100, 100, 650, 410);
 		getContentPane().setLayout(null);
 
-		JLabel lblNome = new JLabel("Nome: ");
+		JLabel lblNome = new JLabel("Nome: *");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNome.setBounds(10, 10, 45, 25);
+		lblNome.setBounds(10, 10, 50, 25);
 		getContentPane().add(lblNome);
 
 		textNome = new JTextField();
@@ -57,7 +57,7 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(textNome);
 		textNome.setColumns(10);
 
-		JLabel lblCPF = new JLabel("CPF: ");
+		JLabel lblCPF = new JLabel("CPF: *");
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCPF.setBounds(10, 45, 45, 25);
 		getContentPane().add(lblCPF);
@@ -79,9 +79,9 @@ public class CadastroClientes extends JInternalFrame {
 		formattedTextCPF.setBounds(70, 50, 80, 25);
 		getContentPane().add(formattedTextCPF);
 
-		JLabel lblRua = new JLabel("Rua: ");
+		JLabel lblRua = new JLabel("Rua: *");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblRua.setBounds(10, 80, 45, 25);
+		lblRua.setBounds(10, 80, 40, 25);
 		getContentPane().add(lblRua);
 
 		textRua = new JTextField();
@@ -89,9 +89,9 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(textRua);
 		textRua.setColumns(10);
 
-		JLabel lblNumero = new JLabel("Número: ");
+		JLabel lblNumero = new JLabel("Número: *");
 		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNumero.setBounds(10, 115, 50, 25);
+		lblNumero.setBounds(10, 115, 60, 25);
 		getContentPane().add(lblNumero);
 
 		textNumero = new JTextField();
@@ -100,9 +100,9 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(textNumero);
 		textNumero.setColumns(10);
 
-		JLabel lblBairro = new JLabel("Bairro:");
+		JLabel lblBairro = new JLabel("Bairro: *");
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblBairro.setBounds(10, 150, 45, 25);
+		lblBairro.setBounds(10, 150, 50, 25);
 		getContentPane().add(lblBairro);
 
 		textBairro = new JTextField();
@@ -110,7 +110,7 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(textBairro);
 		textBairro.setColumns(10);
 
-		JLabel lblEmail = new JLabel("e-mail:");
+		JLabel lblEmail = new JLabel("e-mail: *");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEmail.setBounds(10, 225, 50, 25);
 		getContentPane().add(lblEmail);
@@ -121,9 +121,9 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(textEmail);
 		textEmail.setColumns(10);
 
-		JLabel lblTelefone = new JLabel("Telefone: ");
+		JLabel lblTelefone = new JLabel("Telefone: *");
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTelefone.setBounds(10, 190, 55, 25);
+		lblTelefone.setBounds(10, 190, 60, 25);
 		getContentPane().add(lblTelefone);
 
 			
@@ -152,23 +152,24 @@ public class CadastroClientes extends JInternalFrame {
 		btnSalvar.setBounds(335, 320, 85, 30);
 		getContentPane().add(btnSalvar);
 
-		JLabel lblCEP = new JLabel("CEP: ");
+		JLabel lblCEP = new JLabel("CEP: *");
 		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCEP.setBounds(296, 120, 30, 25);
+		lblCEP.setBounds(296, 120, 40, 25);
 		getContentPane().add(lblCEP);
 
 		try {
 			MaskFormatter mascaraCep = new MaskFormatter("###-####");
 
 			JFormattedTextField TextCEP = new JFormattedTextField(mascaraCep);
-			TextCEP.setBounds(335, 120, 150, 25);
+			TextCEP.setBounds(350, 120, 150, 25);
 			getContentPane().add(TextCEP);
+			
+			JLabel lblNewLabel = new JLabel("* Campos Obrigatorios");
+			lblNewLabel.setBounds(40, 280, 135, 15);
+			getContentPane().add(lblNewLabel);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		JFormattedTextField formattedTextCEP = new JFormattedTextField();
-		formattedTextCEP.setBounds(335, 120, 150, 25);
-		getContentPane().add(formattedTextCEP);
 
 	}
 

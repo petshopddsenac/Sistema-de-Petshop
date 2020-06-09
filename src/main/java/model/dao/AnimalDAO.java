@@ -91,7 +91,7 @@ public class AnimalDAO {
 
 		return quantidadeLinhasAfetadas > 0;
 	}
-	
+
 	public Animal construirAnimal(ResultSet result) {
 		Animal animal = new Animal();
 		try {
@@ -102,7 +102,11 @@ public class AnimalDAO {
 			animal.setDataNascimento(result.getDate("Data de Nascimento"));
 			animal.setPeso(result.getDouble("Peso"));
 			
-		} catch(SQLException e ) {
+			ClienteDAO cDAO = new ClienteDAO();
+			
+			
+
+		} catch (SQLException e) {
 			System.out.println("Erro ao construir animal a partir do ResultSet. Causa: " + e.getMessage());
 		}
 		return animal;
@@ -131,18 +135,13 @@ public class AnimalDAO {
 		sql += "WHERE";
 		boolean primeiro = true;
 
-		if (seletor.getIdAnimal() > 0) {
-			if (!primeiro) {
-				sql += "AND";
-			}
-			sql += "animal.id" + seletor.getIdAnimal();
-			primeiro = false;
-		}
+		
+		
 		if (seletor.getDono() != null) {
 			if (!primeiro) {
 				sql += "AND";
 			}
-			sql += "animal.dono"+ seletor.getDono();
+			sql += "animal.dono" + seletor.getDono();
 			primeiro = false;
 		}
 		if ((seletor.getRaca() != null) && (seletor.getRaca().trim().length() > 0)) {
@@ -153,25 +152,45 @@ public class AnimalDAO {
 			primeiro = false;
 
 		}
-		
-		if ((seletor.getEspecie() != null) && (seletor.getEspecie().trim().length() >0)) {
-			if(!primeiro) {
-				sql += "AND";	
+
+		if ((seletor.getEspecie() != null) && (seletor.getEspecie().trim().length() > 0)) {
+			if (!primeiro) {
+				sql += "AND";
 			}
-			sql += "animal.especie = '"+ seletor.getEspecie()+ "'";
+			sql += "animal.especie LIKE '%'"+ seletor.getEspecie() + "%'";
 			primeiro = false;
 		}
-		
-		if(seletor.getDataNascimento() != null){
+
+		if (seletor.getDataNascimento() != null) {
 			if (!primeiro) {
 				sql += "AND";
 			}
 			sql += "animal.dataNascimento'" + seletor.getDataNascimento();
 			primeiro = false;
 		}
-		
+
 		return sql;
 	}
-	
 
+	public ArrayList<Animal> consultarTodos() {
+		Connection conexao = Banco.getConnection();
+		String sql = " SELECT * FROM ANIMAL ";
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Animal> animais = new ArrayList<Animal>();
+		try {
+			ResultSet result = stmt.executeQuery();
+
+			while (result.next()) {
+				Animal animal = construirAnimal(result);
+				animais.add(animal);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar animais.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+
+		return animais;
+	}
 }
