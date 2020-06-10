@@ -86,6 +86,43 @@ public class FuncionarioDAO {
 		return registrosAlterados > 0;
 
 	}
+	
+	public  Funcionario ConsultarFuncionario(int id) {
+		Connection conn = Banco.getConnection();
+		String sql = "SELECT FROM FUNCIONARIO WHERE ID " + id;
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		ResultSet rs = null;
+		Funcionario funcionario = new Funcionario();
+		try {
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				funcionario.setId(rs.getInt(1));
+				funcionario.setNome(rs.getString(2));
+				funcionario.setCpf(rs.getString(3));
+				funcionario.setRua(rs.getString(4));
+				funcionario.setNumero(rs.getString(5));
+				funcionario.setBairro(rs.getString(6));
+				funcionario.setCep(rs.getString(7));
+				funcionario.setEmail(rs.getString(8));
+				funcionario.setTelefone(rs.getString(9));
+				funcionario.setCargo(rs.getNString(10));
+				funcionario.setSalario(rs.getDouble(11));
+
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			Banco.closeResultSet(rs);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return funcionario;
+		
+	}
+	
+	
 
 	public ArrayList<Funcionario> consultarTodos() {
 		Connection conexao = Banco.getConnection();
@@ -120,6 +157,7 @@ public class FuncionarioDAO {
 			func.setEmail(result.getNString("email"));
 			func.setCargo(result.getNString("Cargo"));
 			func.setSalario(result.getDouble("Salário"));
+		
 
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir funcionário a partir do ResultSet. Causa: " + e.getMessage());

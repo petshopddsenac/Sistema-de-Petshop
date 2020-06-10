@@ -67,6 +67,42 @@ public class ClienteDAO {
 		}
 		return c;
 	}
+	
+	public Cliente consultarPorNome(Cliente nome) {
+		Connection conn = Banco.getConnection();
+		String sql = "SELECT * FROM CLIENTE WHERE nome = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		ResultSet rs = null;
+		Cliente cliente = new Cliente();
+		try {
+			
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				cliente.setId(rs.getInt(1));
+				cliente.setNome(rs.getString(2));
+				cliente.setCpf(rs.getString(3));
+				cliente.setRua(rs.getString(4));
+				cliente.setNumero(rs.getString(5));
+				cliente.setBairro(rs.getString(6));
+				cliente.setCep(rs.getString(7));
+				cliente.setEmail(rs.getString(8));
+				cliente.setTelefone(rs.getString(9));
+			}
+				
+			}catch (SQLException e) {
+
+						e.printStackTrace();
+					} finally {
+						Banco.closeResultSet(rs);
+						Banco.closePreparedStatement(stmt);
+						Banco.closeConnection(conn);
+					}
+					return nome;
+				
+			
+		
+		
+	}
 
 	public boolean alterar(Cliente cliente) {
 		Connection conn = Banco.getConnection();
@@ -119,29 +155,26 @@ public class ClienteDAO {
 		sql += "WHERE";
 		boolean primeiro = true;
 
-		if (seletor.getIdCliente() > 0) {
+		if (seletor.getNome() != null && seletor.getNome().trim().length() > 0) {
 			if (!primeiro) {
-				sql += "AND";
+				sql += " AND ";
 			}
-			sql += "cliente.id" + seletor.getIdCliente();
+
+			sql += " C.NOME LIKE " + "'%" + seletor.getNome() + "%' ";
 			primeiro = false;
 		}
 
-		if ((seletor.getNome() != null) && (seletor.getNome().trim().length() > 0)) {
+		if (seletor.getCpf() != null && seletor.getCpf().trim().length() > 0) {
 			if (!primeiro) {
-				sql += "AND";
+				sql += " AND ";
 			}
 
-			if ((seletor.getCpf() != null) && (seletor.getCpf().trim().length() > 0)) {
-				if (!primeiro) {
-					sql += "AND";
-				}
-			}
+			sql += " C.CPF LIKE " + "'%" + seletor.getCpf() + "%' ";
 		}
 		return sql;
 	}
 
-	public Cliente buscarCliente(int id) {
+	public Cliente consulrPorId(int id) {
 		Connection conn = Banco.getConnection();
 		String sql = "SELECT FROM CLIENTE WHERE ID " + id;
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
