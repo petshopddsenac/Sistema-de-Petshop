@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.vo.Servico; 
+import model.vo.Servico;
 public class ServicoDAO {
 
 	public Servico cadastrar(Servico novoServico) {
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO SERVICO(NOME, TIPO, DATASERVICO, NECESSITACONSULTA, PRECO) VALUES  " + "(?,?, ?,?,?)";
+		String sql = "INSERT INTO SERVICO(NOME, NECESSITACONSULTA, PRECO) VALUES  " + "(?,?,?)";
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
@@ -54,16 +54,15 @@ public class ServicoDAO {
 		return quantidadeLinhasAfetadas > 0;
 	}
 
-	public boolean Alterar(Servico servico) {
+	public boolean alterar(Servico servico) {
 		Connection conn = Banco.getConnection();
-		String sql = "UPDATE SERVICO SET NOME, TIPO, DATASERVICO, NECESSITACONSULTA, PRECO " + "WHERE ID =?";
+		String sql = "UPDATE SERVICO SET NOME = '" + servico.getNome() + "', NECESSITACONSULTA = '" + servico.isNecessitaConsulta() + "', PRECO = '" + servico.getPreco() + "' WHERE IDSERVICO = " + servico.getId();
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
 		ResultSet rs = null;
 		int quantidadeLinhasAfetadas = 0;
 
 		try {
 			stmt.setString(1, servico.getNome());
-
 			stmt.setBoolean(2, servico.isNecessitaConsulta());
 			stmt.setDouble(3, servico.getPreco());
 
@@ -89,8 +88,12 @@ public class ServicoDAO {
 		try {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				Servico serv = ConstruirServico(rs);
-				servicos.add(serv);
+				Servico servico = ConstruirServico(rs);
+					servico.setId(Integer.parseInt(rs.getString(1)));
+					servico.setNome(rs.getString(2));
+					servico.setNecessitaConsulta(Boolean.parseBoolean(rs.getString(3)));
+					servico.setPreco(Double.parseDouble(rs.getString(4)));
+					servicos.add(servico);
 			}
 
 		} catch (SQLException e) {
@@ -105,15 +108,13 @@ public class ServicoDAO {
 		return servicos;
 	}
 	
-	
-
 	private Servico ConstruirServico(ResultSet rs) {
 		Servico servico = new Servico();
 		try {
 			servico.setId(rs.getInt("id"));
 			servico.setNome(rs.getString("Nome"));
 			servico.setNecessitaConsulta(rs.getBoolean("necessitaConsulta"));
-			servico.setPreco(rs.getDouble("preço"));
+			servico.setPreco(rs.getDouble("preco"));
 		} catch (SQLException e) {
 			System.out.println("Erro ao contruir o serviço a partir do ResultSet");
 			System.out.println("Erro: " + e.getMessage());
@@ -122,8 +123,53 @@ public class ServicoDAO {
 
 		return servico;
 	}
-	
-	
-	
 
+	public Servico ConsultarPorId(int id) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		Servico servico = new Servico();
+
+		String query = "SELECT IDSERVICO, NOME, NECESSITACONSULTA, PRECO FROM SERVICO WHERE IDSERVICO = " + id;
+
+		try {
+			resultado = stmt.executeQuery(query);
+			while (resultado.next()) {
+				servico.setId(Integer.parseInt(resultado.getString(1)));
+				servico.setNome(resultado.getString(2));
+				servico.setNecessitaConsulta(resultado.getBoolean(3));
+				servico.setPreco(resultado.getDouble(4));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query de Consulta de Serviços.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return servico;
+	}
+	
+	public boolean existeRegistroPorIdServico(int idServico) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		String query = "SELECT IDSERVICO FROM SERVICO WHERE IDSERVICO = " + idServico;
+		try {
+			resultado = stmt.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query que verifica existência de Registro por Id.");
+			System.out.println("Erro: " + e.getMessage());
+			return false;
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return false;
+	}
 }
