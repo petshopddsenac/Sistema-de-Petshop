@@ -8,12 +8,13 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
-public class CadastroFuncionarios extends JInternalFrame {
+public class CadastroFuncionarios extends JFrame {
 	private JTextField textNome;
 	private JTextField textRua;
 	private JTextField textField;
@@ -42,8 +43,7 @@ public class CadastroFuncionarios extends JInternalFrame {
 	 */
 	public CadastroFuncionarios() {
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
-		setClosable(true);
-		setMaximizable(true);
+		
 		setBounds(100, 100, 625, 405);
 		getContentPane().setLayout(null);
 		

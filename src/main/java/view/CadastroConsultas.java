@@ -9,13 +9,14 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
-public class CadastroConsultas extends JInternalFrame {
+public class CadastroConsultas extends JFrame {
 	private JTextField textAnimal;
 
 	/**
@@ -38,8 +39,7 @@ public class CadastroConsultas extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroConsultas() {
-		setMaximizable(true);
-		setClosable(true);
+	
 		setBounds(100, 100, 580, 395);
 		getContentPane().setLayout(null);
 		

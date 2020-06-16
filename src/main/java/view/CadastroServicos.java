@@ -8,10 +8,12 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CadastroServicos extends JInternalFrame {
+public class CadastroServicos extends JFrame {
 	private JTextField textNome;
 	private JTextField textPreco;
 
@@ -35,9 +37,7 @@ public class CadastroServicos extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroServicos() {
-		setClosable(true);
 		
-		setMaximizable(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		

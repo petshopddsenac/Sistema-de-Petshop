@@ -67,42 +67,6 @@ public class ClienteDAO {
 		}
 		return c;
 	}
-	
-	public Cliente consultarPorNome(Cliente nome) {
-		Connection conn = Banco.getConnection();
-		String sql = "SELECT * FROM CLIENTE WHERE nome = ?";
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
-		ResultSet rs = null;
-		Cliente cliente = new Cliente();
-		try {
-			
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				cliente.setId(rs.getInt(1));
-				cliente.setNome(rs.getString(2));
-				cliente.setCpf(rs.getString(3));
-				cliente.setRua(rs.getString(4));
-				cliente.setNumero(rs.getString(5));
-				cliente.setBairro(rs.getString(6));
-				cliente.setCep(rs.getString(7));
-				cliente.setEmail(rs.getString(8));
-				cliente.setTelefone(rs.getString(9));
-			}
-				
-			}catch (SQLException e) {
-
-						e.printStackTrace();
-					} finally {
-						Banco.closeResultSet(rs);
-						Banco.closePreparedStatement(stmt);
-						Banco.closeConnection(conn);
-					}
-					return nome;
-				
-			
-		
-		
-	}
 
 	public boolean alterar(Cliente cliente) {
 		Connection conn = Banco.getConnection();
@@ -174,7 +138,7 @@ public class ClienteDAO {
 		return sql;
 	}
 
-	public Cliente consulrPorId(int id) {
+	public Cliente consultarPorId(int id) {
 		Connection conn = Banco.getConnection();
 		String sql = "SELECT FROM CLIENTE WHERE ID " + id;
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
@@ -206,6 +170,84 @@ public class ClienteDAO {
 		return cliente;
 	}
 
+	public ArrayList<Cliente> listarTodos() {
+		Connection conn = Banco.getConnection();
+		String sql = " SELECT * FROM CLIENTE ";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		ResultSet rs = null;
+
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		try {
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				Cliente cliente = new Cliente();
+
+				cliente.setId(rs.getInt("Id"));
+				cliente.setId(rs.getInt("Id"));
+				cliente.setNome(rs.getNString("Nome"));
+				cliente.setCpf(rs.getNString("CPF"));
+				cliente.setRua(rs.getNString("Rua"));
+				cliente.setNumero(rs.getNString("Número"));
+				cliente.setCep(rs.getNString("CEP"));
+				cliente.setTelefone(rs.getString("Telefone"));
+				cliente.setEmail(rs.getNString("email"));
+
+				clientes.add(cliente);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao listar clientes.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(rs);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+
+		return clientes;
+	}
+
+	
+	public boolean cpfJaUtilizado(String cpf) {
+
+		Connection conn = Banco.getConnection();
+		String sql = " select id from cliente c " + "where c.cpf = '" + cpf + "'";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		ResultSet rs = null;
+		boolean cpfUsado = false;
+
+		try {
+			rs = stmt.executeQuery();
+			cpfUsado = rs.next();
+		} catch (SQLException e) {
+			System.out.println("Erro na verificação de uso do CPF. Causa: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(rs);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+
+		return cpfUsado;
+	}
+	
+	public boolean excluirPorCpf(String cpf) {
+		Connection conn = Banco.getConnection();
+		String sql = "DELETE FROM CLIENTE WHERE CPF = '" + cpf + "'";
+		Statement stmt = Banco.getStatement(conn);
+		int quantidadeLinhasAfetadas = 0;
+		try {
+			quantidadeLinhasAfetadas = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println("Erro ao excluir cliente pelo do cpf.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+
+		return quantidadeLinhasAfetadas > 0;
+	}
+	
 	public boolean excluir(int id) {
 		Connection conn = Banco.getConnection();
 		String sql = "DELETE FROM CLIENTE WHERE ID= " + id;
