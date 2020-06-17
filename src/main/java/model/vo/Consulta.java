@@ -2,36 +2,36 @@ package model.vo;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Consulta {
 
 	private int id;
-	private ArrayList< Cliente> clientes;
+	private Cliente cliente;
 	private Animal animal;
-	private ArrayList<Funcionario> funcionarios;
-	private  ArrayList <Servico> servicos;
-	private Date dataServico;
-	private Time horaServico;
+	private Funcionario funcionario;
+	private Servico servico;
+	private Date dataConsulta;
+	private Time horaConsulta;
 	private String diagnostico;
 	
-	
+
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Consulta(int id, ArrayList<Cliente> clientes, Animal animal, ArrayList<Funcionario> funcionarios,
-			ArrayList<Servico> servicos, Date dataServico, Time horaServico, String diagnostico) {
+	public Consulta(int id, Cliente cliente, Animal animal, Funcionario funcionario, Servico servico,
+			Date dataConsulta, Time horaConsulta, String diagnostico) {
 		super();
 		this.id = id;
-		this.clientes = clientes;
+		this.cliente = cliente;
 		this.animal = animal;
-		this.funcionarios = funcionarios;
-		this.servicos = servicos;
-		this.dataServico = dataServico;
-		this.horaServico = horaServico;
+		this.funcionario = funcionario;
+		this.servico = servico;
+		this.dataConsulta = dataConsulta;
+		this.horaConsulta = horaConsulta;
 		this.diagnostico = diagnostico;
 	}
 
@@ -46,13 +46,13 @@ public class Consulta {
 	}
 
 
-	public ArrayList<Cliente> getClientes() {
-		return clientes;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 
-	public void setClientes(ArrayList<Cliente> clientes) {
-		this.clientes = clientes;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 
@@ -66,43 +66,43 @@ public class Consulta {
 	}
 
 
-	public ArrayList<Funcionario> getFuncionarios() {
-		return funcionarios;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
 
-	public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 
-	public ArrayList<Servico> getServicos() {
-		return servicos;
+	public Servico getServico() {
+		return servico;
 	}
 
 
-	public void setServicos(ArrayList<Servico> servicos) {
-		this.servicos = servicos;
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 
 
-	public Date getDataServico() {
-		return dataServico;
+	public Date getDataConsulta() {
+		return dataConsulta;
 	}
 
 
-	public void setDataServico(Date dataServico) {
-		this.dataServico = dataServico;
+	public void setDataConsulta(Date dataConsulta) {
+		this.dataConsulta = dataConsulta;
 	}
 
 
-	public Time getHoraServico() {
-		return horaServico;
+	public Time getHoraConsulta() {
+		return horaConsulta;
 	}
 
 
-	public void setHoraServico(Time horaServico) {
-		this.horaServico = horaServico;
+	public void setHoraConsulta(Time horaConsulta) {
+		this.horaConsulta = horaConsulta;
 	}
 
 
@@ -118,8 +118,8 @@ public class Consulta {
 
 	@Override
 	public String toString() {
-		return "Consulta [id=" + id + ", clientes=" + clientes + ", animal=" + animal + ", funcionarios=" + funcionarios
-				+ ", servicos=" + servicos + ", dataServico=" + dataServico + ", horaServico=" + horaServico
+		return "Consulta [id=" + id + ", clientes=" + cliente + ", animal=" + animal + ", funcionarios=" + funcionario
+				+ ", servicos=" + servico + ", dataServico=" + dataConsulta + ", horaServico=" + horaConsulta
 				+ ", diagnostico=" + diagnostico + "]";
 	}
 	

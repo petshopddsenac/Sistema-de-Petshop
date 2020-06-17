@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -19,17 +22,17 @@ public class ConsultaDAO {
 
 	public Consulta cadastrar(Consulta novaConsulta) {
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO CONSULTA (CLIENTE, ANIMAL, FUNCIONARIO, SERVICO, DATASERVICO, HORASERVICO, ID) VALUES"
-				+ "(?, ?, ?, ?, ?, ?,?) ";
+		String sql = "INSERT INTO CONSULTA (IDCONSULTA, IDCLIENTE, IDANIMAL, IDFUNCIONARIO, IDSERVICO, DATAC, TIMEC, DIAGNOSTICO) VALUES"
+				+ "(?,?,?,?,?,?,?,?) ";		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
 
-			stmt.setObject(1, novaConsulta.getClientes());
+			stmt.setObject(1, novaConsulta.getCliente());
 			stmt.setObject(2, novaConsulta.getAnimal());
-			stmt.setObject(3, novaConsulta.getFuncionarios());
-			stmt.setObject(4, novaConsulta.getServicos());
+			stmt.setObject(3, novaConsulta.getFuncionario());
+			stmt.setObject(4, novaConsulta.getServico());
 			stmt.setDate(5, novaConsulta.getDataConsulta());
 			stmt.setTime(6, novaConsulta.getHoraConsulta());
 			stmt.execute();
@@ -68,17 +71,17 @@ public class ConsultaDAO {
 	public boolean alterar(Consulta consulta) {
 		Connection conn = Banco.getConnection();
 		String sql = " UPDATE CONSULTA "
-				+ "SET Cliente =? , Animal = ?, Funcionario =?, Servico =?, dataConsulta = ?, horaConsulta = ?"
+				+ "SET IDCLIENTE =? , Animal = ?, Funcionario =?, Servico =?, dataConsulta = ?, horaConsulta = ?"
 				+ "WHERE ID = ?";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
 		ResultSet rs = null;
 		int quantidadeLinhasAfetadas = 0;
 
 		try {
-			stmt.setObject(1, consulta.getClientes());
-			stmt.setObject(2, consulta.getAnimal());
-			stmt.setObject(3, consulta.getFuncionarios());
-			stmt.setObject(4, consulta.getServicos());
+			stmt.setObject(1, consulta.getCliente().getId());
+			stmt.setObject(2, consulta.getAnimal().getId());
+			stmt.setObject(3, consulta.getFuncionario().getId());
+			stmt.setObject(4, consulta.getServico().getId());
 			stmt.setDate(5, consulta.getDataConsulta());
 			stmt.setTime(6, consulta.getHoraConsulta());
 
@@ -120,18 +123,78 @@ public class ConsultaDAO {
 		}
 		return consultas;
 	}
+	
+	
+	public Consulta ConsultarPorId(int id) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		Consulta consulta = new Consulta();
+
+		String query = "SELECT IDCONSULTA, IDCLIENTE, IDANIMAL, IDFUNCIONARIO, IDSERVICO, DATAC, TIMEC, DIAGNOSTICO FROM CONSULTA WHERE IDCONSULTA = " + id;
+
+		try {
+			resultado = stmt.executeQuery(query);
+			while (resultado.next()) {
+				consulta.setId(Integer.parseInt(resultado.getString(1)));
+				consulta.setCliente(resultado.getString(2));
+				consulta.setAnimal(resultado.getBoolean(3));
+				consulta.setFuncionario(resultado.getBoolean(4));
+				consulta.setServico(resultado.getBoolean(5));
+				consulta.setDataConsulta(resultado.getBoolean(6));
+				consulta.setHoraConsulta(resultado.getBoolean(7));				
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query de Consulta de Consultas.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return consulta;
+	}
+	
+	public boolean existeRegistroPorIdConsulta(int id) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		String query = "SELECT IDCONSULTA FROM CONSULTA WHERE IDSERVICO = " + id;
+		try {
+			resultado = stmt.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query que verifica existência de Registro por Id.");
+			System.out.println("Erro: " + e.getMessage());
+			return false;
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return false;
+	}
+	
+	
 
 	private Consulta ConstruirConsulta(ResultSet rs) {
 		Consulta consulta = new Consulta();
 		try {
 			consulta.setId(rs.getInt("id"));
-			ClienteDAO cDAO = new ClienteDAO();
-			Cliente clientes = cDAO.consulrPorId(rs.getInt("id"));
-
+			ClienteDAO clienteDAO = new ClienteDAO();
+			Cliente cliente = clienteDAO.consultarPorId(rs.getInt("id"));	
 			AnimalDAO animalDAO = new AnimalDAO();
-			ArrayList<Animal> pet = animalDAO.consultarTodos();
-			FuncionarioDAO funcDAO = new FuncionarioDAO();
-			Funcionario func = funcDAO.ConsultarFuncionario(rs.getInt("id"));
+			Animal animal = animalDAO.consultarPorId(rs.getInt("id"));	
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+			Funcionario funcionario = funcionarioDAO.ConsultarFuncionario(rs.getInt("id"));
+			ServicoDAO servicoDAO = new ServicoDAO();
+			Servico servico = servicoDAO.ConsultarPorId(rs.getInt("id"));
+			DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			consulta.setDataConsulta(LocalDate.parse(rs.getString("dataConsulta"), dataFormatter));
+			consulta.setHoraConsulta(LocalTime.parse(rs.getString("horaConsulta"), dataFormatter));
 
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir consulta a partir do ResultSet");
@@ -141,5 +204,8 @@ public class ConsultaDAO {
 		return consulta;
 
 	}
+	
+	
+	
 
 }
