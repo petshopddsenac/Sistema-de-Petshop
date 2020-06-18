@@ -6,16 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import model.seletor.AnimalSeletor;
 import model.vo.Animal;
+
+
+
 
 public class AnimalDAO {
 
 	public Animal cadastrar(Animal novoAnimal) {
 
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, DATANASCIMENTO PESO, IDCLIENTE) VALUES "
+		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, DATANASCIMENTO, PESO, ID) VALUES "
 				+ "(?, ?, ?, ?, ?, ?) ";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
@@ -102,7 +104,7 @@ public class AnimalDAO {
 			animal.setDataNascimento(result.getDate("Data de Nascimento"));
 			animal.setPeso(result.getDouble("Peso"));
 			
-			ClienteDAO cDAO = new ClienteDAO();
+			AnimalDAO aDAO = new AnimalDAO();
 			
 			
 
@@ -192,5 +194,161 @@ public class AnimalDAO {
 		}
 
 		return animais;
+	}
+
+	public int inserir(Animal animalVO) {
+		int novoId = -1;
+
+		String sql = " INSERT INTO ANIMAL (NOME, ESPECIE, RACA, DATANASCIMENTO, PESO, ID) " + " VALUES (?,?,?,?) ";
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql, Statement.RETURN_GENERATED_KEYS);
+
+		try {
+			prepStmt.setString(1, animalVO.getNome());
+			prepStmt.setString(2, animalVO.getEspecie());
+			prepStmt.setString(3, animalVO.getRaca());
+			prepStmt.setDate(4, animalVO.getDataNascimento());
+			prepStmt.setDouble(5, animalVO.getPeso());
+
+			prepStmt.execute();
+
+			ResultSet generatedKeys = prepStmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				novoId = generatedKeys.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao inserir O Animal. Causa: \n: " + e.getMessage());
+		} finally {
+			Banco.closePreparedStatement(prepStmt);
+			Banco.closeConnection(conexao);
+		}
+
+		return novoId;
+	}
+
+	public Animal obterPorId(int animal) {
+		String sql = " SELECT * FROM PRODUTO " + " WHERE ID=?";
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+		Animal An = null;
+
+		try {
+			prepStmt.setInt(1, animal);
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				An = new Animal();
+				An.setId(result.getInt("ID"));
+				An.setNome(result.getString("NOME"));
+				An.setEspecie(result.getString("ESPECIE"));
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return An;
+	}
+
+	public boolean atualizar(Animal animala) {
+		boolean sucessoUpdate = false;
+
+		String sql = " UPDATE ANIMAL ANIMALA SET NOME=?, ESPECIE=?, RACA=?, DATANASCIMENTO=?, PESO=?, ID=? " + " WHERE ANIMALA.ID = ? ";   
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+
+		try {
+			prepStmt.setString(1, animala.getNome());
+			prepStmt.setString(2, animala.getEspecie());
+			prepStmt.setString(3, animala.getRaca());
+			prepStmt.setDouble(4, animala.getPeso());
+			prepStmt.setDouble(5, animala.getId());
+			prepStmt.setDate(1, animala.getDataNascimento());
+			
+			int codigoRetorno = prepStmt.executeUpdate();
+
+			if (codigoRetorno == 1) {
+				sucessoUpdate = true;
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao atualizar o Animal. Causa: " + e.getMessage());
+		} finally {
+			Banco.closePreparedStatement(prepStmt);
+			Banco.closeConnection(conexao);
+		}
+
+		return sucessoUpdate;
+	}
+
+	public ArrayList<Animal> listarTodosA(AnimalSeletor seletor) {
+		String sql = " SELECT * FROM ANIMAL animala";
+
+		if (seletor.temFiltro()) {
+			sql = criarFiltros(seletor, sql);
+		}
+
+		if (seletor.temPaginacao()) {
+			
+			sql += " LIMIT " + seletor.getLimite() + " OFFSET " + seletor.getOffset();
+		}
+		Connection conexao = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Animal> produtos = new ArrayList<Animal>();
+
+		try {
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				Animal animala = construirAnimalDoResultSet(result);
+				produtos.add(animala);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return produtos;
+	}
+
+	private Animal construirAnimalDoResultSet(ResultSet result) {
+		Animal A = new Animal();
+
+		try {
+			A.setId(result.getInt("ID"));
+			A.setNome(result.getString("NOME"));
+			A.setDataNascimento(result.getDate("DATADENASCIMENTO"));
+			A.setPeso(result.getDouble("PESO"));
+			A.setEspecie(result.getString("ESPECIE"));
+			A.setRaca(result.getString("ESPECIE"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return A;
+	}
+
+	public ArrayList<Animal> listarTodos() {
+		String sql = " SELECT * FROM ANIMAL ";
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Animal> produtos = new ArrayList<Animal>();
+
+		try {
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				Animal An = new Animal();
+
+				
+				An = new Animal();
+				An.setId(result.getInt("ID"));
+				An.setNome(result.getString("NOME"));
+				An.setEspecie(result.getString("ESPECIE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return produtos;
 	}
 }

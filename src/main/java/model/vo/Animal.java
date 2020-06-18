@@ -9,7 +9,7 @@ public class Animal {
 	private String especie;
 	private String raca;
 	private Date dataNascimento;
-	private String peso;
+	private Double peso;
 	private Cliente dono;
 	
 	
@@ -19,7 +19,7 @@ public class Animal {
 	}
 
 
-	public Animal(int id, String nome, String especie, String raca, Date dataNascimento, String peso, Cliente dono) {
+	public Animal(int id, String nome, String especie, String raca, Date dataNascimento, Double peso, Cliente dono) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -81,12 +81,12 @@ public class Animal {
 	}
 
 
-	public String getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
 
 
-	public void setPeso(String peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 

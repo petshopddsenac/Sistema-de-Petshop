@@ -8,9 +8,11 @@ public class Funcionario extends Pessoa{
 	private String cargo;
 	private double salario;
 	private ArrayList<Servico> servicos;
-	
+	private String cpf;
 	public Funcionario() {
 		super();
+		
+
 		
 	}
 
@@ -55,6 +57,15 @@ public class Funcionario extends Pessoa{
 	@Override
 	public String toString() {
 		return "Funcionario [id=" + id + ", cargo=" + cargo + ", salario=" + salario + ", servicos=" + servicos + "]";
+	}
+
+	public Funcionario(int id, String cargo, double salario, ArrayList<Servico> servicos, String cpf) {
+		super();
+		this.id = id;
+		this.cargo = cargo;
+		this.salario = salario;
+		this.servicos = servicos;
+		this.cpf = cpf;
 	}
 	
 		

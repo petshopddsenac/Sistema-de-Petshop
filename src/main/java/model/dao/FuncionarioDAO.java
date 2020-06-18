@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-
-import model.seletor.ClienteSeletor;
 import model.seletor.FuncionarioSeletor;
-import model.vo.Cliente;
 import model.vo.Funcionario;
+
+
 
 public class FuncionarioDAO {
 
@@ -237,5 +237,147 @@ public class FuncionarioDAO {
 		boolean excluiu = quantidadeLinhasAfetadas > 0;
 
 		return excluiu;
+	}
+
+	public Funcionario salvar(Funcionario funcionarioVO) {
+		Connection conn = Banco.getConnection();
+		String sql = "INSERT INTO FUNCIONARIO (NOME, CPF, RUA, NUMERO, BAIRRO, CEP, EMAIL, TELEFONE, CARGO, SALARIO, SERVIÇO)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+
+		try {
+			stmt.setString(1, funcionarioVO.getNome());
+			stmt.setString(2, funcionarioVO.getCpf());
+			stmt.setString(3, funcionarioVO.getRua());
+			stmt.setString(4, funcionarioVO.getNumero());
+			stmt.setString(5, funcionarioVO.getBairro());
+			stmt.setString(6, funcionarioVO.getCep());
+			stmt.setString(7, funcionarioVO.getEmail());
+			stmt.setNString(8, funcionarioVO.getTelefone());
+			stmt.setString(9, funcionarioVO.getCargo());
+			stmt.setDouble(10, funcionarioVO.getSalario());
+			stmt.setObject(11, funcionarioVO.getServicos());
+			stmt.execute();
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				funcionarioVO.setId(generatedKeys.getInt(1));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query de Salvar o Funcionario.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+
+		return funcionarioVO;
+	}
+
+	public boolean existeRegistroPorCpf(String cpf) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		String query = "SELECT cpf FROM funcionario WHERE cpf = '" + cpf + "'";
+		try {
+			resultado = stmt.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query que verifica existência de Funcionário por CPF.");
+			System.out.println("Erro: " + e.getMessage());
+			return false;
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return false;
+	}
+
+	public boolean ConsultarFuncionarioPorId(int id) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		Funcionario funcionario = new Funcionario();
+
+		String query = "SELECT id, cargo, salario, cpf, FROM funcionario WHERE id = " + id;
+
+		try {
+			resultado = stmt.executeQuery(query);
+			while (resultado.next()) {
+				funcionario.setId(Integer.parseInt(resultado.getString(1)));
+				funcionario.setNome(resultado.getString(2));
+				funcionario.setBairro(resultado.getString(3));
+				funcionario.setCargo(resultado.getString(4));
+				funcionario.setCep(resultado.getNString(5));
+				funcionario.setCpf(resultado.getNString(6));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query de Consulta de Usuário.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return funcionario != null;
+	
+	}
+
+	public boolean existeRegistroPorId(int id) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		String query = "SELECT id FROM funcionario WHERE id = " + id;
+		try {
+			resultado = stmt.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query que verifica existência de Registro por Id.");
+			System.out.println("Erro: " + e.getMessage());
+			return false;
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return false;
+	}
+	
+
+	public Funcionario ConsultarFuncionariosPorId(int id) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		Funcionario funcionario = new Funcionario();
+
+		String query = "SELECT ID, NOME, NECESSITACONSULTA, PRECO FROM SERVICO WHERE IDSERVICO = " + id;
+
+		try {
+			resultado = stmt.executeQuery(query);
+			while (resultado.next()) {
+				funcionario.setId(Integer.parseInt(resultado.getString(1)));
+				funcionario.setNome(resultado.getString(2));
+				funcionario.setBairro(resultado.getString(3));
+				funcionario.setCargo(resultado.getString(4));
+				funcionario.setCep(resultado.getNString(5));
+				funcionario.setCpf(resultado.getNString(6));
+				
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a Query de Consulta de Funcionarios.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return funcionario;
+	
+		
 	}
 }

@@ -1,71 +1,73 @@
 package model.bo;
 
 import model.dao.FuncionarioDAO;
-
-import model.vo.FuncionarioVO;
+import model.vo.Funcionario;
+import model.bo.*;
 
 import java.util.ArrayList;
 
 public class FuncionarioBO {
 
-	public void cadastrarFuncionarioBO(FuncionarioVO funcionarioVO) {
+	public void cadastrarFuncionarioBO(Funcionario funcionarioVO) {
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-		if (FuncionarioDAO.existeRegistroPorCpf(FuncionarioVO.getCpf())) {
-			System.out.println("\nUsuário já Cadastrado");
+		funcionarioVO = funcionarioDAO.cadastrar(funcionarioVO);
+		funcionarioVO = funcionarioDAO.salvar(funcionarioVO);
+		if (funcionarioDAO.existeRegistroPorCpf(funcionarioVO.getCpf())) {
+			System.out.println("\nFuncionario já Cadastrado");
 		} else {
 			funcionarioVO = funcionarioDAO.salvar(funcionarioVO);
-			if (FuncionarioVO.getIdUsuario() > 0) {
-				System.out.println("\nUsuário cadastrado com Sucesso.");
+			if (funcionarioVO.getId() > 0) {
+				System.out.println("\nFuncionário cadastrado com Sucesso.");
 			} else {
-				System.out.println("\nNão foi possível cadastrar o Usuário.");
+				System.out.println("\nNão foi possível cadastrar o Funcionário.");
 			}
 		}
 	}
 
-	public void excluirUsuarioBO(FuncionarioVO FuncionarioVO) {
+	public void excluirUsuarioBO(Funcionario FuncionarioVO) {
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-		if (funcionarioDAO.existeRegistroPorIdUsuario(FuncionarioVO.getIdUsuario())) {
-			boolean conseguiuExcluir = funcionarioDAO.excluir(FuncionarioVO.getIdUsuario());
+		if (funcionarioDAO.ConsultarFuncionarioPorId(FuncionarioVO.getId())) {
+			boolean conseguiuExcluir = funcionarioDAO.excluir(FuncionarioVO.getId());
 			if (conseguiuExcluir) {
-				System.out.println("\nUsuário excluído com Sucesso.");
+				System.out.println("\nFuncionário excluído com Sucesso.");
 			} else {
-				System.out.println("\nNão foi possível excluir o Usuário.");
+				System.out.println("\nNão foi possível excluir o Funcionário.");
 			}
 		} else {
-			System.out.println("\nUsuário não existe na base da dados.");
+			System.out.println("\nEsse Funcionário não existe na base da dados.");
 		}
 	}
 
-	public void atualizarUsuarioBO(FuncionarioVO FuncionarioVO) {
+	public void atualizarUsuarioBO(Funcionario FuncionarioVO) {
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-		if (funcionarioDAO.existeRegistroPorIdUsuario(FuncionarioVO.getIdUsuario())) {
-			boolean alterou = funcionarioDAO.alterar(funcionarioDAO);
+		if (funcionarioDAO.existeRegistroPorId(FuncionarioVO.getId())) {
+			boolean alterou = funcionarioDAO.alterar(FuncionarioVO);
 			if (alterou) {
-				System.out.println("\nUsuário atualizado com Sucesso.");
+				System.out.println("\nFuncionário atualizado com Sucesso.");
 			} else {
-				System.out.println("\nNão foi possível atualizar o Usuário.");
+				System.out.println("\nNão foi possível atualizar o Funcionário.");
 			}
 		} else {
-			System.out.println("\nUsuário ainda não foi cadastrado.");
+			System.out.println("\nFuncionário ainda não foi cadastrado.");
 		}
 	}
 
-	public ArrayList<FuncionarioVO> consultarFuncionarioBO() {
-		FuncionarioDAO usuarioDAO = new FuncionarioDAO();
-		ArrayList<FuncionarioVO> usuariosVO = usuarioDAO.consultarTodos();
-		if (usuariosVO.isEmpty()) {
-			System.out.println("\nLista de Usuários está vazia.");
+	public ArrayList<Funcionario> consultarFuncionarioBO() {
+		FuncionarioDAO FuncionarioDAO = new FuncionarioDAO();
+		ArrayList<Funcionario> Funcionario = FuncionarioDAO.consultarTodos();
+		if (Funcionario.isEmpty()) {
+			System.out.println("\nLista de funcionários está vazia.");
 		}
-		return usuariosVO;
+		return Funcionario;
 	}
 
-	public FuncionarioVO consultarFuncionarioBO(FuncionarioVO funcionarioVO) {
-		FuncionarioDAO usuarioDAO = new FuncionarioDAO();
-		FuncionarioVO usuario = usuarioDAO.consultarPorId(funcionarioVO.getIdUsuario());
-		if (usuario == null) {
-			System.out.println("\nUsuário não Localizado.");
+	public Funcionario consultarFuncionarioBO(Funcionario funcionarioVO) {
+		FuncionarioDAO FuncionarioDAO = new FuncionarioDAO();
+		Funcionario funcionario = FuncionarioDAO.ConsultarFuncionariosPorId(funcionarioVO.getId());
+		if (funcionario == null) {
+			System.out.println("\nFuncionário não Localizado.");
 		}
-		return usuario;
+		return funcionario;
 	}
 
 }
