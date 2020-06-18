@@ -6,9 +6,11 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class PainelCadastroCliente extends JInternalFrame {
@@ -61,9 +63,16 @@ public class PainelCadastroCliente extends JInternalFrame {
 		lblCpf.setBounds(10, 45, 45, 20);
 		getContentPane().add(lblCpf);
 		
-		JFormattedTextField formattedTextCPF = new JFormattedTextField();
+	try {
+		MaskFormatter mascaracpf = new MaskFormatter("###.###.###-##");
+		JFormattedTextField formattedTextCPF = new JFormattedTextField(mascaracpf);
+		formattedTextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		formattedTextCPF.setBounds(65, 45, 200, 25);
 		getContentPane().add(formattedTextCPF);
+	}catch (ParseException e1){
+		e1.printStackTrace();
+		
+	}
 		
 		JLabel lblRua = new JLabel("Rua: ");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -91,9 +100,16 @@ public class PainelCadastroCliente extends JInternalFrame {
 		lblCep.setBounds(223, 110, 30, 25);
 		getContentPane().add(lblCep);
 		
-		JFormattedTextField formattedTextCEP = new JFormattedTextField();
+		try {
+			MaskFormatter  mascaraCep = new MaskFormatter("#####-###");
+		JFormattedTextField formattedTextCEP = new JFormattedTextField(mascaraCep);
+		formattedTextCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		formattedTextCEP.setBounds(260, 110, 160, 25);
 		getContentPane().add(formattedTextCEP);
+		}catch(ParseException e1) {
+			e1.printStackTrace();
+			
+		}
 		
 		JLabel lblBairro = new JLabel("Bairro: ");
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
