@@ -12,12 +12,13 @@ import controller.ClienteController;
 import model.vo.Cliente;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
-public class CadastroClientes extends JInternalFrame {
+public class CadastroClientes extends JFrame {
 	private JTextField textNome;
 	private JTextField textRua;
 	private JTextField textNumero;
@@ -45,8 +46,7 @@ public class CadastroClientes extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroClientes() {
-		setMaximizable(true);
-		setClosable(true);
+		
 		setBounds(100, 100, 650, 410);
 		getContentPane().setLayout(null);
 

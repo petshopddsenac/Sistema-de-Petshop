@@ -8,12 +8,13 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
-public class CadastroAnimal extends JInternalFrame {
+public class CadastroAnimal extends JFrame {
 	private JTextField textNomePet;
 	private JTextField textEspecie;
 	private JTextField textRaca;
@@ -40,8 +41,7 @@ public class CadastroAnimal extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroAnimal() {
-		setMaximizable(true);
-		setClosable(true);
+		
 		setBounds(100, 100, 465, 335);
 		getContentPane().setLayout(null);
 		
