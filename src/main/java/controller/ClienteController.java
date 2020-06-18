@@ -3,6 +3,9 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
+
 import model.bo.ClienteBO;
 import model.dao.ClienteDAO;
 import model.seletor.ClienteSeletor;
@@ -106,6 +109,10 @@ public class ClienteController {
 		}
 
 		return mensagem;
+	}
+	public void Salvar(JTextField textNome, JTextField textRua, JTextField textBairro, JTextField textNumero,
+			JTextField textTelefone, JTextField textEmail, JFormattedTextField textCPF, JFormattedTextField textCEP) {
+	
 	}
 
 	public void gerarRelatorio(ArrayList<Cliente> clientes, String caminhoEscolhido) {

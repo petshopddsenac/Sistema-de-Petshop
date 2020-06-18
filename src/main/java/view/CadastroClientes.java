@@ -7,6 +7,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import controller.ClienteController;
+import model.vo.Cliente;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -74,10 +78,10 @@ public class CadastroClientes extends JInternalFrame {
 			e1.printStackTrace();
 		}
 
-		JFormattedTextField formattedTextCPF = new JFormattedTextField();
-		formattedTextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		formattedTextCPF.setBounds(70, 50, 80, 25);
-		getContentPane().add(formattedTextCPF);
+		final JFormattedTextField TextCPF = new JFormattedTextField();
+		TextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		TextCPF.setBounds(70, 50, 80, 25);
+		getContentPane().add(TextCPF);
 
 		JLabel lblRua = new JLabel("Rua: *");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -109,6 +113,31 @@ public class CadastroClientes extends JInternalFrame {
 		textBairro.setBounds(70, 155, 200, 25);
 		getContentPane().add(textBairro);
 		textBairro.setColumns(10);
+		
+		JLabel lblCEP = new JLabel("CEP: *");
+		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblCEP.setBounds(296, 120, 40, 25);
+		getContentPane().add(lblCEP);
+
+		try {
+			MaskFormatter  mascaraCep = new MaskFormatter("#####-###");
+
+			JFormattedTextField TextCEP = new JFormattedTextField(mascaraCep);
+			TextCEP.setBounds(345, 120, 140, 25);
+			getContentPane().add(TextCEP);
+			
+			JLabel lblNewLabel = new JLabel("* Campos Obrigatorios");
+			lblNewLabel.setBounds(40, 280, 135, 15);
+			getContentPane().add(lblNewLabel);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		 final JFormattedTextField textCEP = new JFormattedTextField();
+
+			textCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			textCEP.setBounds(345, 120, 140, 25);
+			getContentPane().add(textCEP);
+
 
 		JLabel lblEmail = new JLabel("e-mail: *");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -146,31 +175,19 @@ public class CadastroClientes extends JInternalFrame {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ClienteController controller = new ClienteController();
+				Cliente cliente = new Cliente();
+				
+	controller.Salvar(textNome, textRua, textBairro, textNumero, textTelefone, textEmail, TextCPF, textCEP);
+				
+				
 			}
-		});
-		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnSalvar.setBounds(335, 320, 85, 30);
-		getContentPane().add(btnSalvar);
-
-		JLabel lblCEP = new JLabel("CEP: *");
-		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCEP.setBounds(296, 120, 40, 25);
-		getContentPane().add(lblCEP);
-
-		try {
-			MaskFormatter mascaraCep = new MaskFormatter("###-####");
-
-			JFormattedTextField TextCEP = new JFormattedTextField(mascaraCep);
-			TextCEP.setBounds(350, 120, 150, 25);
-			getContentPane().add(TextCEP);
 			
-			JLabel lblNewLabel = new JLabel("* Campos Obrigatorios");
-			lblNewLabel.setBounds(40, 280, 135, 15);
-			getContentPane().add(lblNewLabel);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		});btnSalvar.setFont(new Font("Tahoma",Font.PLAIN,12));btnSalvar.setBounds(335,320,85,30);
 
+	getContentPane().add(btnSalvar);
+
+		
 	}
 
 }
