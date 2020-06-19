@@ -18,7 +18,7 @@ public class CadastroAnimal extends JFrame {
 	private JTextField textNomePet;
 	private JTextField textEspecie;
 	private JTextField textRaca;
-	private JTextField textField;
+	private JTextField textPeso;
 	private JTextField textDono;
 
 	/**
@@ -42,7 +42,7 @@ public class CadastroAnimal extends JFrame {
 	 */
 	public CadastroAnimal() {
 		
-		setBounds(100, 100, 465, 335);
+		setBounds(100, 100, 500, 360);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome: ");
@@ -86,6 +86,7 @@ public class CadastroAnimal extends JFrame {
 		try {
 			MaskFormatter mascaraData = new MaskFormatter("##/##/####");
 			JFormattedTextField  formattedTextDataNascimento = new JFormattedTextField (mascaraData);
+			formattedTextDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			formattedTextDataNascimento.setBounds(130, 200, 115, 25);
 			getContentPane().add(formattedTextDataNascimento);
 		}catch (ParseException e1) {
@@ -94,24 +95,24 @@ public class CadastroAnimal extends JFrame {
 		
 		JLabel lblPeso = new JLabel("Peso: ");
 		lblPeso.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblPeso.setBounds(10, 130, 40, 25);
+		lblPeso.setBounds(10, 165, 40, 25);
 		getContentPane().add(lblPeso);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setBounds(70, 130, 85, 25);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textPeso = new JTextField();
+		textPeso.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textPeso.setBounds(70, 165, 85, 25);
+		getContentPane().add(textPeso);
+		textPeso.setColumns(10);
 		
 				
 		JLabel lblDono = new JLabel("Dono: ");
 		lblDono.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDono.setBounds(10, 165, 40, 25);
+		lblDono.setBounds(10, 125, 40, 25);
 		getContentPane().add(lblDono);
 		
 		textDono = new JTextField();
 		textDono.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textDono.setBounds(70, 165, 175, 25);
+		textDono.setBounds(70, 125, 175, 25);
 		getContentPane().add(textDono);
 		textDono.setColumns(10);
 		
@@ -121,7 +122,7 @@ public class CadastroAnimal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCadastrar.setBounds(110, 260, 85, 30);
+		btnCadastrar.setBounds(110, 280, 85, 30);
 		getContentPane().add(btnCadastrar);
 		
 		JButton btnSalvar = new JButton("Salvar");
@@ -130,7 +131,7 @@ public class CadastroAnimal extends JFrame {
 			}
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnSalvar.setBounds(240, 260, 85, 30);
+		btnSalvar.setBounds(240, 280, 85, 30);
 		getContentPane().add(btnSalvar);
 		
 		JLabel lblNewLabel = new JLabel("*");
@@ -145,12 +146,12 @@ public class CadastroAnimal extends JFrame {
 		
 		JLabel label_1 = new JLabel("*");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_1.setBounds(50, 122, 10, 20);
+		label_1.setBounds(50, 157, 10, 20);
 		getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("*");
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_2.setBounds(50, 158, 10, 20);
+		label_2.setBounds(50, 125, 10, 20);
 		getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("*");
