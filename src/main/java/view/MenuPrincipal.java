@@ -131,6 +131,9 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar Serviço");
 		mntmCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				CadastroServicos menuCadastroServico = new CadastroServicos();
+				menuCadastroServico.setVisible(true);
 			}
 		});
 		mntmCadastrar.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/higiene.png")));
