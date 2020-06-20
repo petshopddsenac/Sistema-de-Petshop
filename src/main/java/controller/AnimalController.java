@@ -6,12 +6,7 @@ import model.bo.AnimalBO;
 
 import model.vo.Animal;
 
-
-
 public class AnimalController {
-	
-	
-
 	
 	public void inserirAnimalController(Animal animalVO) {
 		AnimalBO animalBO = new AnimalBO();

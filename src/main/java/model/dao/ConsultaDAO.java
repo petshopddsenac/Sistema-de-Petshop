@@ -136,13 +136,14 @@ public class ConsultaDAO {
 		try {
 			resultado = stmt.executeQuery(query);
 			while (resultado.next()) {
-				consulta.setId(Integer.parseInt(resultado.getString(1)));
-				consulta.setCliente(resultado.getString(2));
-				consulta.setAnimal(resultado.getBoolean(3));
-				consulta.setFuncionario(resultado.getBoolean(4));
-				consulta.setServico(resultado.getBoolean(5));
-				consulta.setDataConsulta(resultado.getBoolean(6));
-				consulta.setHoraConsulta(resultado.getBoolean(7));				
+				consulta = new Consulta();
+				consulta.setId(Integer.parseInt(resultado.getString("ID")));
+				consulta.setCliente(resultado.getInt("IDCLIENTE"));
+				consulta.setAnimal(resultado.getInt("IDANIMAL"));
+				consulta.setFuncionario(resultado.getInt("IDFUNCIONARIO"));
+				consulta.setServico(resultado.getInt("IDSERVICO"));
+				consulta.setDataConsulta(resultado.getDate("DATAC"));
+				consulta.setHoraConsulta(resultado.getTime("TIMEC"));				
 				
 			}
 		} catch (SQLException e) {
@@ -186,15 +187,17 @@ public class ConsultaDAO {
 			consulta.setId(rs.getInt("id"));
 			ClienteDAO clienteDAO = new ClienteDAO();
 			Cliente cliente = clienteDAO.consultarPorId(rs.getInt("id"));	
+			
 			AnimalDAO animalDAO = new AnimalDAO();
-			Animal animal = animalDAO.consultarPorId(rs.getInt("id"));	
+			Animal animal = animalDAO.obterPorId(rs.getInt("id"));
+			
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			Funcionario funcionario = funcionarioDAO.ConsultarFuncionario(rs.getInt("id"));
 			ServicoDAO servicoDAO = new ServicoDAO();
 			Servico servico = servicoDAO.ConsultarPorId(rs.getInt("id"));
 			DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			consulta.setDataConsulta(LocalDate.parse(rs.getString("dataConsulta"), dataFormatter));
-			consulta.setHoraConsulta(LocalTime.parse(rs.getString("horaConsulta"), dataFormatter));
+			consulta.setDataConsulta(rs.getDate("dataConsulta"));
+			consulta.setHoraConsulta(rs.getTime("horaConsulta"));
 
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir consulta a partir do ResultSet");
