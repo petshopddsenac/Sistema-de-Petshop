@@ -228,7 +228,7 @@ public class AnimalDAO {
 	}
 
 	public Animal obterPorId(int animal) {
-		String sql = " SELECT * FROM PRODUTO " + " WHERE ID=?";
+		String sql = " SELECT * FROM ANIMAL " + " WHERE ID=?";
 
 		Connection conexao = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);

@@ -128,35 +128,41 @@ public class ConsultaDAO {
 	public Consulta ConsultarPorId(int id) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
-		ResultSet resultado = null;
-		Consulta consulta = new Consulta();
-
+		
 		String query = "SELECT IDCONSULTA, IDCLIENTE, IDANIMAL, IDFUNCIONARIO, IDSERVICO, DATAC, TIMEC, DIAGNOSTICO FROM CONSULTA WHERE IDCONSULTA = " + id;
 
-		try {
-			resultado = stmt.executeQuery(query);
-			while (resultado.next()) {
-				consulta = new Consulta();
-				consulta.setId(Integer.parseInt(resultado.getString("ID")));
-				consulta.setCliente(resultado.getInt("IDCLIENTE"));
-				consulta.setAnimal(resultado.getInt("IDANIMAL"));
-				consulta.setFuncionario(resultado.getInt("IDFUNCIONARIO"));
-				consulta.setServico(resultado.getInt("IDSERVICO"));
-				consulta.setDataConsulta(resultado.getDate("DATAC"));
-				consulta.setHoraConsulta(resultado.getTime("TIMEC"));				
+		Consulta consulta = null;
+		
+		try {				
+				ResultSet resultadoDaConsulta = stmt.executeQuery(query);
 				
-			}
-		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query de Consulta de Consultas.");
-			System.out.println("Erro: " + e.getMessage());
-		} finally {
-			Banco.closeResultSet(resultado);
-			Banco.closeStatement(stmt);
-			Banco.closeConnection(conn);
-		}
-		return consulta;
+				if (resultadoDaConsulta.next()) {
+				
+					consulta = ConstruirConsulta(resultadoDaConsulta);
+				}
+					
+				} catch (SQLException e) {
+					System.out.println("Erro ao executar a Query de Consulta de Consultas.");
+					System.out.println("Erro: " + e.getMessage());
+				
 	}
-	
+		return consulta;
+		}
+				
+	/*			
+	 * 
+	 * 			resultado = stmt.executeQuery(query);
+				while (resultado.next()) {
+	 * 			consulta = new Consulta();
+				consulta.setId(Integer.parseInt(resultado.getString(1)));
+				consulta.setCliente(resultado.getString(2));
+				consulta.setAnimal(resultado.getString(3));
+				consulta.setFuncionario(resultado.getInt(4));
+				consulta.setServico(resultado.getInt(5));
+				consulta.setDataConsulta(resultado.getDate(6));
+				consulta.setHoraConsulta(resultado.getTime(7));				
+	*/			
+				
 	public boolean existeRegistroPorIdConsulta(int id) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
