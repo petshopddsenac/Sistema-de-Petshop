@@ -10,40 +10,38 @@ public class AnimalSeletor {
 	private String especie;
 	private String raca;
 	private Cliente Dono;
-	private Date dataNascimento;
-	
+
 	private int limite;
 	private int pagina;
-	
+
 	public AnimalSeletor() {
-		
+
 		this.limite = 0;
 		this.pagina = -1;
 	}
-	
+
 	public boolean temFiltro() {
-		if (this.idAnimal>0) {
+		if (this.idAnimal > 0) {
 			return true;
 		}
 		if (this.Dono != null) {
 			return true;
 		}
-	if((this.raca !=null) && (this.raca.trim().length()>0)) {
-		return true;
+		if ((this.raca != null) && (this.raca.trim().length() > 0)) {
+			return true;
+		}
+
+		if ((this.especie != null) && (this.especie.trim().length() > 0)) {
+			return true;
+		}
+		return false;
+
 	}
-		
-	if((this.especie != null) && (this.especie.trim().length()>0)) {
-		return true;
-	}
-	 if(this.dataNascimento !=null) {
-		 return true;
-	 }
-	return false;
-	}
-	
+
 	public boolean temPaginacao() {
 		return ((this.limite > 0) && (this.pagina > -1));
 	}
+
 	public int getOffset() {
 		return (this.limite * (this.pagina - 1));
 	}
@@ -80,14 +78,6 @@ public class AnimalSeletor {
 		Dono = dono;
 	}
 
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 	public int getLimite() {
 		return limite;
 	}
@@ -104,4 +94,3 @@ public class AnimalSeletor {
 		this.pagina = pagina;
 	}
 }
-

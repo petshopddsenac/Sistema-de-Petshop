@@ -79,6 +79,8 @@ public class AnimalDAO {
 			stmt.setString(3, animal.getRaca());
 			stmt.setDate(4, animal.getDataNascimento());
 			stmt.setDouble(5, animal.getPeso());
+			stmt.setObject(6, animal.getDono());
+			stmt.setInt(7, animal.getId());
 
 			if (animal.getDono() != null) {
 				stmt.setInt(6, animal.getDono().getId());
@@ -163,13 +165,7 @@ public class AnimalDAO {
 			primeiro = false;
 		}
 
-		if (seletor.getDataNascimento() != null) {
-			if (!primeiro) {
-				sql += "AND";
-			}
-			sql += "animal.dataNascimento'" + seletor.getDataNascimento();
-			primeiro = false;
-		}
+		
 
 		return sql;
 	}
@@ -210,6 +206,7 @@ public class AnimalDAO {
 			prepStmt.setString(3, animalVO.getRaca());
 			prepStmt.setDate(4, animalVO.getDataNascimento());
 			prepStmt.setDouble(5, animalVO.getPeso());
+			prepStmt.setInt(6, animalVO.getId());
 
 			prepStmt.execute();
 
@@ -254,7 +251,7 @@ public class AnimalDAO {
 	public boolean atualizar(Animal animala) {
 		boolean sucessoUpdate = false;
 
-		String sql = " UPDATE ANIMAL ANIMALA SET NOME=?, ESPECIE=?, RACA=?, DATANASCIMENTO=?, PESO=?, ID=? " + " WHERE ANIMALA.ID = ? ";   
+		String sql = " UPDATE ANIMAL ANIMAL SET NOME=?, ESPECIE=?, RACA=?, PESO=?, ID=? " + " WHERE ANIMAL.ID = ? ";   
 
 		Connection conexao = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
@@ -284,7 +281,7 @@ public class AnimalDAO {
 	}
 
 	public ArrayList<Animal> listarTodosA(AnimalSeletor seletor) {
-		String sql = " SELECT * FROM ANIMAL animala";
+		String sql = " SELECT * FROM ANIMAL animal";
 
 		if (seletor.temFiltro()) {
 			sql = criarFiltros(seletor, sql);
@@ -317,10 +314,9 @@ public class AnimalDAO {
 		try {
 			A.setId(result.getInt("ID"));
 			A.setNome(result.getString("NOME"));
-			A.setDataNascimento(result.getDate("DATADENASCIMENTO"));
 			A.setPeso(result.getDouble("PESO"));
 			A.setEspecie(result.getString("ESPECIE"));
-			A.setRaca(result.getString("ESPECIE"));
+			A.setRaca(result.getString("RACA"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -339,12 +335,11 @@ public class AnimalDAO {
 
 			while (result.next()) {
 				Animal An = new Animal();
-
-				
 				An = new Animal();
 				An.setId(result.getInt("ID"));
 				An.setNome(result.getString("NOME"));
 				An.setEspecie(result.getString("ESPECIE"));
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
