@@ -17,7 +17,7 @@ public class ConsultaBO {
 		}
 	}
 	
-	public void excluirServicoBO(Consulta consultaVO ) {
+	public void excluirConsultaBO(Consulta consultaVO ) {
 		ConsultaDAO consultaDAO = new ConsultaDAO();
 		if (consultaDAO.existeRegistroPorIdConsulta(consultaVO.getId())) {
 			boolean conseguiuExcluir = consultaDAO.excluir(consultaVO.getId());
@@ -31,9 +31,9 @@ public class ConsultaBO {
 		}
 	}
 	
-	public void atualizarServicoBO(Consulta consultaVO) {
+	public void atualizarConsultaBO(Consulta consultaVO) {
 		ConsultaDAO consultaDAO = new ConsultaDAO();
-		if (consultaDAO.existeRegistroPorIdServico(consultaVO.getId())) {
+		if (consultaDAO.existeRegistroPorIdConsulta(consultaVO.getId())) {
 			boolean alterou = consultaDAO.alterar(consultaVO);
 			if (alterou) {
 				System.out.println("\nServiço atualizado com Sucesso.");
@@ -45,19 +45,19 @@ public class ConsultaBO {
 		}
 	}
 	
-	public ArrayList<Consulta> consultarServicosBO() {
+	public ArrayList<Consulta> consultarConsultasBO() {
 		ConsultaDAO consultaDAO = new ConsultaDAO();
-		ArrayList<Consulta> consulta = consultaDAO.consultarTodos();
-		if (servicos.isEmpty()) {
+		ArrayList<Consulta> consulta = consultaDAO.ListarTodos();
+		if (consulta.isEmpty()) {
 			System.out.println("\nLista de Serviços está vazia.");
 		}
 		return consulta;
 	}
 
-	public Consulta consultarServicoBO(Consulta consultaVO) {
+	public Consulta consultarConsultaBO(Consulta consultaVO) {
 		ConsultaDAO consultaDAO = new ConsultaDAO();
 		Consulta consulta = consultaDAO.ConsultarPorId(consultaVO.getId());
-		if (servico == null) {
+		if (consulta == null) {
 			System.out.println("\nUsuário não Localizado.");
 		}
 		return consulta;

@@ -161,6 +161,7 @@ public class CadastroAnimal extends JFrame {
 		btnSalvar.setBounds(240, 280, 85, 30);
 		getContentPane().add(btnSalvar);
 
+
 		JLabel lblNewLabel = new JLabel("*");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel.setBounds(50, 15, 10, 20);
@@ -195,6 +196,12 @@ public class CadastroAnimal extends JFrame {
 		lblObrigatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblObrigatorio.setBounds(35, 235, 135, 20);
 		getContentPane().add(lblObrigatorio);
+
+
+		
+		
+		
+		
 
 	}
 

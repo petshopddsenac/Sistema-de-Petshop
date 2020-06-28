@@ -40,7 +40,7 @@ public class ClienteDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Erro ao inserir novo cliente.");
+			System.out.println("Erro ao salvar novo cliente.");
 			System.out.println("Erro: " + e.getMessage());
 		} finally {
 			Banco.closeResultSet(rs);
@@ -128,12 +128,12 @@ public class ClienteDAO {
 			primeiro = false;
 		}
 
-		if (seletor.getCpf() != null && seletor.getCpf().trim().length() > 0) {
+		if (seletor.getBairro() != null && seletor.getBairro().trim().length() > 0) {
 			if (!primeiro) {
 				sql += " AND ";
 			}
 
-			sql += " C.CPF LIKE " + "'%" + seletor.getCpf() + "%' ";
+			sql += " C.CPF LIKE " + "'%" + seletor.getBairro() + "%' ";
 		}
 		return sql;
 	}
