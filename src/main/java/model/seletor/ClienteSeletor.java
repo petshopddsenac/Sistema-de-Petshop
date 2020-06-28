@@ -4,7 +4,7 @@ public class ClienteSeletor {
 	
 	private int idCliente;
 	private String nome;
-	private String cpf;
+	private String bairro;
 	
 
 	private int limite;
@@ -26,7 +26,8 @@ public class ClienteSeletor {
 		return true;
 	}
 	
-	if((this.cpf!= null) && (this.cpf.trim().length()>0)) {
+	if((this.bairro !=null) && (this.bairro.trim().length()>0)) {
+		
 		return true;
 	}
 	return false;
@@ -61,13 +62,16 @@ public class ClienteSeletor {
 	}
 
 
-	public String getCpf() {
-		return cpf;
+	
+
+
+	public String getBairro() {
+		return bairro;
 	}
 
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 
 

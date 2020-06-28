@@ -114,6 +114,7 @@ public class ClienteController {
 			JTextField textTelefone, JTextField textEmail, JFormattedTextField textCPF, JFormattedTextField textCEP) {
 	
 	}
+	
 
 	public void gerarRelatorio(ArrayList<Cliente> clientes, String caminhoEscolhido) {
 		

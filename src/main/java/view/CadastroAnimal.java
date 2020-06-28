@@ -134,40 +134,8 @@ public class CadastroAnimal extends JFrame {
 		btnSalvar.setBounds(240, 280, 85, 30);
 		getContentPane().add(btnSalvar);
 		
-		JLabel lblNewLabel = new JLabel("*");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setBounds(50, 15, 10, 20);
-		getContentPane().add(lblNewLabel);
 		
-		JLabel label = new JLabel("*");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label.setBounds(50, 90, 10, 20);
-		getContentPane().add(label);
 		
-		JLabel label_1 = new JLabel("*");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_1.setBounds(50, 157, 10, 20);
-		getContentPane().add(label_1);
 		
-		JLabel label_2 = new JLabel("*");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_2.setBounds(50, 125, 10, 20);
-		getContentPane().add(label_2);
-		
-		JLabel label_3 = new JLabel("*");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_3.setBounds(120, 200, 10, 20);
-		getContentPane().add(label_3);
-		
-		JLabel label_4 = new JLabel("*");
-		label_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_4.setBounds(50, 49, 10, 20);
-		getContentPane().add(label_4);
-		
-		JLabel lblObrigatorio = new JLabel("* Campos Obrigatorios");
-		lblObrigatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblObrigatorio.setBounds(35, 235, 135, 20);
-		getContentPane().add(lblObrigatorio);
-
 	}
 }
