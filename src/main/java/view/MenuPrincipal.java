@@ -103,11 +103,11 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmCadastrarAnimal = new JMenuItem("Cadastrar Animal");
 		mntmCadastrarAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (cadastroAnimal == null || !cadastroAnimal.isVisible()) {
-					cadastroAnimal = new PainelCadastrarAnimal();
-					desktopPane.add(cadastroAnimal);
-					cadastroAnimal.show();
-				}
+				
+				CadastroAnimal menuCadastroAnimal = new CadastroAnimal();
+				menuCadastroAnimal.setVisible(true);
+				
+				
 			}
 		});
 		mntmCadastrarAnimal.setAccelerator( KeyStroke.getKeyStroke(KeyEvent.VK_F10,0));
@@ -164,6 +164,19 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnFuncionario);
 
 		JMenuItem mntmCadastrarFuncionrio = new JMenuItem("Cadastrar Funcionário");
+		mntmCadastrarFuncionrio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+				CadastroFuncionarios menuCadastroFuncionario = new CadastroFuncionarios();
+				menuCadastroFuncionario.setVisible(true);
+				
+				
+				
+			}
+		});
 		mntmCadastrarFuncionrio.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/medico.png")));
 		mnFuncionario.add(mntmCadastrarFuncionrio);
 

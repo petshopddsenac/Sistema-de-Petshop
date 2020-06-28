@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import model.seletor.AnimalSeletor;
 import model.vo.Animal;
 
-
-
-
 public class AnimalDAO {
 
 	public Animal cadastrar(Animal novoAnimal) {
@@ -105,10 +102,8 @@ public class AnimalDAO {
 			animal.setRaca(result.getNString("Raça"));
 			animal.setDataNascimento(result.getDate("Data de Nascimento"));
 			animal.setPeso(result.getDouble("Peso"));
-			
+
 			AnimalDAO aDAO = new AnimalDAO();
-			
-			
 
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir animal a partir do ResultSet. Causa: " + e.getMessage());
@@ -139,8 +134,6 @@ public class AnimalDAO {
 		sql += "WHERE";
 		boolean primeiro = true;
 
-		
-		
 		if (seletor.getDono() != null) {
 			if (!primeiro) {
 				sql += "AND";
@@ -161,11 +154,9 @@ public class AnimalDAO {
 			if (!primeiro) {
 				sql += "AND";
 			}
-			sql += "animal.especie LIKE '%'"+ seletor.getEspecie() + "%'";
+			sql += "animal.especie LIKE '%'" + seletor.getEspecie() + "%'";
 			primeiro = false;
 		}
-
-		
 
 		return sql;
 	}
@@ -240,7 +231,7 @@ public class AnimalDAO {
 				An.setId(result.getInt("ID"));
 				An.setNome(result.getString("NOME"));
 				An.setEspecie(result.getString("ESPECIE"));
-			
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -251,7 +242,7 @@ public class AnimalDAO {
 	public boolean atualizar(Animal animala) {
 		boolean sucessoUpdate = false;
 
-		String sql = " UPDATE ANIMAL ANIMAL SET NOME=?, ESPECIE=?, RACA=?, PESO=?, ID=? " + " WHERE ANIMAL.ID = ? ";   
+		String sql = " UPDATE ANIMAL ANIMAL SET NOME=?, ESPECIE=?, RACA=?, PESO=?, ID=? " + " WHERE ANIMAL.ID = ? ";
 
 		Connection conexao = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
@@ -263,7 +254,7 @@ public class AnimalDAO {
 			prepStmt.setDouble(4, animala.getPeso());
 			prepStmt.setDouble(5, animala.getId());
 			prepStmt.setDate(1, animala.getDataNascimento());
-			
+
 			int codigoRetorno = prepStmt.executeUpdate();
 
 			if (codigoRetorno == 1) {
@@ -288,7 +279,7 @@ public class AnimalDAO {
 		}
 
 		if (seletor.temPaginacao()) {
-			
+
 			sql += " LIMIT " + seletor.getLimite() + " OFFSET " + seletor.getOffset();
 		}
 		Connection conexao = Banco.getConnection();
@@ -339,11 +330,50 @@ public class AnimalDAO {
 				An.setId(result.getInt("ID"));
 				An.setNome(result.getString("NOME"));
 				An.setEspecie(result.getString("ESPECIE"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return produtos;
 	}
+
+	public Animal salvar1(Animal animal) {
+
+		Connection conn = Banco.getConnection();
+		String sql = "INSERT INTO ANIMAL (ID,NOME, ESPECIE, RACA, DATANASCIMENTO, PESO) VALUES "
+				+ "(?, ?, ?, ?, ?, ) ";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+		try {
+			stmt.setString(1, animal.getNome());
+			stmt.setString(2, animal.getEspecie());
+			stmt.setString(3, animal.getRaca());
+			stmt.setDate(4, animal.getDataNascimento());
+			stmt.setDouble(5, animal.getPeso());
+
+			if (animal.getDono() != null) {
+				stmt.setInt(6, animal.getDono().getId());
+			} else {
+				stmt.setInt(5, 0);
+			}
+
+			stmt.execute();
+
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				int idGerado = generatedKeys.getInt(1);
+				animal.setId(idGerado);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao inserir o novo animal.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+
+		return animal;
+	}
+
+	
+
 }

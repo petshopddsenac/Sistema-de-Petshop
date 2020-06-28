@@ -34,4 +34,24 @@ public class FuncionarioController {
 		funcionarioBO.consultarFuncionarioBO(funcionarioVO);
 
 	}
+
+	public String validarCamposDigitado(String nomeDigitado, String ruaDigitado, String cpfDigitado) {
+		String mensagem = "";
+		if (nomeDigitado.isEmpty() || nomeDigitado.trim().length() < 3)
+			mensagem += "Funcionario deve ter no minimo 3 letras";
+		if (ruaDigitado.isEmpty() || ruaDigitado.trim().length() < 3) {
+			mensagem += "Rua deve ter no minimo 3 letras";
+		}
+		return mensagem;
+	}
+		
+	
+
+	public Funcionario salvar(Funcionario funcionario) {
+		
+		return FuncionarioBO.salvar(funcionario);
+	}
+
+	
+	
 }

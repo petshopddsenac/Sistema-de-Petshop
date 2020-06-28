@@ -70,4 +70,12 @@ public class FuncionarioBO {
 		return funcionario;
 	}
 
+	public static Funcionario salvar(Funcionario funcionario) {
+		FuncionarioDAO FuncionarioDAO = new FuncionarioDAO();
+		
+		return FuncionarioDAO.salvar(funcionario);
+	}
+
+	
+
 }

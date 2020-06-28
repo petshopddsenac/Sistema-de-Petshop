@@ -47,6 +47,13 @@ public class AnimalBO {
 	public List<Animal> listarAnimais(AnimalSeletor seletor) {
 		return dao.listarComSeletor(seletor);
 	}
+
+	public static Animal salvar(Animal animal) {
+		AnimalDAO animalDAO = new AnimalDAO();
+		
+		
+		return animalDAO.salvar1(animal);
+	}
 }
 
 
