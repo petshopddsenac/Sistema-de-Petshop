@@ -6,16 +6,21 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import controller.ServicoController;
+
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
 
 public class CadastroServicos extends JFrame {
 	private JTextField textNome;
 	private JTextField textPreco;
+	JCheckBox chkBoxNecessitaConsulta;
 
 	/**
 	 * Launch the application.
@@ -64,28 +69,31 @@ public class CadastroServicos extends JFrame {
 		
 		JLabel lblNecessitaConsulta = new JLabel("Necessita Consulta: *");
 		lblNecessitaConsulta.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNecessitaConsulta.setBounds(10, 100, 120, 25);
+		lblNecessitaConsulta.setBounds(10, 112, 120, 25);
 		getContentPane().add(lblNecessitaConsulta);
 		
-		JRadioButton rdbtnSim = new JRadioButton("Sim");
-		rdbtnSim.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		rdbtnSim.setBounds(70, 130, 50, 25);
-		getContentPane().add(rdbtnSim);
-		
-		JRadioButton rdbtnNao = new JRadioButton("Não");
-		rdbtnNao.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		rdbtnNao.setBounds(155, 130, 50, 25);
-		getContentPane().add(rdbtnNao);
+		JCheckBox chkboxNecessitaConsulta = new JCheckBox("");
+		chkboxNecessitaConsulta.setBounds(130, 112, 21, 23);
+		getContentPane().add(chkboxNecessitaConsulta);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+			}
+
+		});
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnLimpar.setBounds(125, 215, 85, 30);
 		getContentPane().add(btnLimpar);
+
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ServicoController controller = new ServicoController();
+				controller.cadastrarServicoController(textNome.getText(), chkBoxNecessitaConsulta.isSelected(), textPreco.getText());
 			}
 		});
 		btnSalvar.setBounds(265, 215, 85, 30);
@@ -94,6 +102,12 @@ public class CadastroServicos extends JFrame {
 		JLabel lblCamposObrigatorios = new JLabel("* Campos Obrigatorios");
 		lblCamposObrigatorios.setBounds(15, 170, 115, 15);
 		getContentPane().add(lblCamposObrigatorios);
-
+			
+		}
+	private void limparCampos() {
+		this.textNome.setText("");
+		this.textPreco.setText("");
+	
 	}
-}
+	}
+
