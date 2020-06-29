@@ -48,7 +48,7 @@ public class CadastroClientes extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroClientes() {
-		
+
 		setBounds(100, 100, 650, 410);
 		getContentPane().setLayout(null);
 
@@ -85,7 +85,7 @@ public class CadastroClientes extends JFrame {
 		TextCPF.setBounds(70, 50, 200, 25);
 		getContentPane().add(TextCPF);
 
-		JLabel lblRua = new JLabel("Rua: *");
+		JLabel lblRua = new JLabel("Rua: ");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblRua.setBounds(10, 80, 40, 25);
 		getContentPane().add(lblRua);
@@ -115,14 +115,14 @@ public class CadastroClientes extends JFrame {
 		textBairro.setBounds(70, 155, 200, 25);
 		getContentPane().add(textBairro);
 		textBairro.setColumns(10);
-		
+
 		JLabel lblCEP = new JLabel("CEP: ");
 		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCEP.setBounds(296, 120, 40, 25);
 		getContentPane().add(lblCEP);
 
 		try {
-			MaskFormatter  mascaraCep = new MaskFormatter("#####-###");
+			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
 
 			JFormattedTextField TextCEP = new JFormattedTextField(mascaraCep);
 			TextCEP.setBounds(345, 120, 140, 25);
@@ -130,12 +130,11 @@ public class CadastroClientes extends JFrame {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		 final JFormattedTextField textCEP = new JFormattedTextField();
+		final JFormattedTextField textCEP = new JFormattedTextField();
 
-			textCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			textCEP.setBounds(345, 120, 140, 25);
-			getContentPane().add(textCEP);
-
+		textCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textCEP.setBounds(345, 120, 140, 25);
+		getContentPane().add(textCEP);
 
 		JLabel lblEmail = new JLabel("e-mail: ");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -153,8 +152,6 @@ public class CadastroClientes extends JFrame {
 		lblTelefone.setBounds(10, 190, 60, 25);
 		getContentPane().add(lblTelefone);
 
-			
-
 		textTelefone = new JTextField();
 		textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textTelefone.setBounds(70, 190, 200, 25);
@@ -165,6 +162,8 @@ public class CadastroClientes extends JFrame {
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+
 			}
 		});
 		btnLimpar.setBounds(185, 320, 85, 30);
@@ -174,34 +173,44 @@ public class CadastroClientes extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteController controller = new ClienteController();
-				String nome= textNome.getText();
-				String rua = textRua.getText();
+				String nome = textNome.getText();
 				String bairro = textBairro.getText();
 				String numero = textNumero.getText();
 				String telefone = textTelefone.getText();
 				String email = textEmail.getText();
 				String cpf = TextCPF.getText();
 				String cep = textCEP.getText();
-			
-				String mensagem = controller.Salvar(nome, rua, bairro, numero, telefone, email, cpf, cep);
-				if(mensagem.isEmpty()) {
+
+				String mensagem = controller.Salvar(textNome.getText(), textRua.getText(), textBairro.getText(),
+						textNumero.getText(), textBairro.getText(), textBairro.getText(), TextCPF.getText(),
+						TextCPF.getText());
+
+				if (mensagem.isEmpty()) {
 					Cliente cliente = new Cliente();
 
-					controller.Salvar(textNome, textRua, textBairro, textNumero, textTelefone, textEmail, TextCPF, textCEP);
-					JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-				}else {
+					JOptionPane.showMessageDialog(null, " Cliente Salvo com sucesso");
+				} else {
 					JOptionPane.showMessageDialog(null, "Erro no cadastro do cliente");
 				}
-				
-				
-				
+
 			}
-			
-		});btnSalvar.setFont(new Font("Tahoma",Font.PLAIN,12));btnSalvar.setBounds(335,320,85,30);
 
-	getContentPane().add(btnSalvar);
+		});
+		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnSalvar.setBounds(335, 320, 85, 30);
 
-		
+		getContentPane().add(btnSalvar);
+
+	}
+
+	protected void limparCampos() {
+		this.textNome.setText("");
+		this.textRua.setText("");
+		this.textNumero.setText("");
+		this.textBairro.setText("");
+		this.textTelefone.setText("");
+		this.textEmail.setText("");
+
 	}
 
 }
