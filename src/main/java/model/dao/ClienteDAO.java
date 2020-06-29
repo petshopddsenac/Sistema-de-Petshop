@@ -25,9 +25,10 @@ public class ClienteDAO {
 			stmt.setString(2, novoCliente.getCpf());
 			stmt.setString(3, novoCliente.getRua());
 			stmt.setString(4, novoCliente.getNumero());
-			stmt.setString(5, novoCliente.getCep());
-			stmt.setString(6, novoCliente.getTelefone());
-			stmt.setString(7, novoCliente.getEmail());
+			stmt.setString(5, novoCliente.getBairro());
+			stmt.setString(6, novoCliente.getCep());
+			stmt.setString(7,novoCliente.getTelefone());
+			stmt.setString(8, novoCliente.getEmail());
 			stmt.execute();
 
 			rs = stmt.getGeneratedKeys();
@@ -102,14 +103,21 @@ public class ClienteDAO {
 			sql = criarFiltros(seletor, sql);
 		}
 		Connection conn = Banco.getConnection();
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-		ArrayList<Cliente> clientes = new ArrayList();
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 		try {
 			ResultSet result = stmt.executeQuery();
+			while (result.next()) {
+				Cliente c = construirCliente(result);
+				
+			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Erro ao consultar clientes.");
+			System.out.println("Erro: " + e.getMessage());
+			
+		
 		}
 		return clientes;
 
@@ -133,7 +141,7 @@ public class ClienteDAO {
 				sql += " AND ";
 			}
 
-			sql += " C.CPF LIKE " + "'%" + seletor.getBairro() + "%' ";
+			sql += " C.BAIRRO LIKE " + "'%" + seletor.getBairro() + "%' ";
 		}
 		return sql;
 	}
