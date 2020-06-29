@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 
@@ -18,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 
 public class ExcluirCliente extends JInternalFrame {
+	private JTextField textNomeC;
 
 	/**
 	 * Launch the application.
@@ -45,27 +48,38 @@ public class ExcluirCliente extends JInternalFrame {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 
-		JLabel lblInfo = new JLabel("Digite o CPF a ser excluído");
-		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblInfo.setBounds(20, 30, 160, 25);
-		getContentPane().add(lblInfo);
-
-		JFormattedTextField formattedTextCPF = new JFormattedTextField();
-		formattedTextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		formattedTextCPF.setBounds(185, 30, 185, 25);
-		getContentPane().add(formattedTextCPF);
-
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteController controller = new ClienteController();
-				Cliente cliente = new Cliente();
-				controller.excluirPorCpf(cliente.getCpf());
-			}
+			
+				String nome = textNomeC.getText();
+				 String mensagem = controller.excluirCliente(textNomeC.getText());
+				
+				 if (mensagem.isEmpty()) {
+						Cliente cliente = new Cliente();
+
+						JOptionPane.showMessageDialog(null, " Cliente excluído com sucesso");
+					} else {
+						JOptionPane.showMessageDialog(null, "Erro na exclusão do cliente");
+					}
+
+				}
+			
 		});
 		btnExcluir.setBounds(140, 195, 85, 30);
 		getContentPane().add(btnExcluir);
+		
+		JLabel lblDigite = new JLabel("Digite o nome a ser excluído:");
+		lblDigite.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblDigite.setBounds(90, 20, 195, 25);
+		getContentPane().add(lblDigite);
+		
+		textNomeC = new JTextField();
+		textNomeC.setBounds(90, 90, 225, 25);
+		getContentPane().add(textNomeC);
+		textNomeC.setColumns(10);
 
 	}
 }
