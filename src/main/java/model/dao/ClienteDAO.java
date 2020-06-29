@@ -84,6 +84,22 @@ public class ClienteDAO {
 			stmt.setString(6, cliente.getCep());
 			stmt.setString(7, cliente.getEmail());
 			stmt.setString(8, cliente.getTelefone());
+			if((cliente.getNome()!=null) || !cliente.getNome().isEmpty()) {
+				stmt.setString(9, cliente.getNome());
+			} else {
+				stmt.setString(8, null);
+			
+			}
+			if((cliente.getCpf()!=null) || !cliente.getCpf().isEmpty()) {
+			}else {
+			stmt.setString(9, null);	
+			}
+			
+			if((cliente.getTelefone()!= null) || !cliente.getTelefone().isEmpty()) {
+				stmt.setString(10, null);
+			}
+			
+			
 			registrosAlterados = stmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Erro ao atualizar o cliente.");
@@ -110,6 +126,7 @@ public class ClienteDAO {
 			ResultSet result = stmt.executeQuery();
 			while (result.next()) {
 				Cliente c = construirCliente(result);
+				clientes.add(c);
 				
 			}
 
