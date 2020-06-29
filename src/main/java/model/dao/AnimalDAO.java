@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import model.seletor.AnimalSeletor;
 import model.vo.Animal;
@@ -163,23 +164,36 @@ public class AnimalDAO {
 
 	public ArrayList<Animal> consultarTodos() {
 		Connection conexao = Banco.getConnection();
-		String sql = " SELECT * FROM ANIMAL ";
-		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		Statement stmt = Banco.getStatement(conexao);
+		ResultSet resultado = null;
+		
 		ArrayList<Animal> animais = new ArrayList<Animal>();
+		
+		String query = " SELECT * FROM ANIMAL ";
+		
+		
+		
 		try {
-			ResultSet result = stmt.executeQuery();
+			resultado = stmt.executeQuery(query);
 
-			while (result.next()) {
-				Animal animal = construirAnimal(result);
-				animais.add(animal);
+			while (resultado.next()) {
+				Animal animais1 = new Animal();
+				
+				animais1.setId(resultado.getInt("ID"));
+				animais1.setNome(resultado.getString("NOME"));
+				animais1.setEspecie(resultado.getString("ESPECIE"));
+			
 
 			}
 
 		} catch (SQLException e) {
 			System.out.println("Erro ao consultar animais.");
 			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conexao);
 		}
-
 		return animais;
 	}
 
@@ -341,8 +355,8 @@ public class AnimalDAO {
 	public Animal salvar1(Animal animal) {
 
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO ANIMAL (ID,NOME, ESPECIE, RACA, DATANASCIMENTO, PESO) VALUES "
-				+ "(?, ?, ?, ?, ?, ) ";
+		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, DATANASCIMENTO, PESO) VALUES "
+				+ "(?, ?, ?, ?, ?,)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 		try {
@@ -351,6 +365,7 @@ public class AnimalDAO {
 			stmt.setString(3, animal.getRaca());
 			stmt.setDate(4, animal.getDataNascimento());
 			stmt.setDouble(5, animal.getPeso());
+			stmt.execute();
 
 			if (animal.getDono() != null) {
 				stmt.setInt(6, animal.getDono().getId());
@@ -371,6 +386,39 @@ public class AnimalDAO {
 			System.out.println("Erro: " + e.getMessage());
 		}
 
+		return animal;
+	}
+
+	public ArrayList<Animal> buscar() {
+		String sql = " SELECT * FROM ANIMAL ";
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Animal> animal = new ArrayList<Animal>();
+
+		try {
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				Animal An = new Animal();
+				
+				
+
+				An.setNome(result.getNString("NOME"));
+				An.setEspecie(result.getString("ESPECIE"));
+				An.setRaca(result.getString("RACA"));
+				An.setDataNascimento(result.getDate("DATANASCIMENTO"));
+				An.setPeso(result.getDouble("PESO"));
+				
+				
+				
+				
+			animal.add(An);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return animal;
 	}
 

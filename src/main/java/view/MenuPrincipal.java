@@ -4,12 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
+
+import controller.AnimalController;
+import model.vo.Animal;
+
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import java.awt.Font;
@@ -19,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.event.KeyAdapter;
@@ -28,6 +36,7 @@ public class MenuPrincipal extends JFrame {
 	private JPanel contentPane;
 	private PainelCadastroCliente cadastroCliente;
 	private PainelCadastrarAnimal cadastroAnimal;
+	private ArrayList<Animal> consultarAnimais;
 
 	private JDesktopPane desktopPane;
 
@@ -117,6 +126,13 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmListarAnimais = new JMenuItem("Listar Animais");
 		mntmListarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				TelaListarAnimais manuListarAnimais = new TelaListarAnimais();
+				
+				manuListarAnimais.setVisible(true);
+				
+				
+				
 			}
 		});
 		mntmListarAnimais.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/gatinha.png")));

@@ -50,4 +50,13 @@ public class AnimalController {
 		return AnimalBO.salvar(animal);
 	}
 
+	public ArrayList<Animal> buscarAnimalController() {
+		
+		
+		
+		AnimalBO animalBO = new AnimalBO();
+		
+		return animalBO.buscar();
+	}
+
 }

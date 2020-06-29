@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Funcionario extends Pessoa{
 	
 	private int id;
+	private Animal animal;
+	private Pessoa pessoa;
 	private String cargo;
 	private double salario;
 	private ArrayList<Servico> servicos;
@@ -16,11 +18,13 @@ public class Funcionario extends Pessoa{
 		
 	}
 
-	public Funcionario(int id, String nome, String cpf, String rua, String numero, String bairro, String cep,
+	public Funcionario(int id,Animal animal,Pessoa pessoa, String nome, String cpf, String rua, String numero, String bairro, String cep,
 			String email, String telefone) {
 		super(id, nome, cpf, rua, numero, bairro, cep, email, telefone);
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	public int getId() {
 		return id;
@@ -28,6 +32,22 @@ public class Funcionario extends Pessoa{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Animal getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	public String getCargo() {
@@ -52,6 +72,14 @@ public class Funcionario extends Pessoa{
 
 	public void setServicos(ArrayList<Servico> servicos) {
 		this.servicos = servicos;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	@Override

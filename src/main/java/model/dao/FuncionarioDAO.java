@@ -241,26 +241,21 @@ public class FuncionarioDAO {
 
 	public Funcionario salvar(Funcionario funcionarioVO) {
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO FUNCIONARIO (NOME, CPF, RUA, NUMERO, BAIRRO, CEP, EMAIL, TELEFONE, CARGO, SALARIO, SERVIÇO)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+		String sql = "INSERT INTO FUNCIONARIO ( CARGO, SALARIO, IDPESSOA)"
+				+ " VALUES (?, ?, ?,)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+		
 
 		try {
-			stmt.setString(1, funcionarioVO.getNome());
-			stmt.setString(2, funcionarioVO.getCpf());
-			stmt.setString(3, funcionarioVO.getRua());
-			stmt.setString(4, funcionarioVO.getNumero());
-			stmt.setString(5, funcionarioVO.getBairro());
-			stmt.setString(6, funcionarioVO.getCep());
-			stmt.setString(7, funcionarioVO.getEmail());
-			stmt.setNString(8, funcionarioVO.getTelefone());
-			stmt.setString(9, funcionarioVO.getCargo());
-			stmt.setDouble(10, funcionarioVO.getSalario());
-			stmt.setObject(11, funcionarioVO.getServicos());
+			stmt.setString(1, funcionarioVO.getCargo());
+			stmt.setDouble(2, funcionarioVO.getSalario());
+			stmt.setInt(3, funcionarioVO.getPessoa().getId());
 			stmt.execute();
 			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			
 			if (generatedKeys.next()) {
-				funcionarioVO.setId(generatedKeys.getInt(1));
+				int idgerado = generatedKeys.getInt(1);
+				funcionarioVO.getId();
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao executar a Query de Salvar o Funcionario.");

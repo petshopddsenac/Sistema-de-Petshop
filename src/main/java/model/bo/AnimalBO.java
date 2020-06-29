@@ -54,6 +54,12 @@ public class AnimalBO {
 		
 		return animalDAO.salvar1(animal);
 	}
+
+	public ArrayList<Animal> buscar() {
+		AnimalDAO animalDAO = new AnimalDAO();
+		
+		return animalDAO.buscar();
+	}
 }
 
 
