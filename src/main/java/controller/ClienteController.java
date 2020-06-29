@@ -3,7 +3,9 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import model.bo.ClienteBO;
@@ -26,10 +28,9 @@ public class ClienteController {
 		return mensagem;
 	}
 
-	public String Salvar(String Nome, String Rua, String Bairro, String Numero, String Telefone, String email,
+	public String validar(String Nome, String Rua, String Bairro, String Numero, String Telefone, String email,
 			String Cpf, String Cep) {
 		String mensagem = "";
-
 		if ((Nome == null) || (Nome.trim().length() < 3)) {
 			mensagem += " O nome deve ter no minímo 3 letras ";
 		}
@@ -59,6 +60,33 @@ public class ClienteController {
 
 		return mensagem;
 	}
+	
+
+	public String cadastrarCliente(String textNome, String textRua, String textBairro, String textNumero, String  textTelefone, String  textemail,
+			String  textCpf, String  textCep ) {
+		Cliente cliente = new Cliente();
+		String mensagem = "";
+		cliente.setNome(textNome);
+		cliente.setCpf(textRua);
+		cliente.setRua(textRua);
+		cliente.setNumero(textNumero);
+		cliente.setBairro(textBairro);
+		cliente.setNumero(textNumero);
+		cliente.setTelefone(textTelefone);
+		cliente.setEmail(textemail);
+		cliente.setCpf(textRua);
+		cliente.setCep(textCep);
+		
+		return mensagem;
+		
+	}
+	
+		
+		 
+	
+
+	
+	
 
 	public ArrayList<Cliente> listarClientes(ClienteSeletor seletor) {
 		return dao.listarComSeletor(seletor);
@@ -101,6 +129,19 @@ public class ClienteController {
 		return mensagem;
 	}
 
+	
+	
+	
+	public String excluirCliente(String TextNome) {
+		String mensagem = "";
+		Cliente cliente = new Cliente();
+		cliente.getNome();
+		if(cliente.getNome().isEmpty()) {
+			JOptionPane.showMessageDialog(null,"Informe um nome" );
+		}
+		return mensagem;
+	}
+	
 	public void Salvar(JTextField textNome, JTextField textRua, JTextField textBairro, JTextField textNumero,
 			JTextField textTelefone, JTextField textEmail, JFormattedTextField textCPF, JFormattedTextField textCEP) {
 
@@ -110,4 +151,30 @@ public class ClienteController {
 
 	}
 
+	public String cadastrarCliente(JTextField textNome, JTextField textRua, JTextField textBairro,
+			JTextField textNumero, JTextField textTelefone, JTextField textEmail, JFormattedTextField textCPF,
+			JFormattedTextField textCEP) {
+	
+		return null;
+	}
+	
+	public String alterarCliente(Cliente clienteAlterado) {
+		String mensagem = "";
+		
+		if((clienteAlterado==null ) || clienteAlterado.getNome().trim().isEmpty()) {
+			mensagem += "Digite um nome";
+		}
+		if((clienteAlterado ==null) || clienteAlterado.getCpf().trim().isEmpty()) {
+			mensagem += "Informe um número de CPF váido";
+		}
+		
+		if((clienteAlterado==null) || clienteAlterado.getTelefone().isEmpty()) {
+			mensagem += "Informe um telefone para contato";
+			
+		}
+		
+		
+		return mensagem;
+		
+}
 }
