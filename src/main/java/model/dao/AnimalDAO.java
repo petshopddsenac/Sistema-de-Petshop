@@ -365,7 +365,7 @@ public class AnimalDAO {
 			stmt.setString(3, animal.getRaca());
 			stmt.setDate(4, animal.getDataNascimento());
 			stmt.setDouble(5, animal.getPeso());
-			stmt.execute();
+			
 
 			if (animal.getDono() != null) {
 				stmt.setInt(6, animal.getDono().getId());
