@@ -127,7 +127,7 @@ public class MenuPrincipal extends JFrame {
 		mntmListarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				CadastrarAnimal manuListarAnimais = new CadastrarAnimal();
+				TelaListarAnimais manuListarAnimais = new TelaListarAnimais();
 				
 				manuListarAnimais.setVisible(true);
 				
