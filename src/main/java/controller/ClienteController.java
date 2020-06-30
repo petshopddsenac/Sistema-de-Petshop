@@ -3,7 +3,9 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import model.bo.ClienteBO;
@@ -14,66 +16,82 @@ import model.vo.Cliente;
 public class ClienteController {
 	private ClienteDAO dao = new ClienteDAO();
 	private ClienteBO bo = new ClienteBO();
-	
+
 	public String excluir(String textoIdSelecionado) {
 		String mensagem = "";
 		try {
 			int idSelecionado = Integer.parseInt(textoIdSelecionado);
 			mensagem = bo.excluirPorId(idSelecionado);
-		}catch(NumberFormatException ex) {
+		} catch (NumberFormatException ex) {
 			mensagem = "Informe um número inteiro";
 		}
 		return mensagem;
 	}
 
-	private static final int TAMANHO_MINIMO = 3;
-	private static final int TAMANHO_MAXIMO = 255;
-	private static final int TAMANHO_CPF = 11;
-	private static final int TAMANHO_CEP = 8;
-	
-	
-	
-
-	public String Salvar(String Nome, String Rua, String Bairro,  String Numero, String Telefone,
-			String email, String Cpf, String Cep) {
+	public String validar(String Nome, String Rua, String Bairro, String Numero, String Telefone, String email,
+			String Cpf, String Cep) {
 		String mensagem = "";
-		mensagem += validarCampoDeTexto("Nome", Nome, TAMANHO_MINIMO, TAMANHO_MAXIMO, true);
-		mensagem += validarCampoDeTexto("Rua", Rua, TAMANHO_MINIMO, TAMANHO_MAXIMO, true);
-		mensagem += validarCampoDeTexto("Bairro", Bairro, TAMANHO_MINIMO, TAMANHO_MAXIMO, true);
-		mensagem += validarCampoDeTexto("Número", Numero, TAMANHO_MINIMO, TAMANHO_MAXIMO, true);
+		if ((Nome == null) || (Nome.trim().length() < 3)) {
+			mensagem += " O nome deve ter no minímo 3 letras ";
+		}
 
-		mensagem += validarCampoDeTexto("Telefone", Telefone, TAMANHO_MINIMO, TAMANHO_MAXIMO, true);
-		mensagem += validarCampoDeTexto("Email", email, TAMANHO_MINIMO, TAMANHO_MAXIMO, true);
-		mensagem += validarCampoDeTexto("CPF", Cpf, 11, 11, true);
-		mensagem += validarCampoDeTexto("CEP", Cep, 8, 8, true);
+		if ((Rua == null) || (Rua.trim().length() < 5)) {
+			mensagem += "A Rua deve conter no mínimo 5 caracteres";
+		}
+		if ((Bairro == null) || (Bairro.trim().length() < 5)) {
+			mensagem += " O Bairro deve conter  no mínimo 5 caracteres ";
 
-		
-		
+		}
+		if ((Numero == null) || (Numero.trim().length() < 2)) {
+			mensagem += "O número deve conter no mínimo 2 caracteres";
 
-		if (mensagem.isEmpty()) {
-			Cliente novoCliente = new Cliente(TAMANHO_MINIMO, Nome, Rua, Bairro, Numero, Telefone, email, Cpf, Cep);
-			mensagem = bo.cadastrar(novoCliente);
+		}
+
+		if ((Telefone == null) || (Telefone.trim().length() < 8)) {
+			mensagem += "Telefone deve ter no minímo 8 caracteres ";
+		}
+		if ((Cpf == null) || (Cpf.trim().length() < 11)) {
+			mensagem += "Cliente deve ter 11 digitos";
+
+		}
+		if ((Cep == null) || (Cep.trim().length() < 8)) {
+			mensagem += " O CEP deve conter 8 caracteres";
 		}
 
 		return mensagem;
 	}
+	
 
-	private String validarCampoDeTexto(String nomeDoCampo, String valor, int tamanhoMinimo, int tamanhoMaximo,
-			boolean obrigatorio) {
-		String mensagemValidacao = "";
-
-		if (obrigatorio && valor != null && !valor.isEmpty() || valor.length() < tamanhoMinimo
-				|| valor.length() > tamanhoMaximo) {
-			mensagemValidacao = nomeDoCampo + " deve possuir pelo menos " + tamanhoMinimo + " e no máximo "
-					+ tamanhoMaximo + " caracteres \n";
-		}
-
-		return mensagemValidacao;
+	public String cadastrarCliente(String textNome, String textRua, String textBairro, String textNumero, String  textTelefone, String  textemail,
+			String  textCpf, String  textCep ) {
+		Cliente cliente = new Cliente();
+		String mensagem = "";
+		cliente.setNome(textNome);
+		cliente.setCpf(textRua);
+		cliente.setRua(textRua);
+		cliente.setNumero(textNumero);
+		cliente.setBairro(textBairro);
+		cliente.setNumero(textNumero);
+		cliente.setTelefone(textTelefone);
+		cliente.setEmail(textemail);
+		cliente.setCpf(textRua);
+		cliente.setCep(textCep);
+		
+		return mensagem;
+		
 	}
+	
+		
+		 
+	
+
+	
+	
 
 	public ArrayList<Cliente> listarClientes(ClienteSeletor seletor) {
 		return dao.listarComSeletor(seletor);
 	}
+
 	public String validarCpf(String txtCpf) {
 		String mensagem = "";
 
@@ -83,10 +101,10 @@ public class ClienteController {
 		if (txtCpf.isEmpty()) {
 			mensagem += "O campo do cpf não foi preenchido.\n";
 		}
-		
 
 		return mensagem;
 	}
+
 	public String cpfExistente(String txtCpf) {
 		String mensagem = "";
 
@@ -96,11 +114,11 @@ public class ClienteController {
 		}
 		return mensagem;
 	}
-	
-	public List<Cliente> listarTodosOsClientes(){
+
+	public List<Cliente> listarTodosOsClientes() {
 		return bo.listarTodos();
 	}
-	
+
 	public String excluirPorCpf(String txtCpf) {
 		String mensagem = validarCpf(txtCpf);
 		if (mensagem.isEmpty()) {
@@ -110,15 +128,53 @@ public class ClienteController {
 
 		return mensagem;
 	}
+
+	
+	
+	
+	public String excluirCliente(String TextNome) {
+		String mensagem = "";
+		Cliente cliente = new Cliente();
+		cliente.getNome();
+		if(cliente.getNome().isEmpty()) {
+			JOptionPane.showMessageDialog(null,"Informe um nome" );
+		}
+		return mensagem;
+	}
+	
 	public void Salvar(JTextField textNome, JTextField textRua, JTextField textBairro, JTextField textNumero,
 			JTextField textTelefone, JTextField textEmail, JFormattedTextField textCPF, JFormattedTextField textCEP) {
-	
+
 	}
-	
 
 	public void gerarRelatorio(ArrayList<Cliente> clientes, String caminhoEscolhido) {
-		
-		
+
 	}
 
+	public String cadastrarCliente(JTextField textNome, JTextField textRua, JTextField textBairro,
+			JTextField textNumero, JTextField textTelefone, JTextField textEmail, JFormattedTextField textCPF,
+			JFormattedTextField textCEP) {
+	
+		return null;
+	}
+	
+	public String alterarCliente(Cliente clienteAlterado) {
+		String mensagem = "";
+		
+		if((clienteAlterado==null ) || clienteAlterado.getNome().trim().isEmpty()) {
+			mensagem += "Digite um nome";
+		}
+		if((clienteAlterado ==null) || clienteAlterado.getCpf().trim().isEmpty()) {
+			mensagem += "Informe um número de CPF váido";
+		}
+		
+		if((clienteAlterado==null) || clienteAlterado.getTelefone().isEmpty()) {
+			mensagem += "Informe um telefone para contato";
+			
+		}
+		
+		
+		return mensagem;
+		
+}
 }

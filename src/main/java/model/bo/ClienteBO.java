@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 
+import controller.ClienteController;
 import model.dao.ClienteDAO;
 import model.seletor.ClienteSeletor;
 import model.vo.Cliente;
+import util.GeradorPlanilha;
 
 public class ClienteBO {
 
@@ -23,6 +25,10 @@ public class ClienteBO {
 			mensagem = "Erro ao cadastrar cliente";
 		}
 		return mensagem;
+	}
+	public Cliente cadastrarCliente(Cliente cliente) {
+		ClienteDAO cDAO = new ClienteDAO();
+		return cDAO.cadastrar(cliente);
 	}
 
 	public ArrayList<Cliente> listarComSeletor(ClienteSeletor seletor) {
@@ -70,4 +76,28 @@ public class ClienteBO {
 		}
 
 	}
+	
+	public String excluirCliente(String Nome) {
+		String mensagem ="";
+		Cliente cliente = new Cliente();
+		if(cliente.getNome().isEmpty()) {
+			mensagem = "Digite um nome";
+		}
+		return mensagem;
+	
+			
+	}
+	
+	public boolean alterarCiente (Cliente clienteAlterado) {
+		ClienteDAO dao = new ClienteDAO();
+		return dao.alterar(clienteAlterado);
+		
+	}
+	
+	public void gerarRelatorio(ArrayList<Cliente> clientes, String caminhoEscolido) {
+		GeradorPlanilha gerador = new GeradorPlanilha();
+		gerador.gerarPlanilhaClientes(caminhoEscolido, clientes);
+		
+	}
+	
 }

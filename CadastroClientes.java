@@ -181,10 +181,10 @@ public class CadastroClientes extends JFrame {
 				String cpf = TextCPF.getText();
 				String cep = textCEP.getText();
 
-				String mensagem = controller.cadastrarCliente(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textTelefone.getText(), 
-						textEmail.getText(), TextCPF.getText(), textCEP.getText());
-				
-				
+				String mensagem = controller.Salvar(textNome.getText(), textRua.getText(), textBairro.getText(),
+						textNumero.getText(), textBairro.getText(), textBairro.getText(), TextCPF.getText(),
+						TextCPF.getText());
+
 				if (mensagem.isEmpty()) {
 					Cliente cliente = new Cliente();
 
