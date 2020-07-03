@@ -94,9 +94,9 @@ public class ClienteBO {
 		
 	}
 	
-	public void gerarRelatorio(ArrayList<Cliente> clientes, String caminhoEscolido) {
+	public void gerarRelatorio(ArrayList<Cliente> clientes, String caminhoEscolhido) {
 		GeradorPlanilha gerador = new GeradorPlanilha();
-		gerador.gerarPlanilhaClientes(caminhoEscolido, clientes);
+		gerador.gerarPlanilhaClientes(caminhoEscolhido, clientes);
 		
 	}
 	
