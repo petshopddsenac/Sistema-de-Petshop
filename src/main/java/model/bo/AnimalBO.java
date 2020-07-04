@@ -22,7 +22,7 @@ public class AnimalBO {
 		AnimalDAO animalDAO = new AnimalDAO();
 		Animal animal = animalDAO.obterPorId(animalVO.getId());
 		if (animal == null) {
-			System.out.println("\nUsuário não Localizado.");
+			System.out.println("\nAnimal não Localizado.");
 		}
 		return animal;
 	}
@@ -41,7 +41,7 @@ public class AnimalBO {
 
 	
 	public void gerarPlanilha(List<Animal> animal, String caminhoEscolhido) {
-		//TODO
+		
 	}
 
 	public List<Animal> listarAnimais(AnimalSeletor seletor) {

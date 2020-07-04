@@ -19,14 +19,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class CadastroAnimal extends JFrame {
 	private JTextField textNomePet;
 	private JTextField textEspecie;
 	private JTextField textRaca;
 	private JTextField textPeso;
-	private JTextField textDono;
-	private JFormattedTextField formattedTextDataNascimento;
 
 	/**
 	 * Launch the application.
@@ -87,15 +86,11 @@ public class CadastroAnimal extends JFrame {
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento: ");
 		lblDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDataNascimento.setBounds(10, 200, 120, 25);
+		lblDataNascimento.setBounds(10, 200, 122, 25);
 		getContentPane().add(lblDataNascimento);
 
 		try {
 			MaskFormatter mascaraData = new MaskFormatter("##/##/####");
-			formattedTextDataNascimento = new JFormattedTextField(mascaraData);
-			formattedTextDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			formattedTextDataNascimento.setBounds(130, 200, 115, 25);
-			getContentPane().add(formattedTextDataNascimento);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
@@ -116,12 +111,6 @@ public class CadastroAnimal extends JFrame {
 		lblDono.setBounds(10, 125, 40, 25);
 		getContentPane().add(lblDono);
 
-		textDono = new JTextField();
-		textDono.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textDono.setBounds(70, 125, 175, 25);
-		getContentPane().add(textDono);
-		textDono.setColumns(10);
-
 		JButton btnCadastrar = new JButton("Limpar");
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCadastrar.addActionListener(new ActionListener() {
@@ -141,14 +130,13 @@ public class CadastroAnimal extends JFrame {
 				AnimalController controladora = new AnimalController();
 				String nomeDigitado = textNomePet.getText();
 				String racaDigitado = textRaca.getText();
-				String donoDigitado = textDono.getText();
 				String especieDigitado = textEspecie.getText();
-
-				String mensagem = controladora.validarCamposDigitados(nomeDigitado, racaDigitado, donoDigitado,
+				String mensagem = controladora.validarCamposDigitados(nomeDigitado, racaDigitado,
 						especieDigitado);
+				
 				if (mensagem.isEmpty()) {
 					Animal animal = new Animal();
-					animal = controladora.salvar(animal);
+					animal = controladora.salvar(textNomePet, textEspecie, textRaca, cbDono, textPeso, TextDataN);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
 				} else {
 					JOptionPane.showMessageDialog(null, mensagem);
@@ -182,11 +170,6 @@ public class CadastroAnimal extends JFrame {
 		label_2.setBounds(50, 125, 10, 20);
 		getContentPane().add(label_2);
 
-		JLabel label_3 = new JLabel("*");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label_3.setBounds(120, 200, 10, 20);
-		getContentPane().add(label_3);
-
 		JLabel label_4 = new JLabel("*");
 		label_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		label_4.setBounds(50, 49, 10, 20);
@@ -196,6 +179,12 @@ public class CadastroAnimal extends JFrame {
 		lblObrigatorio.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblObrigatorio.setBounds(35, 235, 135, 20);
 		getContentPane().add(lblObrigatorio);
+		
+		JComboBox cbDono = new JComboBox();
+		AnimalController controladora = new AnimalController();
+		controladora.preencherDono(cbDono);
+		cbDono.setBounds(70, 125, 175, 25);
+		getContentPane().add(cbDono);
 
 
 		
@@ -207,13 +196,13 @@ public class CadastroAnimal extends JFrame {
 
 	protected void limparCampos() {
 
-		this.textDono.setText("");
+		
 		this.textEspecie.setText("");
 		this.textNomePet.setText("");
 		this.textPeso.setText("");
 		this.textRaca.setText("");
-		this.textDono.setText("");
-		this.formattedTextDataNascimento.setText("");
+		
+		
 
 	}
 }
