@@ -15,7 +15,7 @@ public class AnimalDAO {
 	public Animal cadastrar(Animal novoAnimal) {
 
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, DATANASCIMENTO, PESO, ID) VALUES "
+		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, IDADE, PESO, ID) VALUES "
 				+ "(?, ?, ?, ?, ?, ?) ";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
@@ -23,7 +23,7 @@ public class AnimalDAO {
 			stmt.setString(1, novoAnimal.getNome());
 			stmt.setString(2, novoAnimal.getEspecie());
 			stmt.setString(3, novoAnimal.getRaca());
-			stmt.setDate(4, novoAnimal.getDataNascimento());
+			stmt.setDouble(4, novoAnimal.getIdade());
 			stmt.setDouble(5, novoAnimal.getPeso());
 
 			if (novoAnimal.getDono() != null) {
@@ -66,7 +66,7 @@ public class AnimalDAO {
 
 	public boolean alterar(Animal animal) {
 		Connection conn = Banco.getConnection();
-		String sql = "UPDATE ANIMAL SET NOME, ESPECIE, RACA, DATANASCIMENTO, PESO, DONO" + "WHERE ID =? ";
+		String sql = "UPDATE ANIMAL SET NOME, ESPECIE, RACA, IDADE, PESO, DONO" + "WHERE ID =? ";
 
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
 		int quantidadeLinhasAfetadas = 0;
@@ -75,7 +75,7 @@ public class AnimalDAO {
 			stmt.setString(1, animal.getNome());
 			stmt.setString(2, animal.getEspecie());
 			stmt.setString(3, animal.getRaca());
-			stmt.setDate(4, animal.getDataNascimento());
+			stmt.setDouble(4, animal.getIdade());
 			stmt.setDouble(5, animal.getPeso());
 			stmt.setObject(6, animal.getDono());
 			stmt.setInt(7, animal.getId());
@@ -101,7 +101,7 @@ public class AnimalDAO {
 			animal.setNome(result.getNString("Nome"));
 			animal.setEspecie(result.getNString("Espécie"));
 			animal.setRaca(result.getNString("Raça"));
-			animal.setDataNascimento(result.getDate("Data de Nascimento"));
+			animal.setIdade(result.getDouble("Idade"));
 			animal.setPeso(result.getDouble("Peso"));
 
 			AnimalDAO aDAO = new AnimalDAO();
@@ -245,6 +245,8 @@ public class AnimalDAO {
 				An.setId(result.getInt("ID"));
 				An.setNome(result.getString("NOME"));
 				An.setEspecie(result.getString("ESPECIE"));
+				An.setIdade(result.getDouble("Idade"));
+				An.setPeso(result.getDouble("Peso"));
 
 			}
 		} catch (SQLException e) {
@@ -256,7 +258,7 @@ public class AnimalDAO {
 	public boolean atualizar(Animal animala) {
 		boolean sucessoUpdate = false;
 
-		String sql = " UPDATE ANIMAL ANIMAL SET NOME=?, ESPECIE=?, RACA=?, PESO=?, ID=? " + " WHERE ANIMAL.ID = ? ";
+		String sql = " UPDATE ANIMAL ANIMAL SET NOME=?, ESPECIE=?, RACA=?, PESO=?,  ID=?, IDADE =? " + " WHERE ANIMAL.ID = ? ";
 
 		Connection conexao = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
@@ -267,7 +269,7 @@ public class AnimalDAO {
 			prepStmt.setString(3, animala.getRaca());
 			prepStmt.setDouble(4, animala.getPeso());
 			prepStmt.setDouble(5, animala.getId());
-			prepStmt.setDate(1, animala.getDataNascimento());
+			prepStmt.setDouble(6, animala.getIdade());
 
 			int codigoRetorno = prepStmt.executeUpdate();
 
@@ -322,6 +324,7 @@ public class AnimalDAO {
 			A.setPeso(result.getDouble("PESO"));
 			A.setEspecie(result.getString("ESPECIE"));
 			A.setRaca(result.getString("RACA"));
+			A.setIdade(result.getDouble("IDADE"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -344,6 +347,9 @@ public class AnimalDAO {
 				An.setId(result.getInt("ID"));
 				An.setNome(result.getString("NOME"));
 				An.setEspecie(result.getString("ESPECIE"));
+				An.setRaca(result.getNString("Raça"));
+				An.setPeso(result.getDouble("PESO"));
+				An.setIdade(result.getDouble("IDADE"));
 
 			}
 		} catch (SQLException e) {
@@ -355,7 +361,7 @@ public class AnimalDAO {
 	public Animal salvar1(Animal animal) {
 
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, DATANASCIMENTO, PESO) VALUES "
+		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, IDADE, PESO) VALUES "
 				+ "(?, ?, ?, ?, ?,)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
@@ -363,7 +369,7 @@ public class AnimalDAO {
 			stmt.setString(1, animal.getNome());
 			stmt.setString(2, animal.getEspecie());
 			stmt.setString(3, animal.getRaca());
-			stmt.setDate(4, animal.getDataNascimento());
+			stmt.setDouble(4, animal.getIdade());
 			stmt.setDouble(5, animal.getPeso());
 			
 
@@ -407,7 +413,7 @@ public class AnimalDAO {
 				An.setNome(result.getNString("NOME"));
 				An.setEspecie(result.getString("ESPECIE"));
 				An.setRaca(result.getString("RACA"));
-				An.setDataNascimento(result.getDate("DATANASCIMENTO"));
+				An.setIdade(rsult.getDouble("IDADE");
 				An.setPeso(result.getDouble("PESO"));
 				
 				
