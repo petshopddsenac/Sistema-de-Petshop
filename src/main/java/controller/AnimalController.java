@@ -49,14 +49,25 @@ public class AnimalController {
 		return mensagem;
 	}
 
-	public String salvar(JTextField textNomePet, JTextField textEspecie, JTextField textRaca,  JComboBox cbDonos, JTextField textPeso,
-			JFormattedTextField TextDataN) {
+	public Animal salvar() {
 		String mensagem = "";
-		AnimalBO bo = new AnimalBO();
-		Animal animal = criarAnimal(textNomePet, textEspecie, textRaca, cbDonos, textPeso, TextDataN);
-		bo.salvar(animal);
-		return mensagem;
-
+	Animal animal = new Animal();
+	if((animal.getNome() !=null) && animal.getNome().isEmpty()) {
+		if ((animal.getEspecie() !=null) && animal.getEspecie().isEmpty()){
+		if((animal.getRaca() !=null) && animal.getRaca().isEmpty()) {	
+			if(animal.getPeso()!=null){
+			if(animal.getIdade()!=null) {
+				if(animal.getDono()!=null) {
+					
+				}
+			}
+			}
+			
+		}
+		}
+	}
+	return animal;
+	
 		
 		
 	}
@@ -90,7 +101,7 @@ public class AnimalController {
 		}
 	
 	public Animal construirAnimal(JTextField textNomePet, JTextField textEspecie, JTextField textRaca,  JComboBox cbDonos, Double textPeso,  
-			JFormattedTextField TextDataN  ) {
+			JTextField TextIdade, Double Idade  ) {
 		String mensagem = cbDonos.toString();
 		Cliente cliente = new Cliente();
 		if (!mensagem.equalsIgnoreCase(mensagem)) {
@@ -103,7 +114,7 @@ public class AnimalController {
 		a.setRaca(textRaca.getText());
 		a.setPeso(textPeso);
 		a.setDono(cliente);
-		a.setDataNascimento(TextDataN.getText());
+		a.setIdade(Idade);
 		return a;
 				
 	}
