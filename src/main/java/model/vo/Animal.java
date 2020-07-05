@@ -8,7 +8,7 @@ public class Animal {
 	private String nome;
 	private String especie;
 	private String raca;
-	private Date dataNascimento;
+	private Double idade;
 	private Double peso;
 	private Cliente dono;
 	
@@ -19,13 +19,13 @@ public class Animal {
 	}
 
 
-	public Animal(int id, String nome, String especie, String raca, Date dataNascimento, Double peso, Cliente dono) {
+	public Animal(int id, String nome, String especie, String raca, Double idade, Double peso, Cliente dono) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.especie = especie;
 		this.raca = raca;
-		this.dataNascimento = dataNascimento;
+		this.idade = idade;
 		this.peso = peso;
 		this.dono = dono;
 	}
@@ -71,13 +71,13 @@ public class Animal {
 	}
 
 
-	public Date getDataNascimento() {
-		return dataNascimento;
+	public Double getIdade() {
+		return idade;
 	}
 
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setIdade(Double idade) {
+		this.idade = idade;
 	}
 
 
@@ -103,10 +103,10 @@ public class Animal {
 
 	@Override
 	public String toString() {
-		return "Animal [id=" + id + ", nome=" + nome + ", especie=" + especie + ", raca=" + raca + ", dataNascimento="
-				+ dataNascimento + ", peso=" + peso + ", dono=" + dono + "]";
+		return "Animal [id=" + id + ", nome=" + nome + ", especie=" + especie + ", raca=" + raca + ", idade=" + idade
+				+ ", peso=" + peso + ", dono=" + dono + "]";
 	}
-	
-	
 
+
+	
 }
