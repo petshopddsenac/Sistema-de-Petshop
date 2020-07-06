@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
-public class CadastroFuncionarios extends JFrame {
+public class CadastroFuncionarios extends JInternalFrame {
 	private JTextField textNome;
 	private JTextField textRua;
 	private JTextField textField;
