@@ -41,6 +41,9 @@ public class AnimalBO {
 
 	
 	public void gerarPlanilha(List<Animal> animal, String caminhoEscolhido) {
+		GeradorPlanilha gerador = new GeradorPlanilha();
+		gerador.gerarPlanilhaAnimais(caminhoEscolhido, animais);
+	}
 		
 	}
 
@@ -60,6 +63,13 @@ public class AnimalBO {
 		
 		return animalDAO.buscar();
 	}
+
+public void excluirPorId(int id) {
+	
+		AnimalDAO dao = new AnimalDAO();
+		 dao.excluir(id);
+		
+}
 }
 
 
