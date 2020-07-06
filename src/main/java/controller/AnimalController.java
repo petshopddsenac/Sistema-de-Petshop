@@ -118,7 +118,10 @@ public class AnimalController {
 		return a;
 				
 	}
-		
+		public void excluirAnimal(int id) {
+		AnimalBO bo = new AnimalBO();
+		bo.excluirPorId( id);
+	}
 	
 		
 	}
