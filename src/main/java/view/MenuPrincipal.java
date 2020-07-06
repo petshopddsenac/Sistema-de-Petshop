@@ -34,10 +34,11 @@ import java.awt.event.KeyAdapter;
 public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private PainelCadastroCliente cadastroCliente;
-	private PainelCadastrarAnimal cadastroAnimal;
+	private CadastroCliente cadastroCliente;
+	private CadastraoAnimal cadastroAnimal;
 	private ArrayList<Animal> consultarAnimais;
-
+	private TelaListagemClientes listaClientes;
+	private CadastroFuncionarios cadastroFuncionario;
 	private JDesktopPane desktopPane;
 
 	/**
@@ -98,8 +99,14 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmListarClientes = new JMenuItem("Listar Clientes");
 		mntmListarClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(listaClientes == null || listaClientes.isVisible()) {
+					listaClientes  = new TelaListagemClientes();
+					desktopPane.add(listaClientes);
+					listaClientes.show();
+				}
 			}
 		});
+		mntmListarClientes.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8,0));
 		mntmListarClientes.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/grup.png")));
 		mnCliente.add(mntmListarClientes);
 
@@ -112,11 +119,10 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmCadastrarAnimal = new JMenuItem("Cadastrar Animal");
 		mntmCadastrarAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				CadastroAnimal menuCadastroAnimal = new CadastroAnimal();
-				menuCadastroAnimal.setVisible(true);
-				
-				
+			if(cadastroAnimal == null || cadastroAnimal.isVisible());
+				CadastroAnimal cadastroAnimal = new CadastroAnimal();
+				desktopPane.add(cadastroAnimal);
+				cadastroAnimal.show();				
 			}
 		});
 		mntmCadastrarAnimal.setAccelerator( KeyStroke.getKeyStroke(KeyEvent.VK_F10,0));
@@ -135,6 +141,7 @@ public class MenuPrincipal extends JFrame {
 				
 			}
 		});
+		mntmListarAnimais.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_9,0) );
 		mntmListarAnimais.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/gatinha.png")));
 		mnAnimal.add(mntmListarAnimais);
 
