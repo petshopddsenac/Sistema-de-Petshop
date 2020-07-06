@@ -21,7 +21,7 @@ import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
-public class CadastroAnimal extends JFrame {
+public class CadastroAnimal extends JInternalFrame {
 	private JTextField textNomePet;
 	private JTextField textEspecie;
 	private JTextField textRaca;
