@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
-public class CadastroClientes extends JFrame {
+public class CadastroClientes extends JInternalFrame {
 	private JTextField textNome;
 	private JTextField textRua;
 	private JTextField textNumero;
