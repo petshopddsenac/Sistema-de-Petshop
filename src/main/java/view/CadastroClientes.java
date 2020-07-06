@@ -52,18 +52,18 @@ public class CadastroClientes extends JInternalFrame {
 		setBounds(100, 100, 650, 410);
 		getContentPane().setLayout(null);
 
-		JLabel lblNome = new JLabel("Nome: ");
+		JLabel lblNome = new JLabel("Nome: * ");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNome.setBounds(10, 10, 50, 25);
 		getContentPane().add(lblNome);
 
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNome.setBounds(70, 10, 415, 25);
+		textNome.setBounds(80, 10, 415, 25);
 		getContentPane().add(textNome);
 		textNome.setColumns(10);
 
-		JLabel lblCPF = new JLabel("CPF: ");
+		JLabel lblCPF = new JLabel("CPF: * ");
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCPF.setBounds(10, 45, 45, 25);
 		getContentPane().add(lblCPF);
@@ -73,7 +73,7 @@ public class CadastroClientes extends JInternalFrame {
 
 			JFormattedTextField TextCPF = new JFormattedTextField(mascaraCpf);
 			TextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			TextCPF.setBounds(70, 50, 200, 25);
+			TextCPF.setBounds(80, 50, 200, 25);
 			getContentPane().add(TextCPF);
 		} catch (ParseException e1) {
 
@@ -82,10 +82,10 @@ public class CadastroClientes extends JInternalFrame {
 
 		final JFormattedTextField TextCPF = new JFormattedTextField();
 		TextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		TextCPF.setBounds(70, 50, 200, 25);
+		TextCPF.setBounds(80, 50, 200, 25);
 		getContentPane().add(TextCPF);
 
-		JLabel lblRua = new JLabel("Rua: ");
+		JLabel lblRua = new JLabel("Rua: * ");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblRua.setBounds(10, 80, 40, 25);
 		getContentPane().add(lblRua);
@@ -95,28 +95,28 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(textRua);
 		textRua.setColumns(10);
 
-		JLabel lblNumero = new JLabel("Número: ");
+		JLabel lblNumero = new JLabel("Número:  *");
 		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNumero.setBounds(10, 115, 60, 25);
 		getContentPane().add(lblNumero);
 
 		textNumero = new JTextField();
 		textNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNumero.setBounds(70, 120, 200, 25);
+		textNumero.setBounds(80, 120, 200, 25);
 		getContentPane().add(textNumero);
 		textNumero.setColumns(10);
 
-		JLabel lblBairro = new JLabel("Bairro: ");
+		JLabel lblBairro = new JLabel("Bairro: * ");
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblBairro.setBounds(10, 150, 50, 25);
 		getContentPane().add(lblBairro);
 
 		textBairro = new JTextField();
-		textBairro.setBounds(70, 155, 200, 25);
+		textBairro.setBounds(80, 155, 200, 25);
 		getContentPane().add(textBairro);
 		textBairro.setColumns(10);
 
-		JLabel lblCEP = new JLabel("CEP: ");
+		JLabel lblCEP = new JLabel("CEP: * ");
 		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCEP.setBounds(296, 120, 40, 25);
 		getContentPane().add(lblCEP);
@@ -143,18 +143,18 @@ public class CadastroClientes extends JInternalFrame {
 
 		textEmail = new JTextField();
 		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textEmail.setBounds(70, 225, 200, 25);
+		textEmail.setBounds(80, 225, 200, 25);
 		getContentPane().add(textEmail);
 		textEmail.setColumns(10);
 
-		JLabel lblTelefone = new JLabel("Telefone: ");
+		JLabel lblTelefone = new JLabel("Telefone: * ");
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblTelefone.setBounds(10, 190, 60, 25);
 		getContentPane().add(lblTelefone);
 
 		textTelefone = new JTextField();
 		textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textTelefone.setBounds(70, 190, 200, 25);
+		textTelefone.setBounds(80, 190, 200, 25);
 		getContentPane().add(textTelefone);
 		textTelefone.setColumns(10);
 
@@ -190,7 +190,7 @@ public class CadastroClientes extends JInternalFrame {
 
 					JOptionPane.showMessageDialog(null, " Cliente Salvo com sucesso");
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro no cadastro do cliente");
+					JOptionPane.showMessageDialog(null, "Preencha os campos Obrigatórios!", "Atenção",JOptionPane.ERROR_MESSAGE");
 				}
 
 			}
@@ -200,6 +200,11 @@ public class CadastroClientes extends JInternalFrame {
 		btnSalvar.setBounds(335, 320, 85, 30);
 
 		getContentPane().add(btnSalvar);
+		
+		JLabel lblObrigatorio = new JLabel(" * Campos Obrigatórios");
+		lblObrigatorio.setBounds(55, 275, 120, 10);
+		getContentPane().add(lblObrigatorio);
+
 
 	}
 
