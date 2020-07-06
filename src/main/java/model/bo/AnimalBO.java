@@ -64,7 +64,7 @@ public class AnimalBO {
 		return animalDAO.buscar();
 	}
 
-public void excluirPorId(int id) {
+	public void excluirPorId(int id) {
 	
 		AnimalDAO dao = new AnimalDAO();
 		 dao.excluir(id);
