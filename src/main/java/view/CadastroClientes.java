@@ -2,7 +2,7 @@ package view;
 
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -20,13 +20,15 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
-public class CadastroClientes extends JInternalFrame {
+public class CadastroClientes extends JFrame {
 	private JTextField textNome;
 	private JTextField textRua;
 	private JTextField textNumero;
 	private JTextField textBairro;
 	private JTextField textEmail;
 	private JTextField textTelefone;
+	private JFormattedTextField TextCEP;
+	private JFormattedTextField TextCPF;
 
 	/**
 	 * Launch the application.
@@ -67,11 +69,14 @@ public class CadastroClientes extends JInternalFrame {
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCPF.setBounds(10, 45, 45, 25);
 		getContentPane().add(lblCPF);
-
+		
+		final JFormattedTextField TextCPF = new JFormattedTextField();
+		MaskFormatter mascaraCpf = new MaskFormatter();
 		try {
-			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
 
-			JFormattedTextField TextCPF = new JFormattedTextField(mascaraCpf);
+			mascaraCpf.setMask("###.###.###-##");
+			mascaraCpf.install(TextCPF);
+			TextCPF.setText("");
 			TextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			TextCPF.setBounds(80, 50, 200, 25);
 			getContentPane().add(TextCPF);
@@ -79,11 +84,6 @@ public class CadastroClientes extends JInternalFrame {
 
 			e1.printStackTrace();
 		}
-
-		final JFormattedTextField TextCPF = new JFormattedTextField();
-		TextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		TextCPF.setBounds(80, 50, 200, 25);
-		getContentPane().add(TextCPF);
 
 		JLabel lblRua = new JLabel("Rua: * ");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -121,16 +121,15 @@ public class CadastroClientes extends JInternalFrame {
 		lblCEP.setBounds(296, 120, 40, 25);
 		getContentPane().add(lblCEP);
 
+		final JFormattedTextField TextCEP = new JFormattedTextField();
+		MaskFormatter mascaraCep;
 		try {
-			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
+			mascaraCep = new MaskFormatter("#####-###");
+			mascaraCep.install(TextCEP);
+		} catch (ParseException e2) {
 
-			JFormattedTextField TextCEP = new JFormattedTextField(mascaraCep);
-			TextCEP.setBounds(345, 120, 140, 25);
-			getContentPane().add(TextCEP);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
+			e2.printStackTrace();
 		}
-		final JFormattedTextField textCEP = new JFormattedTextField();
 
 		textCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textCEP.setBounds(345, 120, 140, 25);
@@ -178,11 +177,11 @@ public class CadastroClientes extends JInternalFrame {
 				String numero = textNumero.getText();
 				String telefone = textTelefone.getText();
 				String email = textEmail.getText();
-				String cpf = TextCPF.getText();
-				String cep = textCEP.getText();
+				String Cpf = TextCPF.getText();
+				String Cep = TextCEP.getText();
 
-				String mensagem = controller.cadastrarCliente(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textTelefone.getText(), 
-						textEmail.getText(), TextCPF.getText(), textCEP.getText());
+				String mensagem = controller.validar(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textTelefone.getText(), 
+						textEmail.getText(), TextCPF.getText(), TextCEP.getText());
 				
 				
 				if (mensagem.isEmpty()) {
@@ -202,7 +201,9 @@ public class CadastroClientes extends JInternalFrame {
 		getContentPane().add(btnSalvar);
 		
 		JLabel lblObrigatorio = new JLabel(" * Campos Obrigatórios");
-		lblObrigatorio.setBounds(55, 275, 120, 10);
+		lblObrigatorio.setForeground(Color.RED);
+		lblObrigatorio.setBounds(55, 275, 140, 15);
+		lblObrigatorio.setVisible(true);
 		getContentPane().add(lblObrigatorio);
 
 
@@ -215,6 +216,9 @@ public class CadastroClientes extends JInternalFrame {
 		this.textBairro.setText("");
 		this.textTelefone.setText("");
 		this.textEmail.setText("");
+		this.TextCEP.setText("");
+		this.TextCPF.setText("");
+
 
 	}
 
