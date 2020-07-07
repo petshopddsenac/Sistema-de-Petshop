@@ -24,10 +24,12 @@ public class AlterarCliente extends JFrame {
 	private JPanel contentPane;
 	private JTextField textNome;
 	private JTextField textRua;
-	private JTextField textNmero;
+	private JTextField textNumero;
 	private JTextField textBairro;
 	private JTextField textTelefone;
 	private JTextField textEmail;
+	private JFormattedTextField TextCEP;
+	private JFormattedTextField TextCPF;
 
 	/**
 	 * Launch the application.
@@ -72,16 +74,23 @@ public class AlterarCliente extends JFrame {
 		lblCpf.setBounds(10, 65, 46, 25);
 		contentPane.add(lblCpf);
 		
+		
+		final JFormattedTextField TextCPF = new JFormattedTextField();
+		MaskFormatter mascaraCpf = new MaskFormatter();
 		try {
-			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
-		JFormattedTextField TextCpf = new JFormattedTextField(mascaraCpf);
-		TextCpf.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		TextCpf.setBounds(70, 65, 200, 25);
-		contentPane.add(TextCpf);
-		} catch(ParseException e1) {
+
+			mascaraCpf.setMask("###.###.###-##");
+			mascaraCpf.install(TextCPF);
+			TextCPF.setText("");
+			TextCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			TextCPF.setBounds(70, 65, 200, 25);
+			getContentPane().add(TextCPF);
+		} catch (ParseException e1) {
+
 			e1.printStackTrace();
 		}
 		
+				
 		JLabel lblRua = new JLabel("Rua: ");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblRua.setBounds(10, 100, 46, 25);
@@ -98,22 +107,31 @@ public class AlterarCliente extends JFrame {
 		lblNumero.setBounds(10, 145, 60, 25);
 		contentPane.add(lblNumero);
 		
-		textNmero = new JTextField();
-		textNmero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNmero.setBounds(70, 145, 200, 25);
-		contentPane.add(textNmero);
-		textNmero.setColumns(10);
+		textNumero = new JTextField();
+		textNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textNumero.setBounds(70, 145, 200, 25);
+		contentPane.add(textNumero);
+		textNumero.setColumns(10);
 		
 		JLabel lblCep = new JLabel("CEP: ");
 		lblCep.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCep.setBounds(305, 145, 45, 25);
 		contentPane.add(lblCep);
 		
-		JFormattedTextField TextCep = new JFormattedTextField();
-		TextCep.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		TextCep.setBounds(360, 145, 140, 25);
-		contentPane.add(TextCep);
-		
+		final JFormattedTextField TextCEP = new JFormattedTextField();
+		MaskFormatter mascaraCep;
+		try {
+		mascaraCep = new MaskFormatter("#####-###");
+		mascaraCep.install(TextCEP);
+		TextCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		TextCEP.setBounds(360, 145, 140, 25);
+		contentPane.add(TextCEP);
+
+		} catch (ParseException e2) {
+
+			e2.printStackTrace();
+		}
+			
 		JLabel lblBairro = new JLabel("Bairro: ");
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblBairro.setBounds(10, 185, 50, 25);
@@ -151,6 +169,19 @@ public class AlterarCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				ClienteController controller = new ClienteController();
+				controller.validar(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textTelefone.getText(), textEmail.getText(),
+						TextCPF.getText(), TextCEP.getText());
+				
+				String mensagem = controller.alterar(textNome.getText(), textRua.getText(), textBairro.getText(),
+						textNumero.getText(), textTelefone.getText(), textEmail.getText(), TextCPF.getText(),
+						TextCEP.getText());
+				if (mensagem.isEmpty()) {
+					Cliente clienteAlterado = new Cliente();
+					JOptionPane.showMessageDialog(null, "Cliente Alterado com sucesso");
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos Obrigatórios!", "Atenção",
+							JOptionPane.ERROR_MESSAGE);
+				}
 				
 			
 				
