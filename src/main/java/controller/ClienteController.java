@@ -32,34 +32,36 @@ public class ClienteController {
 			String Cpf, String Cep) {
 		String mensagem = "";
 		if ((Nome == null) || (Nome.trim().length() < 3)) {
-			mensagem += " O nome deve ter no minímo 3 letras ";
+			mensagem = JOptionPane.showInputDialog("Nome precisa conter no mínimo 3 letras");
 		}
 
 		if ((Rua == null) || (Rua.trim().length() < 5)) {
-			mensagem += "A Rua deve conter no mínimo 5 caracteres";
+			mensagem = JOptionPane.showInputDialog("A Rua deve conter no mínimo 5 caracteres");
 		}
 		if ((Bairro == null) || (Bairro.trim().length() < 5)) {
-			mensagem += " O Bairro deve conter  no mínimo 5 caracteres ";
+			mensagem =  JOptionPane.showInputDialog(" O Bairro deve conter  no mínimo 5 caracteres ");
 
 		}
 		if ((Numero == null) || (Numero.trim().length() < 2)) {
-			mensagem += "O número deve conter no mínimo 2 caracteres";
+			mensagem =  JOptionPane.showInputDialog("O número deve conter no mínimo 2 caracteres");
 
 		}
 
 		if ((Telefone == null) || (Telefone.trim().length() < 8)) {
-			mensagem += "Telefone deve ter no minímo 8 caracteres ";
+			mensagem =  JOptionPane.showInputDialog("Telefone deve ter no minímo 8 caracteres ");
 		}
 		if ((Cpf == null) || (Cpf.trim().length() < 11)) {
-			mensagem += "Cliente deve ter 11 digitos";
+			mensagem = JOptionPane.showInputDialog("CPF deve ter 11 digitos");
 
 		}
 		if ((Cep == null) || (Cep.trim().length() < 8)) {
-			mensagem += " O CEP deve conter 8 caracteres";
+			mensagem = JOptionPane.showInputDialog(" O CEP deve conter 8 caracteres"); 
 		}
 
 		return mensagem;
 	}
+	
+
 	
 
 	public String cadastrarCliente(String textNome, String textRua, String textBairro, String textNumero, String  textTelefone, String  textemail,
