@@ -160,23 +160,50 @@ public class ClienteController {
 		return null;
 	}
 	
+	public String alterar(String textNome, String textRua, String textBairro, String textNumero, String  textTelefone, String  textemail,
+			String  textCpf, String  textCep) {
+		Cliente clienteAlterado = new Cliente();
+		String mensagem = "";
+		clienteAlterado.setNome(textNome);
+		clienteAlterado.setRua(textRua);
+		clienteAlterado.setNumero(textNumero);
+		clienteAlterado.setBairro(textBairro);
+		clienteAlterado.setTelefone(textTelefone);
+		clienteAlterado.setEmail(textemail);
+		clienteAlterado.setCpf(textCpf);
+		clienteAlterado.setCep(textCep);
+		return mensagem;
+		
+		
+	}
 	public String alterarCliente(Cliente clienteAlterado) {
 		String mensagem = "";
 		
-		if((clienteAlterado==null ) || clienteAlterado.getNome().trim().isEmpty()) {
-			mensagem += "Digite um nome";
+		if((clienteAlterado==null ) || clienteAlterado.getNome().isEmpty()) {
+			mensagem =  JOptionPane.showInputDialog("Digite um nome");
+		}
+		
+		if((clienteAlterado== null ) || clienteAlterado.getRua().isEmpty()) {
+			mensagem = JOptionPane.showInputDialog("Digite o nome da rua");
+		}
+		if((clienteAlterado== null) || clienteAlterado.getNumero().isEmpty()) {
+			mensagem = JOptionPane.showInputDialog("Digite o número do imóvel");
+		}
+		if((clienteAlterado == null)|| clienteAlterado.getCep().isEmpty()){
+		mensagem = JOptionPane.showInputDialog("Informe o CEP do Bairro");	
 		}
 		if((clienteAlterado ==null) || clienteAlterado.getCpf().trim().isEmpty()) {
-			mensagem += "Informe um número de CPF váido";
+			mensagem = JOptionPane.showInputDialog( "Informe um número de CPF váido");
 		}
 		
 		if((clienteAlterado==null) || clienteAlterado.getTelefone().isEmpty()) {
-			mensagem += "Informe um telefone para contato";
+			mensagem = JOptionPane.showInputDialog("Informe um telefone para contato") ;
 			
 		}
 		
 		
 		return mensagem;
 		
-}
-}
+	}
+
+	}
