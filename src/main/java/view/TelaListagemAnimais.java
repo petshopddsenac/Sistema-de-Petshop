@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
 
-public class TelaListarAnimais extends JFrame {
+public class TelaListagemAnimais extends JFrame {
 
 	private JFrame frmListagem;
 	private JTable tblAnimais;
@@ -29,7 +29,7 @@ public class TelaListarAnimais extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaListarAnimais window = new TelaListarAnimais();
+					TelaListagemAnimais window = new TelaListagemAnimais();
 					window.frmListagem.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class TelaListarAnimais extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public TelaListarAnimais() {
+	public TelaListagemAnimais() {
 		initialize();
 	}
 
@@ -52,7 +52,7 @@ public class TelaListarAnimais extends JFrame {
 		frmListagem = new JFrame();
 		frmListagem.setTitle("Listagem de Animais");
 		frmListagem.setBounds(100, 100, 743, 392);
-		frmListagem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmListagem.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frmListagem.getContentPane().setLayout(null);
 
 		JButton btnBuscar = new JButton("Buscar");
@@ -94,7 +94,7 @@ public class TelaListarAnimais extends JFrame {
 			novaLinhaTabela[1] = a.getNome();
 			novaLinhaTabela[2] = a.getEspecie();
 			novaLinhaTabela[3] = a.getRaca();
-			novaLinhaTabela[4] = a.getDataNascimento();
+			novaLinhaTabela[4] = a.getIdade();
 			novaLinhaTabela[5] = a.getPeso();
 
 			model.addRow(novaLinhaTabela);

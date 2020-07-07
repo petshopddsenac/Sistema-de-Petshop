@@ -2,6 +2,7 @@ package model.bo;
 import java.util.ArrayList;
 import java.util.List;
 import model.dao.AnimalDAO;
+import model.dao.GeradorPlanilha;
 import model.seletor.AnimalSeletor;
 import model.vo.Animal;
 
@@ -42,10 +43,9 @@ public class AnimalBO {
 	
 	public void gerarPlanilha(List<Animal> animal, String caminhoEscolhido) {
 		GeradorPlanilha gerador = new GeradorPlanilha();
-		gerador.gerarPlanilhaAnimais(caminhoEscolhido, animais);
+		gerador.gerarPlanilhaAnimais(caminhoEscolhido, animal);
 	}
 		
-	}
 
 	public List<Animal> listarAnimais(AnimalSeletor seletor) {
 		return dao.listarComSeletor(seletor);

@@ -15,8 +15,8 @@ public class AnimalDAO {
 	public Animal cadastrar(Animal novoAnimal) {
 
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, IDADE, PESO, ID) VALUES "
-				+ "(?, ?, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO ANIMAL (NOME, ESPECIE, RACA, IDADE, PESO) VALUES "
+				+ "(?, ?, ?, ?, ?) ";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 		try {
@@ -209,7 +209,7 @@ public class AnimalDAO {
 			prepStmt.setString(1, animalVO.getNome());
 			prepStmt.setString(2, animalVO.getEspecie());
 			prepStmt.setString(3, animalVO.getRaca());
-			prepStmt.setDate(4, animalVO.getDataNascimento());
+			prepStmt.setDouble(4, animalVO.getIdade());
 			prepStmt.setDouble(5, animalVO.getPeso());
 			prepStmt.setInt(6, animalVO.getId());
 
@@ -407,18 +407,13 @@ public class AnimalDAO {
 
 			while (result.next()) {
 				Animal An = new Animal();
-				
-				
 
 				An.setNome(result.getNString("NOME"));
 				An.setEspecie(result.getString("ESPECIE"));
 				An.setRaca(result.getString("RACA"));
-				An.setIdade(rsult.getDouble("IDADE");
+				An.setIdade(result.getDouble("IDADE"));
 				An.setPeso(result.getDouble("PESO"));
-				
-				
-				
-				
+
 			animal.add(An);
 
 			}

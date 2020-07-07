@@ -9,7 +9,7 @@ import controller.ClienteController;
 import model.dao.ClienteDAO;
 import model.seletor.ClienteSeletor;
 import model.vo.Cliente;
-import util.GeradorPlanilha;
+import model.dao.GeradorPlanilha;
 
 public class ClienteBO {
 

@@ -9,9 +9,19 @@ public class ServicoController {
 	private ServicoBO bo = new ServicoBO();
 	
 
-	public void cadastrarServicoController(Servico servicoVO) {
-		ServicoBO servicoBO = new ServicoBO();
-		servicoBO.cadastrarServicoBO(servicoVO);
+	public Servico criarServico(String textNome, boolean chkBoxNecessitaConsulta, Double textPreco) {
+		Servico servico = new Servico();
+		servico.setNome(textNome);
+		servico.setNecessitaConsulta(chkBoxNecessitaConsulta);
+		servico.setPreco(textPreco);
+		
+		return servico;
+	}
+	
+	public Servico cadastrarServico(String textNome, boolean chkBoxNecessitaConsulta, Double textPreco) {
+		Servico servico = criarServico(textNome, chkBoxNecessitaConsulta, textPreco);
+		bo.cadastrarServicoBO(servico);
+		return servico;
 	}
 	
 	public void excluirServicoController(Servico servicoVO) {
@@ -33,6 +43,7 @@ public class ServicoController {
 		ServicoBO servicoBO = new ServicoBO();
 		servicoBO.consultarServicoBO(servicoVO);
 	}
+
 
 	/*public void cadastrar(String nome, String preco, boolean necessitaConsulta) {
 		String mensagem = "";

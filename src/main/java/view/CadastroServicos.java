@@ -93,7 +93,7 @@ public class CadastroServicos extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ServicoController controller = new ServicoController();
-				controller.cadastrarServicoController(textNome.getText(), chkBoxNecessitaConsulta.isSelected(), textPreco.getText());
+				controller.cadastrarServico(textNome.getText(), chkBoxNecessitaConsulta.isSelected(), Double.parseDouble(textPreco.getText()));
 			}
 		});
 		btnSalvar.setBounds(265, 215, 85, 30);

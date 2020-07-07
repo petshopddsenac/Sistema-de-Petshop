@@ -190,7 +190,7 @@ public class CadastroClientes extends JInternalFrame {
 
 					JOptionPane.showMessageDialog(null, " Cliente Salvo com sucesso");
 				} else {
-					JOptionPane.showMessageDialog(null, "Preencha os campos Obrigatórios!", "Atenção",JOptionPane.ERROR_MESSAGE");
+					JOptionPane.showMessageDialog(null, "Preencha os campos Obrigatórios!", "Atenção",JOptionPane.ERROR_MESSAGE);
 				}
 
 			}

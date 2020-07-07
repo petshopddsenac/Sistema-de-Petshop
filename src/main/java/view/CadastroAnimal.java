@@ -20,8 +20,9 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import java.awt.Dialog.ModalExclusionType;
 
-public class CadastroAnimal extends JInternalFrame {
+public class CadastroAnimal extends JFrame {
 	private JTextField textNomePet;
 	private JTextField textEspecie;
 	private JTextField textRaca;
@@ -47,6 +48,7 @@ public class CadastroAnimal extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroAnimal() {
+		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 
 		setBounds(100, 100, 500, 360);
 		getContentPane().setLayout(null);
@@ -131,12 +133,14 @@ public class CadastroAnimal extends JInternalFrame {
 				String nomeDigitado = textNomePet.getText();
 				String racaDigitado = textRaca.getText();
 				String especieDigitado = textEspecie.getText();
+				Double pesoDigitado = Double.parseDouble(textPeso.getText());
+
 				String mensagem = controladora.validarCamposDigitados(nomeDigitado, racaDigitado,
 						especieDigitado);
 				
 				if (mensagem.isEmpty()) {
 					Animal animal = new Animal();
-					animal = controladora.salvar(textNomePet, textEspecie, textRaca, cbDono, textPeso, TextDataN);
+					animal = controladora.salvar();
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
 				} else {
 					JOptionPane.showMessageDialog(null, mensagem);
@@ -186,11 +190,6 @@ public class CadastroAnimal extends JInternalFrame {
 		cbDono.setBounds(70, 125, 175, 25);
 		getContentPane().add(cbDono);
 
-
-		
-		
-		
-		
 
 	}
 

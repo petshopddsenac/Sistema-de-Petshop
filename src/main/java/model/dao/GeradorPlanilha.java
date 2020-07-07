@@ -1,4 +1,4 @@
-package util;
+package model.dao;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -14,6 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.mysql.cj.result.Row;
 
+import model.vo.Animal;
 import model.vo.Cliente;
 
 public class GeradorPlanilha {
@@ -41,7 +43,6 @@ public class GeradorPlanilha {
 		
 		int linhaAtual = 1;
 		return salvarNoDisco(planilha, caminhoArquivo, ".xlsx");
-
 	}
 
 	private void criarLinhasClientea(ArrayList<Cliente> clientes, XSSFSheet aba, int posicaoLinhaAtual) {
@@ -60,10 +61,7 @@ public class GeradorPlanilha {
 			linhaAtual.createCell(7).setCellValue(c.getEmail());
 
 			posicaoLinhaAtual++;
-
-		}
-		
-
+		}	
 	}
 
 	private void criarCabecalho(String[] nomesColunas, XSSFSheet aba, int posicaoLinhaAtual) {
@@ -100,6 +98,11 @@ public class GeradorPlanilha {
 		}
 
 		return mensagem;
+	}
+
+	public void gerarPlanilhaAnimais(String caminhoEscolhido, List<Animal> animal) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

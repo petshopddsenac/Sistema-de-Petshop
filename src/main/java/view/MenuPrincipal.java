@@ -34,13 +34,11 @@ import java.awt.event.KeyAdapter;
 public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private CadastroCliente cadastroCliente;
-	private CadastraoAnimal cadastroAnimal;
+	private PainelCadastroCliente cadastroCliente;
+	private CadastroAnimal cadastroAnimal;
 	private ArrayList<Animal> consultarAnimais;
 	private TelaListagemClientes listaClientes;
-	private CadastroFuncionarios cadastroFuncionario;
 	private JDesktopPane desktopPane;
-
 	/**
 	 * Launch the application.
 	 */
@@ -119,26 +117,23 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmCadastrarAnimal = new JMenuItem("Cadastrar Animal");
 		mntmCadastrarAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			if(cadastroAnimal == null || cadastroAnimal.isVisible());
-				CadastroAnimal cadastroAnimal = new CadastroAnimal();
-				desktopPane.add(cadastroAnimal);
-				cadastroAnimal.show();				
+				
+				CadastroAnimal menuCadastroServico = new CadastroAnimal();
+				menuCadastroServico.setVisible(true);
+			
 			}
 		});
 		mntmCadastrarAnimal.setAccelerator( KeyStroke.getKeyStroke(KeyEvent.VK_F10,0));
 		mntmCadastrarAnimal.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/cao.png")));
 		mnAnimal.add(mntmCadastrarAnimal);
-
+		
 		JMenuItem mntmListarAnimais = new JMenuItem("Listar Animais");
 		mntmListarAnimais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				TelaListarAnimais manuListarAnimais = new TelaListarAnimais();
-				
+				TelaListagemAnimais manuListarAnimais = new TelaListagemAnimais();
 				manuListarAnimais.setVisible(true);
-				
-				
-				
+							
 			}
 		});
 		mntmListarAnimais.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_9,0) );
@@ -158,25 +153,51 @@ public class MenuPrincipal extends JFrame {
 				CadastroServicos menuCadastroServico = new CadastroServicos();
 				menuCadastroServico.setVisible(true);
 			}
+
 		});
+
 		mntmCadastrar.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/higiene.png")));
 		mnServico.add(mntmCadastrar);
-
+	
 		JMenuItem mntmListarServicos = new JMenuItem("Listar Serviços");
+		mntmListarServicos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				TelaListagemServicos menuListarServicos = new TelaListagemServicos();
+				menuListarServicos.setVisible(true);
+			}
+		});		
+		
 		mntmListarServicos.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/limpeza.png")));
 		mnServico.add(mntmListarServicos);
-
+		
 		JMenu mnConsulta = new JMenu("Consulta");
 		mnConsulta.setForeground(new Color(0, 0, 0));
 		mnConsulta.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnConsulta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/veterinaria.png")));
 		menuBar.add(mnConsulta);
-
-		JMenuItem mntmCadastrarConsulta = new JMenuItem("Cadastrar Consulta");
+	
+		JMenuItem mntmCadastrarConsulta = new JMenuItem("Cadastrar Consulta");	
+		mntmCadastrarConsulta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				CadastroConsultas menuCadastroConsulta = new CadastroConsultas();
+				menuCadastroConsulta.setVisible(true);
+			}
+		});
+		
 		mntmCadastrarConsulta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/relatorio-medico.png")));
 		mnConsulta.add(mntmCadastrarConsulta);
 
 		JMenuItem mntmListarConsultas = new JMenuItem("Listar Consultas");
+		mntmListarConsultas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				TelaListagemConsultas menuListaConsultas = new TelaListagemConsultas();
+				menuListaConsultas.setVisible(true);
+			}
+
+		});
 		mntmListarConsultas.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/calendario.png")));
 		mnConsulta.add(mntmListarConsultas);
 
@@ -189,21 +210,24 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmCadastrarFuncionrio = new JMenuItem("Cadastrar Funcionário");
 		mntmCadastrarFuncionrio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				
+							
 				CadastroFuncionarios menuCadastroFuncionario = new CadastroFuncionarios();
-				menuCadastroFuncionario.setVisible(true);
-				
-				
-				
+				menuCadastroFuncionario.setVisible(true);			
 			}
-		});
+		});		
+		
 		mntmCadastrarFuncionrio.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/medico.png")));
 		mnFuncionario.add(mntmCadastrarFuncionrio);
 
 		JMenuItem mntmListarFuncionrios = new JMenuItem("Listar Funcionários");
+		mntmListarFuncionrios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+							
+				TelaListagemFuncionarios menuListarFuncionarios = new TelaListagemFuncionarios();
+				menuListarFuncionarios.setVisible(true);			
+			}
+		});		
+		
 		mntmListarFuncionrios.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/estetoscopio.png")));
 		mnFuncionario.add(mntmListarFuncionrios);
 
