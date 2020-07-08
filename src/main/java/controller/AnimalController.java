@@ -36,18 +36,29 @@ public class AnimalController {
 	}
 
 	public String validarCamposDigitados(String nomeDigitado, String racaDigitado, 
-			String especieDigitado) {
+			String especieDigitado, String pesoDigitado, String idadeDigitada) {
 
 		String mensagem = "";
+		Double peso = Double.parseDouble(pesoDigitado);
+		Double idade = Double.parseDouble(idadeDigitada);
 		if (nomeDigitado.isEmpty() || nomeDigitado.trim().length() < 3)
-			mensagem += "Animal deve ter no minimo 3 letras";
+		       mensagem = JOptionPane.showInputDialog("Animal deve ter no minimo 3 letras");
 		if (racaDigitado.isEmpty() || racaDigitado.trim().length() < 3)
-			mensagem += "Raça do animal deve ter no minimo 3 letras";
+			mensagem = mensagem = JOptionPane.showInputDialog("Raça do animal deve ter no minimo 3 letras");
+		if (especieDigitado.isEmpty() || especieDigitado.trim().length() < 3)
+			mensagem = JOptionPane.showInputDialog("A espécie do animal deve conter no mínimo 4 letras");
+		if(pesoDigitado.isEmpty()) {
+			mensagem = JOptionPane.showInputDialog("Digite o peso do animal");
+		}
+		if(idadeDigitada.isEmpty()) {
+			mensagem = JOptionPane.showInputDialog("Digite a idade do animal");
+		}
+		return mensagem;
+
+	}
 		
 
 		
-		return mensagem;
-	}
 
 	public Animal salvar() {
 		String mensagem = "";
@@ -90,7 +101,7 @@ public class AnimalController {
 	public void preencherDono(JComboBox<Object> cbDono) {
 		ClienteBO cliente = new ClienteBO();
 		ArrayList<Cliente> clientes = cliente.listarTodos();
-		cbDono.addItem("Selecione");
+		cbDono.addItem(cliente);
 		for (Cliente dono : clientes) {
 			cbDono.addItem((Cliente) dono);
 			
