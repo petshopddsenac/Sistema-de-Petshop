@@ -27,7 +27,8 @@ public class CadastroAnimal extends JFrame {
 	private JTextField textEspecie;
 	private JTextField textRaca;
 	private JTextField textPeso;
-
+	private JTextField textIdade;
+	private JComboBox cbDono;
 	/**
 	 * Launch the application.
 	 */
@@ -86,16 +87,11 @@ public class CadastroAnimal extends JFrame {
 		getContentPane().add(textRaca);
 		textRaca.setColumns(10);
 
-		JLabel lblDataNascimento = new JLabel("Data de Nascimento: ");
-		lblDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblDataNascimento.setBounds(10, 200, 122, 25);
-		getContentPane().add(lblDataNascimento);
-
-		try {
-			MaskFormatter mascaraData = new MaskFormatter("##/##/####");
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		JLabel lbldade = new JLabel("Idade:  *");
+		lbldade.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lbldade.setBounds(10, 150, 60, 20);
+		contentPane.add(lbldade);
+		
 
 		JLabel lblPeso = new JLabel("Peso: ");
 		lblPeso.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -131,21 +127,24 @@ public class CadastroAnimal extends JFrame {
 
 				AnimalController controladora = new AnimalController();
 				String nomeDigitado = textNomePet.getText();
-				String racaDigitado = textRaca.getText();
+				String racaDigitado = texRaca.getText();
 				String especieDigitado = textEspecie.getText();
-				Double pesoDigitado = Double.parseDouble(textPeso.getText());
-
-				String mensagem = controladora.validarCamposDigitados(nomeDigitado, racaDigitado,
-						especieDigitado);
+				String pesoDigitado = textPeso.getText();
+				String idadeDigitada = textIdade.getText();
+				String mensagem = controladora.validarCamposDigitados(nomeDigitado, racaDigitado, especieDigitado,
+						pesoDigitado, idadeDigitada);
 				
+				controladora.preencherDono(cbDono);
 				if (mensagem.isEmpty()) {
 					Animal animal = new Animal();
-					animal = controladora.salvar();
+
 					JOptionPane.showMessageDialog(null, "salvo com sucesso!");
 				} else {
-					JOptionPane.showMessageDialog(null, mensagem);
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos, Atenção");
 
 				}
+
+				
 
 			}
 		});
@@ -200,7 +199,7 @@ public class CadastroAnimal extends JFrame {
 		this.textNomePet.setText("");
 		this.textPeso.setText("");
 		this.textRaca.setText("");
-		
+		this.textIdade.setText("");
 		
 
 	}
