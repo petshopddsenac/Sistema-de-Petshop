@@ -28,43 +28,42 @@ public class ClienteController {
 		return mensagem;
 	}
 
-	public String validar(String Nome, String Rua, String Bairro, String Numero, String Telefone, String email,
-			String Cpf, String Cep) {
+	public String validar(String Nome, String textRua, String textBairro, String textNumero, int textDDD, String textTelefone, String textEmail,
+			String textCpf, String textCep) {
 		String mensagem = "";
 		if ((Nome == null) || (Nome.trim().length() < 3)) {
 			mensagem = JOptionPane.showInputDialog("Nome precisa conter no mínimo 3 letras");
 		}
 
-		if ((Rua == null) || (Rua.trim().length() < 5)) {
+		if ((textRua == null) || (textRua.trim().length() < 5)) {
 			mensagem = JOptionPane.showInputDialog("A Rua deve conter no mínimo 5 caracteres");
 		}
-		if ((Bairro == null) || (Bairro.trim().length() < 5)) {
+		if ((textBairro == null) || (textBairro.trim().length() < 5)) {
 			mensagem =  JOptionPane.showInputDialog(" O Bairro deve conter  no mínimo 5 caracteres ");
 
 		}
-		if ((Numero == null) || (Numero.trim().length() < 2)) {
+		if ((textNumero == null) || (textNumero.trim().length() < 2)) {
 			mensagem =  JOptionPane.showInputDialog("O número deve conter no mínimo 2 caracteres");
 
 		}
-
-		if ((Telefone == null) || (Telefone.trim().length() < 8)) {
+		if ((textDDD == null) || (textDDD.trim().length() != 2 )) {
+			mensagem =  JOptionPane.showInputDialog("DDD deve ter 2 caracteres ");
+		}
+		if ((textTelefone == null) || (textTelefone.trim().length() < 8)) {
 			mensagem =  JOptionPane.showInputDialog("Telefone deve ter no minímo 8 caracteres ");
 		}
-		if ((Cpf == null) || (Cpf.trim().length() < 11)) {
+		if ((textCpf == null) || (textCpf.trim().length() < 11)) {
 			mensagem = JOptionPane.showInputDialog("CPF deve ter 11 digitos");
 
 		}
-		if ((Cep == null) || (Cep.trim().length() < 8)) {
+		if ((textCep == null) || (textCep.trim().length() < 8)) {
 			mensagem = JOptionPane.showInputDialog(" O CEP deve conter 8 caracteres"); 
 		}
 
 		return mensagem;
 	}
-	
 
-	
-
-	public String cadastrarCliente(String textNome, String textRua, String textBairro, String textNumero, String  textTelefone, String  textemail,
+	public String cadastrarCliente(String textNome, String textRua, String textBairro, String textNumero, int textDDD,  String  textTelefone, String  textemail,
 			String  textCpf, String  textCep ) {
 		Cliente cliente = new Cliente();
 		String mensagem = "";
@@ -74,6 +73,7 @@ public class ClienteController {
 		cliente.setNumero(textNumero);
 		cliente.setBairro(textBairro);
 		cliente.setNumero(textNumero);
+		cliente.setDdd(textDDD);
 		cliente.setTelefone(textTelefone);
 		cliente.setEmail(textemail);
 		cliente.setCpf(textRua);
@@ -83,12 +83,7 @@ public class ClienteController {
 		
 	}
 	
-		
-		 
-	
 
-	
-	
 
 	public ArrayList<Cliente> listarClientes(ClienteSeletor seletor) {
 		return dao.listarComSeletor(seletor);

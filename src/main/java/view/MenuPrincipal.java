@@ -76,17 +76,10 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnCliente);
 
 		JMenuItem mntmCadastrarCliente = new JMenuItem("Cadastrar Cliente");
-		mntmCadastrarCliente.addKeyListener(new KeyAdapter() {
-
-		});
 		mntmCadastrarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (cadastroCliente == null || !cadastroCliente.isVisible()) {
-					cadastroCliente = new PainelCadastroCliente();
-					desktopPane.add(cadastroCliente);
-					cadastroCliente.show();
-
-				}
+					CadastroClientes menuCadastroCliente = new CadastroClientes();
+					menuCadastroCliente.setVisible(true);
 			}
 		});
 		mntmCadastrarCliente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));

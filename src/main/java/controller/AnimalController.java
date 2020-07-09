@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import model.bo.AnimalBO;

@@ -8,11 +8,11 @@
 	INSERT INTO SERVICO (IDSERVICO, NOME, PRECO) VALUES (3, 'CONSULTA', '100.00');
 	INSERT INTO SERVICO (IDSERVICO, NOME, PRECO) VALUES (4, 'VACINADARAIVA', '150.00');
 
-	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep,  email, telefone, TIPO) VALUES (2,'Luciano', 012345678927, 'Rua das Gaivotas', 55, 'Ingleses', 10001200, 'luciano@gmail.com', 99991111, 1);
-	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep, email, telefone, TIPO) VALUES (3,'Magali', 19854763019, 'Rua das Baleias', 44, 'Canasvieiras', 31111400, 'magali@gmail.com', 99223333, 1);
-	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro,  cep, email, telefone, TIPO) VALUES (4,'Maria Luiza', 26045684375, 'Rua dos Girassois',66, 'Trindade', 42222600,'marialuiza@gmail.com', 99334444, 1);
-	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep,  email, telefone, TIPO) VALUES (5,'Andreia', 34567098160, 'Rua das  Sequoias',80, 'Itacorubi', 68888100,'andreia@gmail.com', 99445555, 0);
-	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep, email, telefone, TIPO) VALUES (6,'Rafael', 4012397853, 'Rua dos Guarupuvus',100,  'Centro', 94444300,'rafael@gmail.com', 99556666, 0);
+	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep,  email, ddd, telefone, TIPO) VALUES (2,'Luciano', 012345678927, 'Rua das Gaivotas', 55, 'Ingleses', 10001200, 'luciano@gmail.com', 48, 99991111, 1);
+	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep, email, ddd, telefone, TIPO) VALUES (3,'Magali', 19854763019, 'Rua das Baleias', 44, 'Canasvieiras', 31111400, 'magali@gmail.com', 48, 99223333, 1);
+	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro,  cep, email, ddd, telefone, TIPO) VALUES (4,'Maria Luiza', 26045684375, 'Rua dos Girassois',66, 'Trindade', 42222600,'marialuiza@gmail.com', 48, 99334444, 1);
+	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep,  email, ddd, telefone, TIPO) VALUES (5,'Andreia', 34567098160, 'Rua das  Sequoias',80, 'Itacorubi', 68888100,'andreia@gmail.com', 48, 99445555, 0);
+	INSERT INTO PESSOA (IDPESSOA, nome, cpf, rua, numero, bairro, cep, email, ddd, telefone, TIPO) VALUES (6,'Rafael', 4012397853, 'Rua dos Guarupuvus',100, 'Centro', 94444300,'rafael@gmail.com', 48, 99556666, 0);
 
 	INSERT INTO CLIENTE (IDCLIENTE, IDANIMAL, IDPESSOA) VALUES (1, 1, 1);
 	INSERT INTO CLIENTE (IDCLIENTE, IDANIMAL, IDPESSOA) VALUES (2, 2, 2);

@@ -8,27 +8,40 @@ public class Cliente extends Pessoa {
 	private ArrayList<Animal> Pets;
 	
 	
+
+	
+	public Cliente(int id, String nome, String cpf, String rua, int ddd, String numero, String bairro, String cep,
+			String email, String telefone, int id2, ArrayList<Animal> pets) {
+		super(id, nome, cpf, rua, ddd, numero, bairro, cep, email, telefone);
+		id = id2;
+		Pets = pets;
+	}
+
+
+
+
 	public Cliente() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
-	public Cliente(int id, String nome, String cpf, String rua, String numero, String bairro, String cep, String email,
-			String telefone) {
-		super(id, nome, cpf, rua, numero, bairro, cep, email, telefone);
-		
-	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public ArrayList<Animal> getPets() {
 		return Pets;
 	}
+
 	public void setPets(ArrayList<Animal> pets) {
 		Pets = pets;
 	}
+
+
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", Pets=" + Pets + "]";
