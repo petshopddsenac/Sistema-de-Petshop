@@ -13,6 +13,7 @@ import javax.swing.text.MaskFormatter;
 
 import controller.ClienteController;
 import model.vo.Cliente;
+import model.vo.Pessoa;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
@@ -30,6 +31,7 @@ public class CadastroClientes extends JFrame {
 	private JFormattedTextField textCEP;
 	private JFormattedTextField textCPF;
 	private JTextField textDDD;
+	private Pessoa novapessoa;
 
 	/**
 	 * Launch the application.
@@ -173,18 +175,18 @@ public class CadastroClientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ClienteController controller = new ClienteController();
 				String nome = textNome.getText();
+				String rua = textRua.getText();
 				String bairro = textBairro.getText();
 				String numero = textNumero.getText();
-				int ddd = Integer.parseInt(textDDD.getText());
+				String ddd = textDDD.getText();
 				String telefone = textTelefone.getText();
 				String email = textEmail.getText();
-				String Cpf = textCPF.getText();
-				String Cep = textCEP.getText();
-
-				String mensagem = controller.validar(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), Integer.parseInt(textDDD.getText()), textTelefone.getText(), 
+				String cpf = textCPF.getText();
+				String cep = textCEP.getText();
+				
+				String mensagem = controller.validar(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textDDD.getText(), textTelefone.getText(), 
 						textEmail.getText(), textCPF.getText(), textCEP.getText());
-				
-				
+							
 				if (mensagem.isEmpty()) {
 					Cliente cliente = new Cliente();
 					JOptionPane.showMessageDialog(null, " Cliente Salvo com sucesso");

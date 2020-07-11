@@ -6,7 +6,7 @@ public class Pessoa {
 	private String nome;
 	private String cpf;
 	private String rua;
-	private int ddd;
+	private String ddd;
 	private String numero;
 	private String bairro;
 	private String cep;
@@ -15,7 +15,7 @@ public class Pessoa {
 	
 
 
-	public Pessoa(int id, String nome, String cpf, String rua, int ddd, String numero, String bairro, String cep,
+	public Pessoa(int id, String nome, String cpf, String rua, String ddd, String numero, String bairro, String cep,
 			String email, String telefone) {
 		super();
 		this.id = id;
@@ -87,13 +87,13 @@ public class Pessoa {
 
 
 
-	public int getDdd() {
+	public String getDdd() {
 		return ddd;
 	}
 
 
 
-	public void setDdd(int ddd) {
+	public void setDdd(String ddd) {
 		this.ddd = ddd;
 	}
 

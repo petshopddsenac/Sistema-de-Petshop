@@ -10,7 +10,7 @@ public class Cliente extends Pessoa {
 	
 
 	
-	public Cliente(int id, String nome, String cpf, String rua, int ddd, String numero, String bairro, String cep,
+	public Cliente(int id, String nome, String cpf, String rua, String ddd, String numero, String bairro, String cep,
 			String email, String telefone, int id2, ArrayList<Animal> pets) {
 		super(id, nome, cpf, rua, ddd, numero, bairro, cep, email, telefone);
 		id = id2;
