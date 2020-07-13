@@ -47,42 +47,51 @@ public class ClienteController {
 		cliente.setCpf(textRua);
 		cliente.setCep(textCep);
 		
+		mensagem += validar(cliente);
+		
+		if (mensagem.trim().isEmpty()) {
+			cliente = bo.cadastrarCliente(cliente);
+		}
+		
+		if (mensagem.trim().isEmpty()) {
+			mensagem += "O Cliente foi cadastrado com sucesso!";
+		}
 		return mensagem;
 		
 	}
 	
-	public String validar(String textNome, String textRua, String textBairro, String textNumero, String textDDD, String textTelefone, String textEmail,
-			String textCPF, String textCEP) {
+	public String validar(Cliente cliente) {
 		
+		String mensagem = "";
 		
-		if ((textNome == null) || (textNome.trim().length() < 3) || (textNome.trim().length() < 256)) {
-			JOptionPane.showMessageDialog(null, "Nome precisa ter no mínimo 3 caracteres");
+		if ((cliente.getNome() == null) || (cliente.getNome().trim().length() < 3) || (cliente.getNome().trim().length() > 256)) {
+			mensagem +=  "Nome precisa ter no mínimo 3 caracteres. ";
 		}
-		if ((textRua == null) || (textRua.trim().length() < 5) || (textRua.trim().length() < 256)) {
-			JOptionPane.showMessageDialog(null, "A Rua deve conter no mínimo 5 caracteres");
+		if ((cliente.getRua() == null) || (cliente.getRua().trim().length() < 5) || (cliente.getRua().trim().length() > 256)) {
+			mensagem +=  "A Rua deve conter no mínimo 5 caracteres. ";
 		}
-		if ((textBairro == null) || (textBairro.trim().length() < 5) || (textBairro.trim().length() < 101)) {
-			JOptionPane.showMessageDialog(null, "O Bairro deve conter  no mínimo 5 caracteres ");
+		if ((cliente.getBairro() == null) || (cliente.getBairro().trim().length() < 5) || (cliente.getBairro().trim().length() > 101)) {
+			mensagem +=  "O Bairro deve conter  no mínimo 5 caracteres. ";
 		}
-		if ((textNumero == null) || (textNumero.trim().length() < 2)) {
-			JOptionPane.showMessageDialog(null,"O número deve conter no mínimo 2 caracteres");
+		if ((cliente.getNumero() == null) || (cliente.getNumero().trim().length() < 2)) {
+			mensagem +=  "O número deve conter no mínimo 2 caracteres. ";
 		}
-		if ((textDDD == null) || (textDDD.trim().length() < 10)) {
-			JOptionPane.showMessageDialog(null, "O DDD deve ter 2 caracteres ");
+		if ((cliente.getDdd() == null) || (cliente.getDdd().trim().length() != 2)) {
+			mensagem +=  "O DDD deve ter 2 caracteres. ";
 		}
-		if ((textTelefone == null) || (textTelefone.trim().length() < 10)) {
-			JOptionPane.showMessageDialog(null, "Telefone deve ter  9 caracteres ");
+		if ((cliente.getTelefone() == null) || (cliente.getTelefone().trim().length() < 8) || (cliente.getTelefone().trim().length() > 9)) {
+			mensagem +=  "Telefone deve ter  9 caracteres. ";
 		}
-		if ((textCPF == null) || (textCPF.trim().length() != 11)) {
-			JOptionPane.showMessageDialog(null, "CPF contém somente 11 números");
+//		if ((cliente.getCpf() == null) || (cliente.getCpf().length() != 11)) {
+//			mensagem +=  "O CPF deve conver somente 11 números";
+////		}
+//		if ((cliente.getCep() == null) || (cliente.getCep().length() != 8)) {
+//			mensagem +=  "O CEP deve conter 8 números";
+//		}
+		if(cliente.getEmail() == null)  {
+			mensagem +=  "Informe um email válido";		
 		}
-		if ((textCEP == null) || (textCEP.trim().length() != 8)) {
-			JOptionPane.showMessageDialog(null, " O CEP contém 8 números");
-		}
-		if(textEmail == null)  {
-			JOptionPane.showMessageDialog(null, "Informe um email válido");		
-		}
-		return null;
+		return mensagem;
 	}
 	
 	public static boolean isValidEmailAddressRegex(String email) {
@@ -97,9 +106,6 @@ public class ClienteController {
 	    }
 	    return isEmailIdValid;
 	}
-
-	
-
 
 	public ArrayList<Cliente> listarClientes(ClienteSeletor seletor) {
 		return dao.listarComSeletor(seletor);
@@ -142,9 +148,6 @@ public class ClienteController {
 		return mensagem;
 	}
 
-	
-	
-	
 	public String excluirCliente(String TextNome) {
 		String mensagem = "";
 		Cliente cliente = new Cliente();

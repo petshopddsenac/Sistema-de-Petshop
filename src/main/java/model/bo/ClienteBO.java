@@ -27,7 +27,6 @@ public class ClienteBO {
 		return mensagem;
 	}
 	public Cliente cadastrarCliente(Cliente cliente) {
-		ClienteDAO cDAO = new ClienteDAO();
 		return cDAO.cadastrar(cliente);
 	}
 

@@ -16,19 +16,20 @@ public class ClienteDAO {
 	public Cliente cadastrar(Cliente novoCliente) {
 		Connection conn = Banco.getConnection();
 
-		String sql = "INSERT INTO CLIENTE (NOME, CPF, RUA, NUMERO, BAIRRO, CEP, EMAIL, TELEFONE)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO CLIENTE (NOME, CPF, RUA, DDD, NUMERO, BAIRRO, CEP, EMAIL, TELEFONE)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet rs = null;
 		try {
 			stmt.setString(1, novoCliente.getNome());
 			stmt.setString(2, novoCliente.getCpf());
 			stmt.setString(3, novoCliente.getRua());
-			stmt.setString(4, novoCliente.getNumero());
-			stmt.setString(5, novoCliente.getBairro());
-			stmt.setString(6, novoCliente.getCep());
-			stmt.setString(7,novoCliente.getTelefone());
+			stmt.setString(4, novoCliente.getDdd());
+			stmt.setString(5, novoCliente.getNumero());
+			stmt.setString(6, novoCliente.getBairro());
+			stmt.setString(7, novoCliente.getCep());
 			stmt.setString(8, novoCliente.getEmail());
+			stmt.setString(9, novoCliente.getTelefone());
 			stmt.execute();
 
 			rs = stmt.getGeneratedKeys();
@@ -56,13 +57,16 @@ public class ClienteDAO {
 		Cliente c = new Cliente();
 		try {
 			c.setId(rs.getInt("Id"));
-			c.setNome(rs.getNString("Nome"));
-			c.setCpf(rs.getNString("CPF"));
-			c.setRua(rs.getNString("Rua"));
-			c.setNumero(rs.getNString("Número"));
-			c.setCep(rs.getNString("CEP"));
+			c.setNome(rs.getString("Nome"));
+			c.setCpf(rs.getString("CPF"));
+			c.setRua(rs.getString("Rua"));
+			c.setDdd(rs.getString("DDD"));
+			c.setNumero(rs.getString("Número"));
+			c.setBairro(rs.getString("Bairro"));
+			c.setCep(rs.getString("CEP"));
+			c.setEmail(rs.getString("email"));
 			c.setTelefone(rs.getString("Telefone"));
-			c.setEmail(rs.getNString("email"));
+
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir cliente a partir do ResultSet. Causa: " + e.getMessage());
 		}

@@ -78,10 +78,10 @@ public class CadastroClientes extends JFrame {
 		try {
 			mascaraCpf.setMask("###.###.###-##");
 			mascaraCpf.install(textCPF);
-			textCPF.setText("");
 			textCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			textCPF.setBounds(80, 50, 200, 25);
 			getContentPane().add(textCPF);
+			
 		} catch (ParseException e1) {
 
 			e1.printStackTrace();
@@ -123,19 +123,19 @@ public class CadastroClientes extends JFrame {
 		lblCEP.setBounds(306, 120, 29, 25);
 		getContentPane().add(lblCEP);
 
-		final JFormattedTextField textCEP = new JFormattedTextField();
+		final JFormattedTextField textCep = new JFormattedTextField();
 		MaskFormatter mascaraCep;
 		try {
 			mascaraCep = new MaskFormatter("#####-###");
-			mascaraCep.install(textCEP);
+			mascaraCep.install(textCep);
 		} catch (ParseException e2) {
 
 			e2.printStackTrace();
 		}
 
-		textCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textCEP.setBounds(345, 120, 140, 25);
-		getContentPane().add(textCEP);
+		textCep.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textCep.setBounds(345, 120, 140, 25);
+		getContentPane().add(textCep);
 
 		JLabel lblEmail = new JLabel("E-mail: ");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -174,25 +174,18 @@ public class CadastroClientes extends JFrame {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteController controller = new ClienteController();
-				String nome = textNome.getText();
-				String rua = textRua.getText();
-				String bairro = textBairro.getText();
-				String numero = textNumero.getText();
-				String ddd = textDDD.getText();
-				String telefone = textTelefone.getText();
-				String email = textEmail.getText();
-				String cpf = textCPF.getText();
-				String cep = textCEP.getText();
-				
-				String mensagem = controller.validar(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textDDD.getText(), textTelefone.getText(), 
-						textEmail.getText(), textCPF.getText(), textCEP.getText());
+								
+				String mensagem = controller.cadastrarCliente(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textDDD.getText(), textTelefone.getText(), 
+						textEmail.getText(), textCPF.getText(), textCep.getText());
 							
-				if (mensagem.isEmpty()) {
-					Cliente cliente = new Cliente();
-					JOptionPane.showMessageDialog(null, " Cliente Salvo com sucesso");
-				} else {
-					JOptionPane.showMessageDialog(null, "Preencha os campos Obrigatórios!", "Atenção",JOptionPane.ERROR_MESSAGE);
-				}
+				JOptionPane.showMessageDialog(null, mensagem, "Cadastrar o Cliente", JOptionPane.INFORMATION_MESSAGE);
+
+//				if (mensagem.isEmpty()) {
+//					Cliente cliente = new Cliente();
+//					JOptionPane.showMessageDialog(null, " Cliente Salvo com sucesso");
+//				} else {
+//					JOptionPane.showMessageDialog(null, "Preencha os campos Obrigatórios!", "Atenção",JOptionPane.ERROR_MESSAGE);
+//				}
 
 			}
 
@@ -255,7 +248,7 @@ public class CadastroClientes extends JFrame {
 		JLabel label_7 = new JLabel("*");
 		label_7.setForeground(Color.RED);
 		label_7.setBounds(335, 121, 11, 25);
-		getContentPane().add(label_7);
+		getContentPane().add(label_7);;
 
 
 	}
