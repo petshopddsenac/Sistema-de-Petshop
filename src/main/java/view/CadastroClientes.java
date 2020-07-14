@@ -62,12 +62,6 @@ public class CadastroClientes extends JFrame {
 		lblNome.setBounds(10, 10, 60, 25);
 		getContentPane().add(lblNome);
 
-		textNome = new JTextField();
-		textNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNome.setBounds(80, 10, 531, 25);
-		getContentPane().add(textNome);
-		textNome.setColumns(10);
-
 		JLabel lblCPF = new JLabel("CPF:  ");
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCPF.setBounds(10, 45, 45, 25);
@@ -78,35 +72,31 @@ public class CadastroClientes extends JFrame {
 		lblRua.setBounds(10, 80, 40, 25);
 		getContentPane().add(lblRua);
 
-		textRua = new JTextField();
-		textRua.setBounds(80, 84, 531, 25);
-		getContentPane().add(textRua);
-		textRua.setColumns(10);
-
-		JLabel lblNumero = new JLabel("Número: ");
+		JLabel lblNumero = new JLabel("Complemento: ");
 		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNumero.setBounds(10, 115, 60, 25);
 		getContentPane().add(lblNumero);
-
-		textNumero = new JTextField();
-		textNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNumero.setBounds(80, 120, 223, 25);
-		getContentPane().add(textNumero);
-		textNumero.setColumns(10);
 
 		JLabel lblBairro = new JLabel("Bairro: ");
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblBairro.setBounds(10, 150, 50, 25);
 		getContentPane().add(lblBairro);
 
-		textBairro = new JTextField();
-		textBairro.setBounds(80, 155, 223, 25);
-		getContentPane().add(textBairro);
-
 		JLabel lblCEP = new JLabel("CEP: ");
 		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCEP.setBounds(372, 120, 29, 25);
 		getContentPane().add(lblCEP);
+		
+		JLabel lblEmail = new JLabel("E-mail: ");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblEmail.setBounds(10, 225, 50, 25);
+		getContentPane().add(lblEmail);
+
+		JLabel lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTelefone.setBounds(341, 191, 60, 25);
+		getContentPane().add(lblTelefone);
+
 		
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("###.###.###-##");
@@ -130,28 +120,81 @@ public class CadastroClientes extends JFrame {
 			e.printStackTrace();
 		}
 		
-		JLabel lblEmail = new JLabel("E-mail: ");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEmail.setBounds(10, 225, 50, 25);
-		getContentPane().add(lblEmail);
-
-		textEmail = new JTextField();
-		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textEmail.setBounds(80, 225, 223, 25);
-		getContentPane().add(textEmail);
-		textEmail.setColumns(10);
-
-		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTelefone.setBounds(341, 191, 60, 25);
-		getContentPane().add(lblTelefone);
-
-		textTelefone = new JTextField();
-		textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textTelefone.setBounds(411, 191, 200, 25);
-		getContentPane().add(textTelefone);
-		textTelefone.setColumns(10);
-
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????"); //100 dígitos
+			textNome = new JFormattedTextField(maskFormatter);
+			textNome.setBounds(80, 10, 531, 25);
+			getContentPane().add(textNome);
+			textNome.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de Nome no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("****************************************************************************************************"); //100 dígitos any caracteres
+			textRua = new JFormattedTextField(maskFormatter);
+			textRua.setBounds(80, 84, 531, 25);
+			getContentPane().add(textRua);
+			textRua.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de Nome no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("**************************************************"); //50 dígitos any caracteres
+			textNumero = new JFormattedTextField(maskFormatter);
+			textNumero.setBounds(80, 120, 223, 25);
+			getContentPane().add(textNumero);
+			textNumero.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de Complemento no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("**************************************************"); //50 dígitos any caracteres
+			textBairro = new JFormattedTextField(maskFormatter);
+			textBairro.setBounds(80, 155, 223, 25);
+			getContentPane().add(textBairro);
+			textNome.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de Bairro no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("**************************************************"); //50 dígitos any caracteres
+			textEmail = new JFormattedTextField(maskFormatter);
+			textEmail.setBounds(80, 225, 223, 25);
+			getContentPane().add(textEmail);
+			textEmail.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de Email no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("#########"); //9 números any caracteres
+			textTelefone = new JFormattedTextField(maskFormatter);
+			textTelefone.setBounds(411, 191, 200, 25);
+			getContentPane().add(textTelefone);
+			textTelefone.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de Telefone no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("##"); //50 dígitos any caracteres
+			textDDD = new JFormattedTextField(maskFormatter);
+			textDDD.setBounds(80, 191, 223, 25);
+			getContentPane().add(textDDD);
+			textDDD.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de DDD no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnLimpar.addActionListener(new ActionListener() {
@@ -188,10 +231,7 @@ public class CadastroClientes extends JFrame {
 		lblObrigatorio.setVisible(true);
 		getContentPane().add(lblObrigatorio);
 		
-		textDDD = new JTextField();
-		textDDD.setBounds(80, 191, 223, 25);
-		getContentPane().add(textDDD);
-		textDDD.setColumns(10);
+
 		
 		JLabel lblDdd = new JLabel("DDD:");
 		lblDdd.setBounds(10, 197, 46, 14);
@@ -250,7 +290,6 @@ public class CadastroClientes extends JFrame {
 		this.textEmail.setText("");
 		this.txtCep.setText("");
 		this.txtCpf.setText("");
-
 
 	}
 }
