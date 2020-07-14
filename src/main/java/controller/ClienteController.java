@@ -63,14 +63,14 @@ public class ClienteController {
 		
 		String mensagem = "";
 		
-		if ((cliente.getNome() == null) || (cliente.getNome().trim().length() < 3) || (cliente.getNome().trim().length() > 255)) {
-			mensagem +=  "- O Nome precisa deve ter entre 3 e 255 caracteres; " + "\n";	
+		if ((cliente.getNome() == null) || (cliente.getNome().trim().length() < 3) || (cliente.getNome().trim().length() > 100)) {
+			mensagem +=  "- O Nome precisa deve ter entre 3 e 100 caracteres; " + "\n";	
 		}
-		if ((cliente.getRua() == null) || (cliente.getRua().trim().length() < 5) || (cliente.getRua().trim().length() > 255)) {
-			mensagem +=  "- A Rua deve ter entre 5 e 255 caracteres; " + "\n";
+		if ((cliente.getRua() == null) || (cliente.getRua().trim().length() < 5) || (cliente.getRua().trim().length() > 100)) {
+			mensagem +=  "- A Rua deve ter entre 5 e 100 caracteres; " + "\n";
 		}
-		if ((cliente.getBairro() == null) || (cliente.getBairro().trim().length() < 3) || (cliente.getBairro().trim().length() > 100)) {
-			mensagem +=  "- O Bairro deve ter entre 5 e 100 caracteres; " + "\n";
+		if ((cliente.getBairro() == null) || (cliente.getBairro().trim().length() < 3) || (cliente.getBairro().trim().length() > 50)) {
+			mensagem +=  "- O Bairro deve ter entre 5 e 50 caracteres; " + "\n";
 		}
 		if ((cliente.getNumero() == null) || (cliente.getNumero().trim().length() < 2) || (cliente.getNumero().trim().length() > 50)){
 			mensagem +=  "- O Número deve ter entre 2 e 50 caracteres caracteres; " + "\n";
@@ -82,13 +82,10 @@ public class ClienteController {
 			mensagem +=  "- Telefone deve ter 8 ou 9 caracteres; " + "\n";
 		}
 		if ((cliente.getCpf() == null) || (cliente.getCpf().length() != 11)) {
-			mensagem +=  "- O CPF deve conver 11 números; " + "\n";
+			mensagem +=  "- O CPF deve conter 11 números; " + "\n";
 		}
 		if ((cliente.getCep() == null) || (cliente.getCep().length() != 8)) {
 			mensagem +=  "- O CEP deve conter 8 números; " + "\n";
-		}
-		if(cliente.getEmail() == null)  {
-			mensagem +=  "- Informe um email válido.";		
 		}
 		return mensagem;
 	}

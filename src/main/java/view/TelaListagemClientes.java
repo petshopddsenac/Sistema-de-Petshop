@@ -17,12 +17,15 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import java.awt.Font;
 
 public class TelaListagemClientes extends JFrame {
 	
 	private JTable tblClientes;
 	private ArrayList<Cliente> clientes;
-	private String[] nomesColunas = { "Nome", "CPF", "Rua", "DDD", "Número", "Bairro", "CEP", "Telefone", "email" };
+	private String[] nomesColunas = { "Nome", "CPF", "Rua", "DDD", "Número", "Bairro", "CEP", "Telefone", "Email" };
 	private JTextField textNome;
 	private JTextField txtCpf;
 
@@ -72,10 +75,13 @@ public class TelaListagemClientes extends JFrame {
 	 */
 	public TelaListagemClientes() {
 		setTitle("Listagem de Clientes");
-		setBounds(100, 100, 1010, 520);
+		setBounds(100, 100, 1315, 520);
 		getContentPane().setLayout(null);
 
-		JButton btnBuscar = new JButton("Buscar");
+		JButton btnBuscar = new JButton("Buscar!");
+		btnBuscar.setForeground(new Color(255, 255, 255));
+		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnBuscar.setBackground(new Color(0, 128, 0));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteSeletor seletor = new ClienteSeletor();
@@ -88,30 +94,38 @@ public class TelaListagemClientes extends JFrame {
 				atualizarTabelaClientes();
 			}
 		});
-		btnBuscar.setBounds(449, 19, 535, 89);
+		btnBuscar.setBounds(529, 19, 760, 97);
 		getContentPane().add(btnBuscar);
 
 		tblClientes = new JTable();
-		tblClientes.setBounds(12, 136, 972, 334);
+		tblClientes.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
+		tblClientes.setBounds(12, 177, 1277, 293);
 		getContentPane().add(tblClientes);
 
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(25, 25, 61, 16);
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNome.setBounds(12, 30, 61, 16);
 		getContentPane().add(lblNome);
 
 		textNome = new JTextField();
-		textNome.setBounds(90, 19, 302, 28);
+		textNome.setBounds(90, 19, 302, 43);
 		getContentPane().add(textNome);
 		textNome.setColumns(10);
 
 		JLabel lblCpf = new JLabel("CPF");
-		lblCpf.setBounds(25, 73, 108, 16);
+		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCpf.setBounds(12, 84, 61, 16);
 		getContentPane().add(lblCpf);
 
 		txtCpf = new JTextField();
-		txtCpf.setBounds(90, 67, 302, 28);
+		txtCpf.setBounds(90, 73, 302, 43);
 		getContentPane().add(txtCpf);
 		txtCpf.setColumns(10);
+		
+		JLabel lblClientes = new JLabel("Clientes");
+		lblClientes.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblClientes.setBounds(614, 146, 76, 28);
+		getContentPane().add(lblClientes);
 
 	}
 }

@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class CadastroClientes extends JFrame {
 	private JTextField textNome;
@@ -64,7 +65,7 @@ public class CadastroClientes extends JFrame {
 
 		JLabel lblCPF = new JLabel("CPF:  ");
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCPF.setBounds(10, 45, 45, 25);
+		lblCPF.setBounds(10, 45, 40, 25);
 		getContentPane().add(lblCPF);
 		
 		JLabel lblRua = new JLabel("Rua: ");
@@ -74,34 +75,34 @@ public class CadastroClientes extends JFrame {
 
 		JLabel lblNumero = new JLabel("Complemento: ");
 		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNumero.setBounds(10, 115, 60, 25);
+		lblNumero.setBounds(324, 152, 84, 25);
 		getContentPane().add(lblNumero);
 
 		JLabel lblBairro = new JLabel("Bairro: ");
 		lblBairro.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblBairro.setBounds(10, 150, 50, 25);
+		lblBairro.setBounds(10, 116, 50, 25);
 		getContentPane().add(lblBairro);
 
 		JLabel lblCEP = new JLabel("CEP: ");
 		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCEP.setBounds(372, 120, 29, 25);
+		lblCEP.setBounds(10, 152, 29, 25);
 		getContentPane().add(lblCEP);
 		
 		JLabel lblEmail = new JLabel("E-mail: ");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEmail.setBounds(10, 225, 50, 25);
+		lblEmail.setBounds(10, 231, 50, 25);
 		getContentPane().add(lblEmail);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTelefone.setBounds(341, 191, 60, 25);
+		lblTelefone.setBounds(349, 190, 60, 25);
 		getContentPane().add(lblTelefone);
 
 		
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("###.###.###-##");
 			txtCpf = new JFormattedTextField(maskFormatter);
-			txtCpf.setBounds(80, 50, 223, 23);
+			txtCpf.setBounds(80, 47, 223, 23);
 			getContentPane().add(txtCpf);
 			txtCpf.setColumns(10);;
 		} catch (Exception e) {
@@ -112,7 +113,7 @@ public class CadastroClientes extends JFrame {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("#####-###");
 			txtCep = new JFormattedTextField(maskFormatter);
-			txtCep.setBounds(411, 120, 200, 25);
+			txtCep.setBounds(80, 153, 223, 25);
 			getContentPane().add(txtCep);
 			txtCep.setColumns(10);
 		} catch (Exception e) {
@@ -121,7 +122,7 @@ public class CadastroClientes extends JFrame {
 		}
 		
 		try {
-			MaskFormatter maskFormatter = new MaskFormatter("????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????"); //100 dígitos
+			MaskFormatter maskFormatter = new MaskFormatter("****************************************************************************************************"); //100 dígitos
 			textNome = new JFormattedTextField(maskFormatter);
 			textNome.setBounds(80, 10, 531, 25);
 			getContentPane().add(textNome);
@@ -144,7 +145,7 @@ public class CadastroClientes extends JFrame {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("**************************************************"); //50 dígitos any caracteres
 			textNumero = new JFormattedTextField(maskFormatter);
-			textNumero.setBounds(80, 120, 223, 25);
+			textNumero.setBounds(421, 153, 190, 25);
 			getContentPane().add(textNumero);
 			textNumero.setColumns(10);
 		} catch (Exception e) {
@@ -154,7 +155,7 @@ public class CadastroClientes extends JFrame {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("**************************************************"); //50 dígitos any caracteres
 			textBairro = new JFormattedTextField(maskFormatter);
-			textBairro.setBounds(80, 155, 223, 25);
+			textBairro.setBounds(80, 116, 223, 25);
 			getContentPane().add(textBairro);
 			textNome.setColumns(10);
 		} catch (Exception e) {
@@ -165,7 +166,7 @@ public class CadastroClientes extends JFrame {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("**************************************************"); //50 dígitos any caracteres
 			textEmail = new JFormattedTextField(maskFormatter);
-			textEmail.setBounds(80, 225, 223, 25);
+			textEmail.setBounds(80, 232, 223, 25);
 			getContentPane().add(textEmail);
 			textEmail.setColumns(10);
 		} catch (Exception e) {
@@ -176,7 +177,7 @@ public class CadastroClientes extends JFrame {
 		try {
 			MaskFormatter maskFormatter = new MaskFormatter("#########"); //9 números any caracteres
 			textTelefone = new JFormattedTextField(maskFormatter);
-			textTelefone.setBounds(411, 191, 200, 25);
+			textTelefone.setBounds(421, 191, 190, 25);
 			getContentPane().add(textTelefone);
 			textTelefone.setColumns(10);
 		} catch (Exception e) {
@@ -196,17 +197,21 @@ public class CadastroClientes extends JFrame {
 		}
 		
 		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnLimpar.setForeground(Color.WHITE);
+		btnLimpar.setBackground(new Color(204, 0, 0));
+		btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
 
 			}
 		});
-		btnLimpar.setBounds(337, 313, 111, 44);
+		btnLimpar.setBounds(341, 313, 111, 44);
 		getContentPane().add(btnLimpar);
 
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setForeground(Color.WHITE);
+		btnSalvar.setBackground(new Color(0, 128, 0));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteController controller = new ClienteController();
@@ -214,27 +219,27 @@ public class CadastroClientes extends JFrame {
 				String mensagem = controller.cadastrarCliente(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textDDD.getText(), textTelefone.getText(), 
 						textEmail.getText(), txtCpf.getText(), txtCep.getText());
 							
-				JOptionPane.showMessageDialog(null, mensagem, "Cadastrar o Cliente", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, mensagem, "Validação dos Campos", JOptionPane.INFORMATION_MESSAGE);
 				limparCampos();
 
 			}
 
 		});
-		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSalvar.setBounds(471, 313, 140, 44);
 
 		getContentPane().add(btnSalvar);
 		
 		JLabel lblObrigatorio = new JLabel(" * Campos Obrigatórios");
 		lblObrigatorio.setForeground(Color.RED);
-		lblObrigatorio.setBounds(55, 275, 140, 15);
+		lblObrigatorio.setBounds(10, 268, 140, 15);
 		lblObrigatorio.setVisible(true);
 		getContentPane().add(lblObrigatorio);
 		
 
 		
 		JLabel lblDdd = new JLabel("DDD:");
-		lblDdd.setBounds(10, 197, 46, 14);
+		lblDdd.setBounds(10, 196, 46, 14);
 		getContentPane().add(lblDdd);
 		
 		JLabel label = new JLabel("*");
@@ -242,39 +247,39 @@ public class CadastroClientes extends JFrame {
 		label.setBounds(68, 11, 11, 25);
 		getContentPane().add(label);
 		
+		JLabel label_3 = new JLabel("*");
+		label_3.setForeground(Color.RED);
+		label_3.setBounds(410, 153, 11, 25);
+		getContentPane().add(label_3);
+		
 		JLabel label_1 = new JLabel("*");
 		label_1.setForeground(Color.RED);
-		label_1.setBounds(65, 51, 11, 25);
+		label_1.setBounds(68, 153, 11, 25);
 		getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("*");
 		label_2.setForeground(Color.RED);
-		label_2.setBounds(69, 84, 10, 25);
+		label_2.setBounds(410, 192, 11, 25);
 		getContentPane().add(label_2);
-		
-		JLabel label_3 = new JLabel("*");
-		label_3.setForeground(Color.RED);
-		label_3.setBounds(68, 121, 11, 25);
-		getContentPane().add(label_3);
 		
 		JLabel label_4 = new JLabel("*");
 		label_4.setForeground(Color.RED);
-		label_4.setBounds(70, 156, 11, 25);
+		label_4.setBounds(68, 191, 11, 25);
 		getContentPane().add(label_4);
 		
 		JLabel label_5 = new JLabel("*");
 		label_5.setForeground(Color.RED);
-		label_5.setBounds(68, 189, 11, 25);
+		label_5.setBounds(68, 115, 11, 25);
 		getContentPane().add(label_5);
 		
 		JLabel label_6 = new JLabel("*");
 		label_6.setForeground(Color.RED);
-		label_6.setBounds(399, 192, 11, 25);
+		label_6.setBounds(68, 86, 11, 25);
 		getContentPane().add(label_6);
 		
 		JLabel label_7 = new JLabel("*");
 		label_7.setForeground(Color.RED);
-		label_7.setBounds(399, 120, 11, 25);
+		label_7.setBounds(68, 46, 11, 25);
 		getContentPane().add(label_7);
 		
 
