@@ -84,17 +84,13 @@ public class MenuPrincipal extends JFrame {
 		});
 		mntmCadastrarCliente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
 		mntmCadastrarCliente.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/ícones/equipe.png")));
-
 		mnCliente.add(mntmCadastrarCliente);
 
 		JMenuItem mntmListarClientes = new JMenuItem("Listar Clientes");
 		mntmListarClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(listaClientes == null || listaClientes.isVisible()) {
-					listaClientes  = new TelaListagemClientes();
-					desktopPane.add(listaClientes);
-					listaClientes.show();
-				}
+				TelaListagemClientes menuListagemClientes = new TelaListagemClientes();
+				menuListagemClientes.setVisible(true);
 			}
 		});
 		mntmListarClientes.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8,0));

@@ -30,22 +30,21 @@ public class ClienteController {
 		return mensagem;
 	}
 
-	
 	public String cadastrarCliente(String textNome, String textRua, String textBairro, String textNumero, String textDDD,  String textTelefone, String textEmail,
-			String textCpf, String textCep ) {
+			String txtCpf, String txtCep ) {
 		Cliente cliente = new Cliente();
 		String mensagem = "";
 		cliente.setNome(textNome);
-		cliente.setCpf(textRua);
+		cliente.setCpf(txtCpf.trim().replaceAll("[^0-9]", ""));
 		cliente.setRua(textRua);
+		cliente.setDdd(textDDD);
 		cliente.setNumero(textNumero);
 		cliente.setBairro(textBairro);
-		cliente.setNumero(textNumero);
-		cliente.setDdd(textDDD);
-		cliente.setTelefone(textTelefone);
+		cliente.setCep(txtCep.trim().replaceAll("[^0-9]", ""));
 		cliente.setEmail(textEmail);
-		cliente.setCpf(textRua);
-		cliente.setCep(textCep);
+		cliente.setTelefone(textTelefone);
+		
+		
 		
 		mensagem += validar(cliente);
 		
@@ -64,32 +63,32 @@ public class ClienteController {
 		
 		String mensagem = "";
 		
-		if ((cliente.getNome() == null) || (cliente.getNome().trim().length() < 3) || (cliente.getNome().trim().length() > 256)) {
-			mensagem +=  "Nome precisa ter no mínimo 3 caracteres. ";
+		if ((cliente.getNome() == null) || (cliente.getNome().trim().length() < 3) || (cliente.getNome().trim().length() > 255)) {
+			mensagem +=  "- O Nome precisa deve ter entre 3 e 255 caracteres; " + "\n";	
 		}
-		if ((cliente.getRua() == null) || (cliente.getRua().trim().length() < 5) || (cliente.getRua().trim().length() > 256)) {
-			mensagem +=  "A Rua deve conter no mínimo 5 caracteres. ";
+		if ((cliente.getRua() == null) || (cliente.getRua().trim().length() < 5) || (cliente.getRua().trim().length() > 255)) {
+			mensagem +=  "- A Rua deve ter entre 5 e 255 caracteres; " + "\n";
 		}
-		if ((cliente.getBairro() == null) || (cliente.getBairro().trim().length() < 5) || (cliente.getBairro().trim().length() > 101)) {
-			mensagem +=  "O Bairro deve conter  no mínimo 5 caracteres. ";
+		if ((cliente.getBairro() == null) || (cliente.getBairro().trim().length() < 3) || (cliente.getBairro().trim().length() > 100)) {
+			mensagem +=  "- O Bairro deve ter entre 5 e 100 caracteres; " + "\n";
 		}
-		if ((cliente.getNumero() == null) || (cliente.getNumero().trim().length() < 2)) {
-			mensagem +=  "O número deve conter no mínimo 2 caracteres. ";
+		if ((cliente.getNumero() == null) || (cliente.getNumero().trim().length() < 2) || (cliente.getNumero().trim().length() > 50)){
+			mensagem +=  "- O Número deve ter entre 2 e 50 caracteres caracteres; " + "\n";
 		}
 		if ((cliente.getDdd() == null) || (cliente.getDdd().trim().length() != 2)) {
-			mensagem +=  "O DDD deve ter 2 caracteres. ";
+			mensagem +=  "- O DDD deve ter 2 caracteres; " + "\n";
 		}
 		if ((cliente.getTelefone() == null) || (cliente.getTelefone().trim().length() < 8) || (cliente.getTelefone().trim().length() > 9)) {
-			mensagem +=  "Telefone deve ter  9 caracteres. ";
+			mensagem +=  "- Telefone deve ter 8 ou 9 caracteres; " + "\n";
 		}
-//		if ((cliente.getCpf() == null) || (cliente.getCpf().length() != 11)) {
-//			mensagem +=  "O CPF deve conver somente 11 números";
-////		}
-//		if ((cliente.getCep() == null) || (cliente.getCep().length() != 8)) {
-//			mensagem +=  "O CEP deve conter 8 números";
-//		}
+		if ((cliente.getCpf() == null) || (cliente.getCpf().length() != 11)) {
+			mensagem +=  "- O CPF deve conver 11 números; " + "\n";
+		}
+		if ((cliente.getCep() == null) || (cliente.getCep().length() != 8)) {
+			mensagem +=  "- O CEP deve conter 8 números; " + "\n";
+		}
 		if(cliente.getEmail() == null)  {
-			mensagem +=  "Informe um email válido";		
+			mensagem +=  "- Informe um email válido.";		
 		}
 		return mensagem;
 	}

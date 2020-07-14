@@ -2,96 +2,105 @@ package model.seletor;
 
 public class ClienteSeletor {
 	
-	private int idCliente;
+	private int id;
 	private String nome;
+	private String cpf;
+	private String rua;
+	private String ddd;
+	private String telefone;
+	private String numero;
 	private String bairro;
-	
-
-	private int limite;
-	private int pagina;
-	
-	public ClienteSeletor() {
-		this.limite = 0;
-		this.pagina = -1;
-		
-	}
-
+	private String cep;
+	private String email;
 
 	public boolean temFiltro() {
-		if (this.idCliente>0) {
-			return true;
-		}
-		
-	if((this.nome!= null) && (this.nome.trim().length() >0)){
-		return true;
+		boolean temFiltroPreenchido = false;
+
+		temFiltroPreenchido = (nome != null && nome.trim().length() > 0)
+				|| (cpf != null && cpf.trim().length() > 0);
+
+		return temFiltroPreenchido;
 	}
+
 	
-	if((this.bairro !=null) && (this.bairro.trim().length()>0)) {
-		
-		return true;
-	}
-	return false;
-
-}
-	
-	public boolean temPaginacao() {
-		return ((this.limite > 0) && (this.pagina > -1));
-	}
-	public int getOffset() {
-		return (this.limite * (this.pagina - 1));
+	public int getId() {
+		return id;
 	}
 
-
-	public int getIdCliente() {
-		return idCliente;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
-	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
 
-	
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public String getDdd() {
+		return ddd;
+	}
+
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
 	public String getBairro() {
 		return bairro;
 	}
 
-
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
 
-
-	public int getLimite() {
-		return limite;
+	public String getCep() {
+		return cep;
 	}
 
-
-	public void setLimite(int limite) {
-		this.limite = limite;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
-
-	public int getPagina() {
-		return pagina;
+	public String getEmail() {
+		return email;
 	}
 
-
-	public void setPagina(int pagina) {
-		this.pagina = pagina;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
+
 }

@@ -14,8 +14,8 @@ import model.vo.Cliente;
 public class ClienteDAO {
 
 	public Cliente cadastrar(Cliente novoCliente) {
+		
 		Connection conn = Banco.getConnection();
-
 		String sql = "INSERT INTO CLIENTE (NOME, CPF, RUA, DDD, NUMERO, BAIRRO, CEP, EMAIL, TELEFONE)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -30,14 +30,12 @@ public class ClienteDAO {
 			stmt.setString(7, novoCliente.getCep());
 			stmt.setString(8, novoCliente.getEmail());
 			stmt.setString(9, novoCliente.getTelefone());
-			stmt.execute();
 
+			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
-			int refIdGerado = 0;
 
 			if (rs.next()) {
 				int idGerado = rs.getInt(1);
-				refIdGerado = idGerado;
 				novoCliente.setId(idGerado);
 			}
 
@@ -56,16 +54,16 @@ public class ClienteDAO {
 	public Cliente construirCliente(ResultSet rs) {
 		Cliente c = new Cliente();
 		try {
-			c.setId(rs.getInt("Id"));
-			c.setNome(rs.getString("Nome"));
-			c.setCpf(rs.getString("CPF"));
-			c.setRua(rs.getString("Rua"));
-			c.setDdd(rs.getString("DDD"));
-			c.setNumero(rs.getString("Número"));
-			c.setBairro(rs.getString("Bairro"));
-			c.setCep(rs.getString("CEP"));
+
+			c.setNome(rs.getString("nome"));
+			c.setCpf(rs.getString("cpf"));
+			c.setRua(rs.getString("rua"));
+			c.setDdd(rs.getString("ddd"));
+			c.setTelefone(rs.getString("telefone"));
+			c.setNumero(rs.getString("numero"));
+			c.setBairro(rs.getString("bairro"));
+			c.setCep(rs.getString("cep"));
 			c.setEmail(rs.getString("email"));
-			c.setTelefone(rs.getString("Telefone"));
 
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir cliente a partir do ResultSet. Causa: " + e.getMessage());
@@ -118,12 +116,13 @@ public class ClienteDAO {
 	}
 
 	public ArrayList<Cliente> listarComSeletor(ClienteSeletor seletor) {
-		String sql = "SELECT * FROM CLIENTE  c";
-		if (seletor.temFiltro()) {
-			sql = criarFiltros(seletor, sql);
-		}
 		Connection conn = Banco.getConnection();
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
+		String sql = "SELECT * FROM CLIENTE ";
+		
+		if (seletor.temFiltro()) {
+			sql = criarFiltros(sql, seletor);
+		}
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
 
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 		try {
@@ -144,7 +143,7 @@ public class ClienteDAO {
 
 	}
 
-	private String criarFiltros(ClienteSeletor seletor, String sql) {
+	private String criarFiltros(String sql, ClienteSeletor seletor) {
 		sql += "WHERE";
 		boolean primeiro = true;
 
@@ -153,16 +152,16 @@ public class ClienteDAO {
 				sql += " AND ";
 			}
 
-			sql += " C.NOME LIKE " + "'%" + seletor.getNome() + "%' ";
+			sql += " NOME LIKE " + "'%" + seletor.getNome() + "%' ";
 			primeiro = false;
 		}
 
-		if (seletor.getBairro() != null && seletor.getBairro().trim().length() > 0) {
+		if (seletor.getCpf() != null && seletor.getCpf().trim().length() > 0) {
 			if (!primeiro) {
 				sql += " AND ";
 			}
 
-			sql += " C.BAIRRO LIKE " + "'%" + seletor.getBairro() + "%' ";
+			sql += " CPF LIKE " + "'%" + seletor.getCpf() + "%' ";
 		}
 		return sql;
 	}

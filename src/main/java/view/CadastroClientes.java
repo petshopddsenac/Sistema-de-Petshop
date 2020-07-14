@@ -13,7 +13,6 @@ import javax.swing.text.MaskFormatter;
 
 import controller.ClienteController;
 import model.vo.Cliente;
-import model.vo.Pessoa;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
@@ -28,10 +27,9 @@ public class CadastroClientes extends JFrame {
 	private JTextField textBairro;
 	private JTextField textEmail;
 	private JTextField textTelefone;
-	private JFormattedTextField textCEP;
-	private JFormattedTextField textCPF;
 	private JTextField textDDD;
-	private Pessoa novapessoa;
+	private JTextField txtCpf;
+	private JTextField txtCep;
 
 	/**
 	 * Launch the application.
@@ -53,7 +51,9 @@ public class CadastroClientes extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroClientes() {
+		setTitle("Cadastrar Cliente");
 
+		
 		setBounds(100, 100, 650, 410);
 		getContentPane().setLayout(null);
 
@@ -64,7 +64,7 @@ public class CadastroClientes extends JFrame {
 
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNome.setBounds(80, 10, 415, 25);
+		textNome.setBounds(80, 10, 531, 25);
 		getContentPane().add(textNome);
 		textNome.setColumns(10);
 
@@ -73,27 +73,13 @@ public class CadastroClientes extends JFrame {
 		lblCPF.setBounds(10, 45, 45, 25);
 		getContentPane().add(lblCPF);
 		
-		final JFormattedTextField textCPF = new JFormattedTextField();
-		MaskFormatter mascaraCpf = new MaskFormatter();
-		try {
-			mascaraCpf.setMask("###.###.###-##");
-			mascaraCpf.install(textCPF);
-			textCPF.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			textCPF.setBounds(80, 50, 200, 25);
-			getContentPane().add(textCPF);
-			
-		} catch (ParseException e1) {
-
-			e1.printStackTrace();
-		}
-
 		JLabel lblRua = new JLabel("Rua: ");
 		lblRua.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblRua.setBounds(10, 80, 40, 25);
 		getContentPane().add(lblRua);
 
 		textRua = new JTextField();
-		textRua.setBounds(80, 84, 415, 25);
+		textRua.setBounds(80, 84, 531, 25);
 		getContentPane().add(textRua);
 		textRua.setColumns(10);
 
@@ -104,7 +90,7 @@ public class CadastroClientes extends JFrame {
 
 		textNumero = new JTextField();
 		textNumero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textNumero.setBounds(80, 120, 200, 25);
+		textNumero.setBounds(80, 120, 223, 25);
 		getContentPane().add(textNumero);
 		textNumero.setColumns(10);
 
@@ -114,29 +100,36 @@ public class CadastroClientes extends JFrame {
 		getContentPane().add(lblBairro);
 
 		textBairro = new JTextField();
-		textBairro.setBounds(80, 155, 200, 25);
+		textBairro.setBounds(80, 155, 223, 25);
 		getContentPane().add(textBairro);
-		textBairro.setColumns(10);
 
 		JLabel lblCEP = new JLabel("CEP: ");
 		lblCEP.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCEP.setBounds(306, 120, 29, 25);
+		lblCEP.setBounds(372, 120, 29, 25);
 		getContentPane().add(lblCEP);
-
-		final JFormattedTextField textCep = new JFormattedTextField();
-		MaskFormatter mascaraCep;
+		
 		try {
-			mascaraCep = new MaskFormatter("#####-###");
-			mascaraCep.install(textCep);
-		} catch (ParseException e2) {
-
-			e2.printStackTrace();
+			MaskFormatter maskFormatter = new MaskFormatter("###.###.###-##");
+			txtCpf = new JFormattedTextField(maskFormatter);
+			txtCpf.setBounds(80, 50, 223, 23);
+			getContentPane().add(txtCpf);
+			txtCpf.setColumns(10);;
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de CPF no painel de cadastro de usuario.");
+			e.printStackTrace();
 		}
-
-		textCep.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textCep.setBounds(345, 120, 140, 25);
-		getContentPane().add(textCep);
-
+		
+		try {
+			MaskFormatter maskFormatter = new MaskFormatter("#####-###");
+			txtCep = new JFormattedTextField(maskFormatter);
+			txtCep.setBounds(411, 120, 200, 25);
+			getContentPane().add(txtCep);
+			txtCep.setColumns(10);
+		} catch (Exception e) {
+			System.out.println("Erro na mascara de formatacao de CEP no painel de cadastro de usuario.");
+			e.printStackTrace();
+		}
+		
 		JLabel lblEmail = new JLabel("E-mail: ");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEmail.setBounds(10, 225, 50, 25);
@@ -144,18 +137,18 @@ public class CadastroClientes extends JFrame {
 
 		textEmail = new JTextField();
 		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textEmail.setBounds(80, 225, 200, 25);
+		textEmail.setBounds(80, 225, 223, 25);
 		getContentPane().add(textEmail);
 		textEmail.setColumns(10);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTelefone.setBounds(185, 189, 60, 25);
+		lblTelefone.setBounds(341, 191, 60, 25);
 		getContentPane().add(lblTelefone);
 
 		textTelefone = new JTextField();
 		textTelefone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textTelefone.setBounds(255, 191, 200, 25);
+		textTelefone.setBounds(411, 191, 200, 25);
 		getContentPane().add(textTelefone);
 		textTelefone.setColumns(10);
 
@@ -167,7 +160,7 @@ public class CadastroClientes extends JFrame {
 
 			}
 		});
-		btnLimpar.setBounds(185, 320, 85, 30);
+		btnLimpar.setBounds(337, 313, 111, 44);
 		getContentPane().add(btnLimpar);
 
 		JButton btnSalvar = new JButton("Salvar");
@@ -176,22 +169,16 @@ public class CadastroClientes extends JFrame {
 				ClienteController controller = new ClienteController();
 								
 				String mensagem = controller.cadastrarCliente(textNome.getText(), textRua.getText(), textBairro.getText(), textNumero.getText(), textDDD.getText(), textTelefone.getText(), 
-						textEmail.getText(), textCPF.getText(), textCep.getText());
+						textEmail.getText(), txtCpf.getText(), txtCep.getText());
 							
 				JOptionPane.showMessageDialog(null, mensagem, "Cadastrar o Cliente", JOptionPane.INFORMATION_MESSAGE);
-
-//				if (mensagem.isEmpty()) {
-//					Cliente cliente = new Cliente();
-//					JOptionPane.showMessageDialog(null, " Cliente Salvo com sucesso");
-//				} else {
-//					JOptionPane.showMessageDialog(null, "Preencha os campos Obrigatórios!", "Atenção",JOptionPane.ERROR_MESSAGE);
-//				}
+				limparCampos();
 
 			}
 
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnSalvar.setBounds(335, 320, 85, 30);
+		btnSalvar.setBounds(471, 313, 140, 44);
 
 		getContentPane().add(btnSalvar);
 		
@@ -202,7 +189,7 @@ public class CadastroClientes extends JFrame {
 		getContentPane().add(lblObrigatorio);
 		
 		textDDD = new JTextField();
-		textDDD.setBounds(80, 191, 86, 25);
+		textDDD.setBounds(80, 191, 223, 25);
 		getContentPane().add(textDDD);
 		textDDD.setColumns(10);
 		
@@ -242,14 +229,14 @@ public class CadastroClientes extends JFrame {
 		
 		JLabel label_6 = new JLabel("*");
 		label_6.setForeground(Color.RED);
-		label_6.setBounds(244, 189, 11, 25);
+		label_6.setBounds(399, 192, 11, 25);
 		getContentPane().add(label_6);
 		
 		JLabel label_7 = new JLabel("*");
 		label_7.setForeground(Color.RED);
-		label_7.setBounds(335, 121, 11, 25);
-		getContentPane().add(label_7);;
-
+		label_7.setBounds(399, 120, 11, 25);
+		getContentPane().add(label_7);
+		
 
 	}
 
@@ -261,8 +248,8 @@ public class CadastroClientes extends JFrame {
 		this.textDDD.setText("");
 		this.textTelefone.setText("");
 		this.textEmail.setText("");
-		this.textCEP.setText("");
-		this.textCPF.setText("");
+		this.txtCep.setText("");
+		this.txtCpf.setText("");
 
 
 	}
